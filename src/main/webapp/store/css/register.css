@@ -28,3 +28,15 @@
     background-color: #42AEEC;
     color: #fff;
 }
+
+.input-group{
+    height: 50px;
+}
+
+.input-group-prepend{
+    height: 100%;
+}
+
+.form-control{
+    height: 100%;
+}

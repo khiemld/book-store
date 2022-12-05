@@ -99,11 +99,10 @@
 										<div class="col">
 											<p class="btn btn-danger btn-block">${o.salePrice}</p>
 										</div>
-										<div class="col">
+										<%--<div class="col">
 											<a href="cart?pid=${o.id}"
 												class="btn btn-success btn-block">Add to cart</a>
-										</div>
-
+										</div>--%>
 									</div>
 								</div>
 							</div>

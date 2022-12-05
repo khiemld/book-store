@@ -19,6 +19,9 @@
 		  crossorigin="anonymous">
 	<link href="<c:url value = "/store/css/style2.css" />"
 		  rel="stylesheet" type="text/css">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+	<link href="<c:url value = "/store/css/register.css" />" rel="stylesheet" type="text/css">
 	<title>Register Form</title>
 </head>
 <body>
@@ -56,21 +59,48 @@
 		<a href="#" id="cancel_reset"><i class="fas fa-angle-left"></i> Back</a>
 	</form>
 
-	<form action="signup" class="form-signup">
-		<input name="firstname" type="text" id="first-name" class="form-control" placeholder="First name" required="" autofocus="">
-		<input name="lastname" type="text" id="last-name" class="form-control" placeholder="Last name" required autofocus="">
-		<input name="idcard" type="number" id="id_card" class="form-control" placeholder="Id card" required autofocus="">
-		<input name="user" type="text" id="user-name" class="form-control" placeholder="User/ Email" required="" autofocus="">
-		<input name="phone" type="number" id="phone" class="form-control" placeholder="Phone" required autofocus="">
-		<input name="e_wallet" type="text" id="e_wallet" class="form-control" placeholder="E wallet" required autofocus="">
-		<input name="pass" type="password" id="user-pass" class="form-control" placeholder="Password" required autofocus="">
-		<input name="repass" type="password" id="user-repeatpass" class="form-control" placeholder="Repeat Password" required autofocus="">
-
-		<button class="btn btn-primary btn-block" type="submit">
-			<i class="fas fa-user-plus"></i> Sign Up
-		</button>
-		<a href="#" id="cancel_signup"><i class="fas fa-angle-left"></i>
-			Back</a>
+	<form action="register" class="form-signup">
+		<h1 class="h3 mb-3 font-weight-normal" style="text-align: center">Register</h1>
+		<div class="form-group input-group" >
+			<div class="input-group-prepend" >
+				<span class="input-group-text"> <i class="fa fa-user"></i> </span>
+			</div>
+			<input name="" class="form-control" placeholder="Full name" type="text">
+		</div> <!-- form-group// -->
+		<div class="form-group input-group">
+			<div class="input-group-prepend">
+				<span class="input-group-text"> <i class="fa fa-building"></i> </span>
+			</div>
+			<input name="" class="form-control" placeholder="Address" type="text">
+		</div> <!-- form-group end.// -->
+		<div class="form-group input-group">
+			<div class="input-group-prepend">
+				<span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+			</div>
+			<input name="" class="form-control" placeholder="Phone number" type="text">
+		</div>
+		<div class="form-group input-group">
+			<div class="input-group-prepend">
+				<span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+			</div>
+			<input name="" class="form-control" placeholder="Email address" type="text">
+		</div> <!-- form-group// -->
+		<div class="form-group input-group">
+			<div class="input-group-prepend">
+				<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+			</div>
+			<input class="form-control" placeholder="Create password" type="password">
+		</div> <!-- form-group// -->
+		<div class="form-group input-group">
+			<div class="input-group-prepend">
+				<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+			</div>
+			<input class="form-control" placeholder="Repeat password" type="password">
+		</div> <!-- form-group// -->
+		<div class="form-group">
+			<button type="submit" class="btn btn-primary btn-block"> Create Account  </button>
+		</div> <!-- form-group// -->
+		<p class="text-center">Have an account? <a href="">Log In</a> </p>
 	</form>
 	<br>
 
@@ -102,5 +132,7 @@
 		$('#logreg-forms #cancel_signup').click(toggleSignUp);
 	});
 </script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </body>
 </html>

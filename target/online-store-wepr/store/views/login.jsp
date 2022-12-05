@@ -28,11 +28,15 @@
 <div id="logreg-forms">
 	<div class="row">
 		<div class="col">
+			<c:if test="${not empty message}">
+				<div class="alert alert-success">${message}</div>
+			</c:if>
 			<c:if test="${not empty error}">
 				<div class="alert alert-danger">${error}</div>
 			</c:if>
 		</div>
 	</div>
+
 	<form class="form-signin" action="login" method="post">
 		<h1 class="h3 mb-3 font-weight-normal" style="text-align: center">Sign in</h1>
 		<div class="social-login">
@@ -61,41 +65,41 @@
 
 	<form action="register" class="form-signup">
 		<h1 class="h3 mb-3 font-weight-normal" style="text-align: center">Register</h1>
-		<div class="form-group input-group" >
-			<div class="input-group-prepend" >
+		<div class="form-group input-group" style="height: 48px">
+			<div class="input-group-prepend" style="height: 100%">
 				<span class="input-group-text"> <i class="fa fa-user"></i> </span>
 			</div>
-			<input name="" class="form-control" placeholder="Full name" type="text">
+			<input name="" class="form-control" placeholder="Full name" type="text" style="height: 100%">
 		</div> <!-- form-group// -->
-		<div class="form-group input-group">
-			<div class="input-group-prepend">
+		<div class="form-group input-group" style="height: 48px">
+			<div class="input-group-prepend" style="height: 100%">
 				<span class="input-group-text"> <i class="fa fa-building"></i> </span>
 			</div>
-			<input name="" class="form-control" placeholder="Address" type="text">
+			<input name="" class="form-control" placeholder="Address" type="text" style="height: 100%">
 		</div> <!-- form-group end.// -->
-		<div class="form-group input-group">
-			<div class="input-group-prepend">
+		<div class="form-group input-group" style="height: 48px">
+			<div class="input-group-prepend" style="height: 100%">
 				<span class="input-group-text"> <i class="fa fa-phone"></i> </span>
 			</div>
-			<input name="" class="form-control" placeholder="Phone number" type="text">
+			<input name="" class="form-control" placeholder="Phone number" type="text" style="height: 100%">
 		</div>
-		<div class="form-group input-group">
-			<div class="input-group-prepend">
+		<div class="form-group input-group" style="height: 48px">
+			<div class="input-group-prepend" style="height: 100%">
 				<span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
 			</div>
-			<input name="" class="form-control" placeholder="Email address" type="text">
+			<input name="" class="form-control" placeholder="Email address" type="text" style="height: 100%">
 		</div> <!-- form-group// -->
-		<div class="form-group input-group">
-			<div class="input-group-prepend">
+		<div class="form-group input-group" style="height: 48px">
+			<div class="input-group-prepend" style="height: 100%">
 				<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
 			</div>
-			<input class="form-control" placeholder="Create password" type="password">
+			<input class="form-control" placeholder="Create password" type="password" style="height: 100%">
 		</div> <!-- form-group// -->
-		<div class="form-group input-group">
-			<div class="input-group-prepend">
+		<div class="form-group input-group" style="height: 48px" >
+			<div class="input-group-prepend" style="height: 100%">
 				<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
 			</div>
-			<input class="form-control" placeholder="Repeat password" type="password">
+			<input class="form-control" placeholder="Repeat password" type="password" style="height: 100%">
 		</div> <!-- form-group// -->
 		<div class="form-group">
 			<button type="submit" class="btn btn-primary btn-block"> Create Account  </button>

@@ -47,7 +47,7 @@
                 <div class="card-body">
                   <div class="d-flex flex-column align-items-center text-center">
                       <c:if test="${sessionScope.acc.image != null}">
-                          <img src="${sessionScope.acc.image}" alt="Admin" class="rounded-circle" width="150">
+                          <img src="${sessionScope.acc.image}" alt="Admin" class="rounded-circle" width="150" height="150">
                       </c:if>
                       <div class="mt-3">
                           <h4>${sessionScope.acc.email}</h4>
@@ -55,10 +55,10 @@
                             <p class="text-secondary mb-1">Admin</p>
                           </c:if>
                           <c:if test="${sessionScope.acc.isRole == 2}">
-                              <p class="text-secondary mb-1">Employee</p>
+                              <p class="text-secondary mb-1">Nhân viên</p>
                           </c:if>
                           <c:if test="${sessionScope.acc.isRole == 3}">
-                              <p class="text-secondary mb-1">Customer</p>
+                              <p class="text-secondary mb-1">Khách hàng</p>
                           </c:if>
                           <p class="text-muted font-size-sm">${sessionScope.acc.address}</p>
                           <button class="btn btn-primary">Follow</button>
@@ -138,37 +138,33 @@
         <div class="modal-content">
             <form action="profile" method="post">
                 <div class="modal-header">
-                    <h4 class="modal-title">Edit Profile</h4>
+                    <h4 class="modal-title">Chỉnh sửa thông tin</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
 
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>Full Name</label>
+                        <label>Họ và tên</label>
                         <input name="name" value="${sessionScope.acc.name}" type="text" class="form-control"
                                required>
                     </div>
                     <div class="form-group">
-                        <label>Email:</label>
+                        <label>Địa chỉ Email:</label>
                         <input name="email" type="text" value="${sessionScope.acc.email}" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label>Phone</label>
+                        <label>Số điện thoại</label>
                         <input name="phone" type="text" value="${sessionScope.acc.phone}" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label>Address</label>
+                        <label>Địa chỉ</label>
                         <input name="address" value="${sessionScope.acc.address}" type="text" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label>Avatar</label>
+                        <label>Avatar. Nhập link ảnh.</label>
                         <c:if test="${sessionScope.acc.image != null}">
-                            <input name="image" value="${sessionScope.acc.image}" type="image" class="form-control">
+                            <input name="address" value="${sessionScope.acc.image}" type="text" class="form-control">
                         </c:if>
-                        <c:if test="${sessionScope.acc.image == null}">
-                            <input name="image" value="${sessionScope.acc.image}" type="image" class="form-control">
-                        </c:if>
-<%--                        <input name="avatar" value="${sessionScope.acc.image}" type="image" class="form-control">--%>
                     </div>
                 </div>
                 <div class="modal-footer">

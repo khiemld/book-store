@@ -4,8 +4,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<%--<img src="https://cdn0.fahasa.com/media/wysiwyg/Thang-12-2022/FahasaT1222_Banner_1263x60.jpg" alt="Ảnh bìa" class="top-slide"style="position: fixed; float: top">--%>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-	<a class="navbar-brand" href="#">BOOKSTORE</a>
+	<a class="navbar-brand" href="#">GIẤY</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarSupportedContent"
 		aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -32,10 +33,12 @@
 			<li class="nav-item"><a class="nav-link" href="contact">Contact</a></li>
 		</ul>
 
-		<form action="login" method="post" class="form-inline my-2 my-lg-0">
+		<form action="login" method="get" class="form-inline my-2 my-lg-0" <%--name="action" value="signin-form"--%>>
 			<c:if test="${sessionScope.acc == null}">
 				<li class="nav-item" style='margin-right: 16px; list-style: none'>
-					<a aria-haspopup="true" aria-expanded="false" style='font-size: 16px; color: white' href="login"> Sign in | Sign up
+					<a aria-haspopup="true" aria-expanded="false" style='font-size: 16px; color: white' href="login" >
+						<input type="hidden" name="action" value="signin-form">
+						Sign in | Sign up
 					</a>
 				</li>
 			</c:if>
@@ -82,9 +85,7 @@
 </nav>
 <section class="jumbotron text-center">
 	<div class="container">
-		<h1 class="jumbotron-heading">E-COMMERCE BOOTSTRAP THEME</h1>
-		<p class="lead text-muted mb-0">Simple theme for e-commerce buid
-			with Bootstrap 4.0.0. Pages available : home, category, product, cart
-			& contact</p>
+		<h1 class="jumbotron-heading">GIẤY BOOKSTORE</h1>
+		<p class="lead text-muted mb-0">Cửa hàng online chuyên cung cấp sản phẩm tri thức như sách giáo khoa, sách văn học, sách giải</p>
 	</div>
 </section>

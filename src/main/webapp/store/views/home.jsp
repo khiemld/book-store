@@ -8,11 +8,30 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Free Bootstrap 4 Ecommerce Template</title>
+    <link rel="shortcut icon" href="./store/icon/paper-plane.ico">
     <!-- CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
     <link href="<c:url value = "./store/css/style.css" />" rel="stylesheet" type="text/css">
+    <style>
+        .web-kit-3{
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            word-break: break-all;
+        }
+        .web-kit-2{
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            word-break: break-all;
+        }
+    </style>
 </head>
 <body>
 
@@ -31,13 +50,13 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img class="d-block w-100" src="https://dummyimage.com/855x365/55595c/fff" alt="First slide">
+                        <img class="d-block w-100" src="https://cdn0.fahasa.com/media/magentothem/banner7/Branday_mainbanner_Slide_840x320.jpg" alt="First slide">
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block w-100" src="https://dummyimage.com/855x365/a30ca3/fff" alt="Second slide">
+                        <img class="d-block w-100" src="https://cdn0.fahasa.com/media/magentothem/banner7/Trangdochoi_mainbanner_840X320.jpg" alt="Second slide">
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block w-100" src="https://dummyimage.com/855x365/1443ff/fff" alt="Third slide">
+                        <img class="d-block w-100" src="https://cdn0.fahasa.com/media/magentothem/banner7/Trang_Manga-Comic_Mainbanner_T10_Slide_840x320.jpg" alt="Third slide">
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -56,21 +75,19 @@
                 <div class="card-header bg-success text-white text-uppercase">
                     <i class="fa fa-heart"></i> Top product
                 </div>
-                <img class="img-fluid border-0" src="#" alt="${list1product.name}">
+                <img class="img-fluid border-0" src="${list1product.image}" alt="${list1product.name}">
                 <div class="card-body">
-                    <h4 class="card-title text-center"><a href="product?pid=${list1product.id }" title="View Product">${list1product.name}</a></h4>
+                    <h4 class="card-title text-center"><a href="<%=request.getContextPath()%>/detail?pid=${list1product.id}" title="View Product">${list1product.name}</a></h4>
                     <div class="row">
                         <div class="col">
-                            <p class="btn btn-danger btn-block">${list1product.price} $</p>
+                            <p class="btn btn-danger btn-block">${list1product.salePrice} $</p>
                         </div>
-                        <div class="col">
-                            <a href="product" class="btn btn-success btn-block">View</a>
-                        </div>
+<%--                        <div class="col">--%>
+<%--                            <a href="product" class="btn btn-success btn-block">View</a>--%>
+<%--                        </div>--%>
                     </div>
                 </div>
-               
             </div>
-            
         </div>
     </div>
 </div>
@@ -88,22 +105,18 @@
                         <c:forEach items ="${list4last}" var = "p">
                          <div class="col-sm">
                             <div class="card">
-                                <img class="card-img-top" src="#" alt="${p.name }">
+                                <img class="card-img-top" src="${p.image}" alt="${p.name}">
                                 <div class="card-body">
-                                    <h4 class="card-title"><a href="product?pid=${p.id }"title="View Product">${p.name}</a></h4>
-                                    <p class="card-text">${p.description}</p>
+                                    <h4 class="card-title web-kit-2"><a href="<%=request.getContextPath()%>/detail?pid=${p.id}" title="View Product">${p.name}</a></h4>
+                                    <p class="card-text web-kit-3">${p.discription}</p>
                                     <div class="row">
                                         <div class="col">
-                                            <p class="btn btn-danger btn-block">${p.price} $</p>
-                                        </div>
-                                        <div class="col">
-                                            <a href="cart" class="btn btn-success btn-block">Add to cart</a>
+                                            <p class="btn btn-danger btn-block">${p.salePrice} $</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
                         </c:forEach>
                     </div>
                 </div>
@@ -111,63 +124,6 @@
         </div>
     </div>
 </div>
-
-
-<div class="container mt-3 mb-4">
-    <div class="row">
-        <div class="col-sm">
-            <div class="card">
-                <div class="card-header bg-primary text-white text-uppercase">
-                    <i class="fa fa-trophy"></i> New products
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                    
-                    <c:forEach items ="${list4product}" var = "p">
-                        <div class="col-sm">
-                            <div class="card">
-                                <img class="card-img-top" src="#" alt="${p.name }">
-                                <div class="card-body">
-                                    <h4 class="card-title"><a href="product?pid=${p.id }" title="View Product">${p.name }</a></h4>
-                                    <p class="card-text">${p.description}</p>
-                                    <div class="row">
-                                        <div class="col">
-                                            <p class="btn btn-danger btn-block">${p.price} $</p>
-                                        </div>
-                                        <div class="col">
-                                           <c:if test="${sessionScope.account ==null }">
-                                            <a href="login" class="btn btn-success btn-block">Add to cart</a>
-                                           </c:if>
-                                           <c:if test="${sessionScope.account !=null }">
-                                           <a href="cart" class="btn btn-success btn-block">Add to cart</a>
-                                           </c:if>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                       </c:forEach>
-                        </div>
-                     
-                </div>
-            </div>
-        </div>
-        
-    </div>
-</div>
-<form action="cart" method="post">
-					<div class="form-group">
-						<label>Id</label> <input name="user"
-							value="${sessionScope.account.email}" type="text"
-							class="form-control" readonly>
-					</div>
-					<div class="form-group">
-						<label>First Name</label> <input name="pass"
-							value="${sessionScope.account.hashed_password}" type="text"
-							class="form-control" required>
-					</div>
-					</form>
-
 <!-- Footer -->
 <%@ include file="footer.jsp" %>
 <!-- end footer -->

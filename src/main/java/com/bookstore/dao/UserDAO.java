@@ -50,6 +50,27 @@ public class UserDAO {
         return user;
     }
 
+    public User findByEmail(String email){
+        Session session = HibernateUtility.getSessionFactory().openSession();
+        User user = new User();
+        List<User> users = null;
+
+        try {
+            final String sqlString = "Select u from User u where u.email = :email";
+            Query query = session.createQuery(sqlString);
+            query.setParameter("email", email);
+            users = query.list();
+            user = users.get(0);
+            System.out.println("user is" + user.getEmail());
+        }
+        catch(RuntimeException e){
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return user;
+    }
+
     public List<User> getAll(){
         // open session
         Session session = HibernateUtility.getSessionFactory().openSession();
@@ -83,7 +104,6 @@ public class UserDAO {
         }
         return users;
     }
-
 
     public User testLogin(String email, String password){
         Session session = HibernateUtility.getSessionFactory().openSession();
@@ -170,4 +190,5 @@ public class UserDAO {
         }
         return result;
     }
+
 }

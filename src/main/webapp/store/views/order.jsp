@@ -9,6 +9,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="shortcut icon" href="./store/icon/paper-plane.ico">
+
     <link href="<c:url value = "/store/css/order.css" />" rel="stylesheet" type="text/css">
 </head>
 <body>

@@ -27,6 +27,9 @@ public class RegisterController extends HttpServlet {
         response.setContentType("text/html");
         String url = "/login";
 
+        System.out.println("Loading: RegisterController DoPost");
+
+
         String name = request.getParameter("name").trim();
         String address = request.getParameter("address").trim();
         String phone = request.getParameter("phone").trim();

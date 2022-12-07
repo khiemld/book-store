@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<link rel="shortcut icon" href="./store/icon/paper-plane.ico">
+
 </head>
 <body>
  <form action="reset-password" class="form-reset" method="post">

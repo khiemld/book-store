@@ -24,35 +24,22 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
     <link href="<c:url value = "/store/css/register.css" />" rel="stylesheet" type="text/css">
     <title>Bookstore</title>
+    <link rel="shortcut icon" href="./store/icon/paper-plane.ico">
+
 </head>
 <body>
-<%
-    String errorMessage = "";
-    if (session.getAttribute("register_error") != "" || session.getAttribute("register_error") != null) {
-        errorMessage = (String) session.getAttribute("register_error");
-    }
-%>
-<c:if test="${not empty register_error}">
-    <script>
-        toggleResetPswd();
-        toggleResetPswd();
-        toggleSignUp();
-        toggleSignUp();
-    </script>
-</c:if>
 <div id="logreg-forms">
-    <div class="row">
-        <div class="col">
-            <c:if test="${not empty message}">
-                <div class="alert alert-success">${message}</div>
-            </c:if>
-            <c:if test="${not empty error}">
-                <div class="alert alert-danger">${error}</div>
-            </c:if>
-        </div>
-    </div>
-
     <form class="form-signin" action="login" method="post">
+        <div class="row">
+            <div class="col">
+                <c:if test="${not empty message}">
+                    <div class="alert alert-success">${message}</div>
+                </c:if>
+                <c:if test="${not empty error}">
+                    <div class="alert alert-danger">${error}</div>
+                </c:if>
+            </div>
+        </div>
         <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">Sign in</h1>
         <div class="social-login">
             <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign in with Facebook</span>
@@ -63,28 +50,24 @@
         <input name="user" type="text" class="form-control" placeholder="Email" style="margin-bottom: 8px">
         <input name="pass" type="password" class="form-control" placeholder="Password">
 
-        <button class="btn btn-success btn-block" type="submit">
+        <button class="btn btn-success btn-block" type="submit" name="action" value="signin">
             <i class="fas fa-sign-in-alt"></i> Sign in
         </button>
         <a href="#" id="forgot_pswd">Forgot password?</a>
         <hr>
         <!-- <p>Don't have an account!</p>  -->
-        <div class="btn btn-primary btn-block"  id="btn-signup">
-            <i class="fas fa-user-plus"></i> <a href="/register" style="display: inline-block; color: white">Sign up New Account</a>
-        </div>
+        <button class="btn btn-primary btn-block" id="btn-signup">
+            <i class="fas fa-user-plus"></i> <a href="<%=request.getContextPath()%>/login" style="display: inline-block; color: white">Đăng ký tài khoản mới</a>
+        </button>
     </form>
 
-    <form action="/reset" class="form-reset">
-        <input type="email" id="resetEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+    <form action="forgot" method="post" class="form-reset">
+        <input type="email" name="resetEmail" class="form-control" placeholder="Email address" required="" autofocus="">
         <button class="btn btn-primary btn-block" type="submit">Reset Password</button>
         <a href="#" id="cancel_reset"><i class="fas fa-angle-left"></i> Back</a>
     </form>
 
-    <form action="register" class="form-signup" method="post">
-        <%if (errorMessage != "" && errorMessage != null) {%>
-        <p class="existUser alert alert-danger" role="alert"><%= errorMessage%>
-        </p>
-        <%}%>
+    <form action="login" class="form-signup" method="post">
         <h1 class="h3 mb-3 font-weight-normal mg-bot-2rem" style="text-align: center">Register</h1>
         <div class="form-group input-group" style="height: 48px">
             <div class="input-group-prepend" style="height: 100%">
@@ -113,7 +96,7 @@
             <div class="input-group-prepend" style="height: 100%">
                 <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
             </div>
-            <input id="email" name="email" class="form-control" placeholder="Email address" type="text"
+            <input id="email" name="email" class="form-control" placeholder="Email address" type="email"
                    style="height: 100%">
         </div> <!-- form-group// -->
         <p id="emailRemind" class="remind">Please enter your email address</p>
@@ -134,11 +117,11 @@
         </div> <!-- form-group// -->
         <p id="repeatPasswordRemind" class="remind">The entered passwords do not match</p>
         <div class="form-group mg-top-2rem">
-            <button type="submit" class="btn btn-primary btn-block" id="register" onclick="return valiData();">
-                Create Account
+            <button type="submit" name="action" value="createAccount" class="btn btn-primary btn-block" id="register" onclick="return valiData();" >
+                Tạo tài khoản
             </button>
         </div> <!-- form-group// -->
-        <p class="text-center">Have an account? <a href="">Log In</a></p>
+        <p class="text-center"><a href="">Đăng nhập</a></p>
     </form>
     <br>
 

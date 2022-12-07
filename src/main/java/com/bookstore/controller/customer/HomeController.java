@@ -20,6 +20,11 @@ public class HomeController extends HttpServlet {
         List<Product> product4Lastest = null;
         product4Lastest = productDAO.get4LastestProduct();
 
+        Product product1Lastest = productDAO.getLatestProduct();
+
+        request.setAttribute("list1product", product1Lastest);
+        request.setAttribute("list4last",  product4Lastest);
+
         RequestDispatcher rq =request.getRequestDispatcher("/store/views/home.jsp");
         rq.forward(request, response);
     }

@@ -1,19 +1,19 @@
-import com.bookstore.dao.CategoryDAO;
-import com.bookstore.dao.ProductDAO;
-import com.bookstore.dao.UserDAO;
-import com.bookstore.entity.Category;
-import com.bookstore.entity.Product;
-import com.bookstore.entity.User;
+import com.bookstore.dao.*;
+import com.bookstore.entity.*;
 
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 public class main {
     public static void main(String[] args) {
-        UserDAO userDAO = new UserDAO();
-        List<User> users = userDAO.getAll();
+        Order order = new Order(2, "0982235145", "Đà Nẵng", "Khiem", 1, 1);
+        OrderDAO orderDAO = new OrderDAO();
+        orderDAO.save(order);
 
-        for(User u : users){
-            System.out.println(u.getName());
-        }
-}
+        orderDAO.addOrder(order, 2);
+
+    }
 }

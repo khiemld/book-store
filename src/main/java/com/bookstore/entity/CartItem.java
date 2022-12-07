@@ -29,6 +29,17 @@ public class CartItem {
     @JoinColumn(name="idUser",  referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
     private User user;
 
+
+
+    public CartItem(){}
+
+    public CartItem(int idUser, int idProduct, int quantity, int price) {
+        this.idUser = idUser;
+        this.idProduct = idProduct;
+        this.quantity = quantity;
+        this.price = price;
+    }
+
     public int getId() {
         return id;
     }
@@ -110,4 +121,6 @@ public class CartItem {
         result = 31 * result + price;
         return result;
     }
+
+
 }

@@ -28,6 +28,17 @@ public class OrderItem {
     @JoinColumn(name = "idProduct", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
     private Product product;
 
+    public OrderItem(){
+
+    }
+
+    public OrderItem(int idOrder, int idProduct, int quantity, int price) {
+        this.idOrder = idOrder;
+        this.idProduct = idProduct;
+        this.quantity = quantity;
+        this.price = price;
+    }
+
     public int getId() {
         return id;
     }

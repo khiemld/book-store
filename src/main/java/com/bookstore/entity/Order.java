@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.util.List;
 
 @Entity
+@Table(name = "`order`", schema = "bookstore")
 public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -14,10 +15,10 @@ public class Order {
     @Column(name = "idUser", nullable = false)
     private int idUser;
     @Basic
-    @Column(name = "idSeller", nullable = false)
-    private int idSeller;
+    @Column(name = "idSeller", nullable = true)
+    private Integer idSeller;
     @Basic
-    @Column(name = "createTime", nullable = false)
+    @Column(name = "createTime", nullable = true)
     private Date createTime;
     @Basic
     @Column(name = "phone", nullable = false, length = 10)
@@ -29,7 +30,7 @@ public class Order {
     @Column(name = "contactName", nullable = false, length = 50)
     private String contactName;
     @Basic
-    @Column(name = "receiveDate", nullable = false)
+    @Column(name = "receiveDate", nullable = true)
     private Date receiveDate;
     @Basic
     @Column(name = "idMethod", nullable = false)
@@ -43,6 +44,18 @@ public class Order {
     @Basic
     @Column(name = "status", nullable = false)
     private int status;
+
+    public Order(){}
+
+    public Order(int idUser, String phone, String address, String contactName, int idMethod, int idDelivery) {
+        this.idUser = idUser;
+        this.phone = phone;
+        this.address = address;
+        this.contactName = contactName;
+        this.idMethod = idMethod;
+        this.idDelivery = idDelivery;
+    }
+
     @ManyToOne
     @JoinColumn(name = "idDelivery", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
     private Delivery delivery;
@@ -74,11 +87,11 @@ public class Order {
         this.idUser = idUser;
     }
 
-    public int getIdSeller() {
+    public Integer getIdSeller() {
         return idSeller;
     }
 
-    public void setIdSeller(int idSeller) {
+    public void setIdSeller(Integer idSeller) {
         this.idSeller = idSeller;
     }
 
@@ -154,49 +167,25 @@ public class Order {
         this.status = status;
     }
 
-    public List<OrderItem> getOrderItems() {
-        return orderItems;
-    }
-
-    public void setOrderItems(List<OrderItem> orderItems) {
-        this.orderItems = orderItems;
-    }
-
-    public PayMethod getPayMethod() {
-        return payMethod;
-    }
-
-    public void setPayMethod(PayMethod payMethod) {
-        this.payMethod = payMethod;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Order order = (Order) o;
+        Order that = (Order) o;
 
-        if (id != order.id) return false;
-        if (idUser != order.idUser) return false;
-        if (idSeller != order.idSeller) return false;
-        if (idMethod != order.idMethod) return false;
-        if (idDelivery != order.idDelivery) return false;
-        if (totalPay != order.totalPay) return false;
-        if (status != order.status) return false;
-        if (createTime != null ? !createTime.equals(order.createTime) : order.createTime != null) return false;
-        if (phone != null ? !phone.equals(order.phone) : order.phone != null) return false;
-        if (address != null ? !address.equals(order.address) : order.address != null) return false;
-        if (contactName != null ? !contactName.equals(order.contactName) : order.contactName != null) return false;
-        if (receiveDate != null ? !receiveDate.equals(order.receiveDate) : order.receiveDate != null) return false;
+        if (id != that.id) return false;
+        if (idUser != that.idUser) return false;
+        if (idMethod != that.idMethod) return false;
+        if (idDelivery != that.idDelivery) return false;
+        if (totalPay != that.totalPay) return false;
+        if (status != that.status) return false;
+        if (idSeller != null ? !idSeller.equals(that.idSeller) : that.idSeller != null) return false;
+        if (createTime != null ? !createTime.equals(that.createTime) : that.createTime != null) return false;
+        if (phone != null ? !phone.equals(that.phone) : that.phone != null) return false;
+        if (address != null ? !address.equals(that.address) : that.address != null) return false;
+        if (contactName != null ? !contactName.equals(that.contactName) : that.contactName != null) return false;
+        if (receiveDate != null ? !receiveDate.equals(that.receiveDate) : that.receiveDate != null) return false;
 
         return true;
     }
@@ -205,7 +194,7 @@ public class Order {
     public int hashCode() {
         int result = id;
         result = 31 * result + idUser;
-        result = 31 * result + idSeller;
+        result = 31 * result + (idSeller != null ? idSeller.hashCode() : 0);
         result = 31 * result + (createTime != null ? createTime.hashCode() : 0);
         result = 31 * result + (phone != null ? phone.hashCode() : 0);
         result = 31 * result + (address != null ? address.hashCode() : 0);
@@ -216,13 +205,5 @@ public class Order {
         result = 31 * result + totalPay;
         result = 31 * result + status;
         return result;
-    }
-
-    public Delivery getDelivery() {
-        return delivery;
-    }
-
-    public void setDelivery(Delivery deliveryByIdDelivery) {
-        this.delivery = deliveryByIdDelivery;
     }
 }

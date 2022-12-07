@@ -43,6 +43,8 @@ public class Product {
     @JoinColumn(name = "idCategory", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
     private Category category;
 
+
+
     public int getId() {
         return id;
     }

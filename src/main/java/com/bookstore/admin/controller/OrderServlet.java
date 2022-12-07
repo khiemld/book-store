@@ -3,7 +3,9 @@ package com.bookstore.admin.controller;
 import com.bookstore.admin.business.*;
 import com.bookstore.dao.*;
 import com.bookstore.entity.*;
+import com.bookstore.util.EmailUtils;
 
+import javax.mail.MessagingException;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -88,13 +90,13 @@ public class OrderServlet extends HttpServlet {
                 actionSave(request, response);
                 break;
             case "confirm":
-                actionConfirm(request,response);
+                actionConfirm(request, response);
                 break;
             case "provide":
-                actionProvide(request,response);
+                actionProvide(request, response);
                 break;
             case "cancel":
-                actionCancel(request,response);
+                actionCancel(request, response);
                 break;
             case "home":
                 actionHome(request, response);
@@ -159,8 +161,13 @@ public class OrderServlet extends HttpServlet {
         User customer = UserDAO.find(selectedOrder.getIdUser());
         request.setAttribute("customer", customer);
 
-        User employee = UserDAO.find(selectedOrder.getIdSeller());
-        request.setAttribute("employee", employee);
+        // Vì order sẽ được xác nhận sau khi nhân viên hoặc admin xác nhận
+        if (selectedOrder.getIdSeller() == null) {
+            selectedOrder.setIdSeller(0);
+        } else {
+            User employee = UserDAO.find(selectedOrder.getIdSeller());
+            request.setAttribute("employee", employee);
+        }
 
         List<OrderStatusBS> statusList = OrderBS.statusList();
         request.setAttribute("statusList", statusList);
@@ -247,12 +254,51 @@ public class OrderServlet extends HttpServlet {
         response.setCharacterEncoding("utf-8");
 //      Lấy id của product được truyền xuống nè
         String oID = request.getParameter("orderID");
-//      Lấy product có id tương ứng ra
+//      Lấy order có id tương ứng ra
         Order selectedOrder = OrderDAO.getOrderByIdOrder(Integer.parseInt(oID));
         selectedOrder.setStatus(2);
+
+//        Lấy Id của seller mà xác nhận đơn hàng
+        HttpSession session = request.getSession();
+        User seller = (User) session.getAttribute("acc");
+        selectedOrder.setIdSeller(seller.getId());
         OrderDAO.update(selectedOrder);
         List<Order> orderList = OrderDAO.getAll();
         request.setAttribute("orderList", orderList);
+        String message = new String("Vừa xác nhận order số <b>" + selectedOrder.getId() + "</b>");
+        request.setAttribute("message", message);
+
+//        //  Chỗ này gửi email xác nhận đơn hàng đã được xác nhận
+        Email email = new Email();
+        email.setFrom("hau.trantrungg@gmail.com");
+        email.setFromPassword("rdobhlqlzqazyrrt");
+        email.setTo(UserDAO.find(selectedOrder.getIdUser()).getEmail());
+        email.setSubject("XÁC NHẬN ĐƠN HÀNG");
+
+        StringBuilder content = new StringBuilder();
+        content.append("Thân gửi <b>" + UserDAO.find(selectedOrder.getIdUser()).getName() + "</b><br>");
+        content.append("Đại diện <b>Giấy Bookstore</b>, chúng mình xin gửi bạn thông báo đơn hàng của bạn đã được <b style=\"color: #38761D; background-color: #FFF2CC\">XÁC NHẬN</b>");
+        content.append(", đang chuẩn bị hàng để chuyển cho đơn vị vận chuyển.<br>Cảm ơn bạn đã tin tưởng và ủng hộ <b>Giấy Bookstore</b>, vui lòng kiểm tra lại đơn hàng của bạn tại mục <b style=\"background-color: #EEEEEE\">Your Profile -> Đơn hàng của tôi</b>");
+        content.append("<br>");
+        content.append("<br>");
+        List<OrderItem> orderItemList = OrderItemDAO.orderItemList(selectedOrder.getId());
+        OrderItemBS.finalOrderItemList(orderItemList);
+        int count = 1;
+        for (OrderItem orderItem : orderItemList) {
+            content.append(count + ". " + orderItem.getProduct().getName() + " x " + orderItem.getQuantity() + "<br>");
+            count++;
+        }
+        content.append("<br>");
+        content.append("<b>Tổng hóa đơn: " + selectedOrder.getTotalPay() + " </b><br>");
+        content.append("Một lần nữa xin cảm ơn bạn rất nhiều!");
+        email.setContent(content.toString());
+        try {
+            EmailUtils.send(email);
+        } catch (MessagingException e) {
+            message = new String("Vừa xác nhận order số <b>" + selectedOrder.getId() + "</b>, không thể gửi mail xác nhận!");
+            request.setAttribute("message", message);
+        }
+
         request.getRequestDispatcher("/admin/order.jsp").forward(request, response);
     }
 

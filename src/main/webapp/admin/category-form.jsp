@@ -37,6 +37,9 @@
   <!-- Template Main CSS File -->
   <link href="${pageContext.request.contextPath}/admin/assets/css/style.css" rel="stylesheet">
 
+  <!-- Logo -->
+  <link rel="shortcut icon" href="${pageContext.request.contextPath}/store/icon/paper-plane.ico">
+
   <!-- Chỗ này hong biết sao nó hong ăn bên file style.css nên phải để ở đây :>> -->
   <style>
     .img-rectangle {
@@ -82,7 +85,7 @@
 
   <div class="d-flex align-items-center justify-content-between">
     <a href="${pageContext.request.contextPath}/admin" class="logo d-flex align-items-center">
-      <img src="${pageContext.request.contextPath}/admin/assets/img/logo.png" alt="">
+      <img src="${pageContext.request.contextPath}/store/icon/paper-plane.ico" alt="">
       <span class="d-none d-lg-block">Giấy Bookstore</span>
     </a>
     <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -94,14 +97,27 @@
       <li class="nav-item dropdown pe-3">
 
         <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-          <img src="${pageContext.request.contextPath}/admin/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-          <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+          <img src="
+                                <c:if test="${sessionScope.acc.image.equals('')}">
+                                    https://static.vecteezy.com/system/resources/thumbnails/001/840/618/small/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg
+                                </c:if>
+                                <c:if test="${!sessionScope.acc.image.equals('')}">
+                                    ${sessionScope.acc.image}
+                                </c:if>
+                            " alt="Profile"
+               class="rounded-circle">
+          <span class="d-none d-md-block dropdown-toggle ps-2">${sessionScope.acc.name}</span>
         </a><!-- End Profile Iamge Icon -->
 
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
           <li class="dropdown-header">
-            <h6>Kevin Anderson</h6>
-            <span>Web Designer</span>
+            <h6>${sessionScope.acc.name}</h6>
+            <c:if test="${sessionScope.acc.isRole==1}">
+              <span>Quản lý</span>
+            </c:if>
+            <c:if test="${sessionScope.acc.isRole==2}">
+              <span>Nhân viên</span>
+            </c:if>
           </li>
           <li>
             <hr class="dropdown-divider">
@@ -138,9 +154,9 @@
           </li>
 
           <li>
-            <a class="dropdown-item d-flex align-items-center" href="#">
+            <a class="dropdown-item d-flex align-items-center" href="/logout">
               <i class="bi bi-box-arrow-right"></i>
-              <span>Sign Out</span>
+              <span>Đăng xuất</span>
             </a>
           </li>
 
@@ -158,10 +174,12 @@
   <ul class="sidebar-nav" id="sidebar-nav">
 
     <li class="nav-item">
-      <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin">
-        <i class="bi bi-grid"></i>
-        <span>Dashboard</span>
-      </a>
+      <c:if test="${sessionScope.acc.isRole==1}">
+        <a class="nav-link" href="${pageContext.request.contextPath}/admin">
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span>
+        </a>
+      </c:if>
     </li><!-- End Dashboard Nav -->
 
     <li class="nav-heading">Pages</li>
@@ -172,7 +190,6 @@
     <%--                <span>Profile</span>--%>
     <%--            </a>--%>
     <%--        </li><!-- End Profile Page Nav -->--%>
-
     <li class="nav-item">
       <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/customer">
         <i class="bi bi-emoji-sunglasses"></i>
@@ -180,19 +197,23 @@
       </a>
     </li><!-- End Customer Page Nav -->
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/employee">
-        <i class="bi bi-emoji-expressionless"></i>
-        <span>Employee</span>
-      </a>
-    </li><!-- End Employee Page Nav -->
+    <c:if test="${sessionScope.acc.isRole==1}">
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/employee">
+          <i class="bi bi-emoji-expressionless"></i>
+          <span>Employee</span>
+        </a>
+      </li><!-- End Employee Page Nav -->
+    </c:if>
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/book">
-        <i class="bi bi-journal-bookmark-fill"></i>
-        <span>Book</span>
-      </a>
-    </li><!-- End Book Page Nav -->
+    <c:if test="${sessionScope.acc.isRole==1}">
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/book">
+          <i class="bi bi-journal-bookmark-fill"></i>
+          <span>Book</span>
+        </a>
+      </li><!-- End Book Page Nav -->
+    </c:if>
 
     <li class="nav-item">
       <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/order">
@@ -201,25 +222,32 @@
       </a>
     </li><!-- End Order Page Nav -->
 
-    <li class="nav-item">
-      <a class="nav-link" href="${pageContext.request.contextPath}/admin/category">
-        <i class="bi bi-grid-1x2"></i>
-        <span>Category</span>
-      </a>
-    </li><!-- End Category Page Nav -->
+    <c:if test="${sessionScope.acc.isRole==1}">
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/category">
+          <i class="bi bi-grid-1x2"></i>
+          <span>Category</span>
+        </a>
+      </li><!-- End Category Page Nav -->
+    </c:if>
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/paymethod">
-        <i class="bi bi-wallet2"></i>
-        <span>Pay method</span>
-      </a>
-    </li><!-- End Pay method Page Nav -->
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/delivery">
-        <i class="bi bi-box-seam"></i>
-        <span>Delivery</span>
-      </a>
-    </li><!-- End Category Page Nav -->
+    <c:if test="${sessionScope.acc.isRole==1}">
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/paymethod">
+          <i class="bi bi-wallet2"></i>
+          <span>Pay method</span>
+        </a>
+      </li><!-- End Pay method Page Nav -->
+    </c:if>
+
+    <c:if test="${sessionScope.acc.isRole==1}">
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/delivery">
+          <i class="bi bi-box-seam"></i>
+          <span>Delivery</span>
+        </a>
+      </li><!-- End Category Page Nav -->
+    </c:if>
   </ul>
 
 </aside><!-- End Sidebar-->

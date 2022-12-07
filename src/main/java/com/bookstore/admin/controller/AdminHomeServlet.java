@@ -57,10 +57,6 @@ public class AdminHomeServlet extends HttpServlet {
         User bestCustomerByPrice= CustomerBS.BestCustomerByPrice();
         request.setAttribute("bestCustomerByPrice", bestCustomerByPrice);
 
-        // Tổng số bán trong ngày
-        // Thu nhập trong tháng
-        // Khách hàng trong năm
-        // Top selling
         request.getRequestDispatcher("/admin/index.jsp").forward(request, response);
     }
 

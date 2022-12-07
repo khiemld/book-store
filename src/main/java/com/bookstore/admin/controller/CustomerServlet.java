@@ -132,6 +132,7 @@ public class CustomerServlet extends HttpServlet {
             user.setPassword(cPassword);
             user.setImage(cImageLink);
             user.setIsRole(3);
+            user.setActive(true);
 
 //            Kiểm tra dữ liệu đầu vào đang được lưu trong book
 //            Nêu dữ liệu chưa hợp lệ

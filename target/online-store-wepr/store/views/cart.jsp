@@ -19,87 +19,89 @@
 <!-- header -->
 <%@ include file ="header.jsp" %>
 <!-- end header -->
-<form action="cart" method="post">
-					<div class="form-group">
-						<label>Id</label> <input name="user"
-							value="${sessionScope.account.email}" type="text"
-							class="form-control" readonly>
-					</div>
-					<div class="form-group">
-						<label>First Name</label> <input name="pass"
-							value="${sessionScope.account.hashed_password}" type="text"
-							class="form-control" required>
-					</div>
+<form action="order" method="get">
 <div class="container mb-4">
     <div class="row">
         <div class="col-12">
-
             <div class="table-responsive">
                 <table class="table table-striped">
-                    <thead>
+                    <thead >
                         <tr>
-                            <th scope="col"> </th>
-                            <th scope="col">Product</th>
-                            <th scope="col">Available</th>
-                            <th scope="col" class="text-center">Quantity</th>
-                            <th scope="col" class="text-right">Price</th>
-                            <th> </th>
+                            <th scope="col" style="vertical-align: middle">Stt</th>
+                            <th scope="col" style="vertical-align: middle; max-width: 64px" class="text-center">Image</th>
+                            <th scope="col-sm-4" style="vertical-align: middle">Product</th>
+                            <th scope="col" style="vertical-align: middle">Quantity</th>
+                            <th scope="col" class="text-center" style="vertical-align: middle">Price</th>
+                            <th scope="col" style="vertical-align: middle">Delete</th>
+                            <th scope="col" style="vertical-align: middle">Sub-total</th>
                         </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${listcate }" var="p">
+                    <c:set var="tt" value="0"/>
+                    <c:forEach items="${listItem}" var="i">
+                        <c:set var="tt" value="${tt+1}"/>
                         <tr>
-                            <td><img class =" col-4" src=${pdetail.images }" /> </td>
-                            <td>${sessionScope.account}</td>
-                            <td>${pdetail.stock }</td>
-                            <td><input class="form-control "  type="text" value="1" /></td>
-                            <td class="text-right">${pdetail.price} $</td>
-                            <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
+                            <td>${tt}</td>
+                            <td><img class ="col-4" src="${i.product.image}"></td>
+                            <td>${i.product.name}</td>
+                            <td>
+                                <button style="border: none; display:inline; width: 20px; background-color:#4285f4"><a href="process?num=-1&id=${i.idProduct}&u=${i.idUser}" style="text-decoration: none; color: white" >-</a></button>
+                                <%--<input type="number" value="${i.quantity}" min="1" max="10">--%>
+                                ${i.quantity}
+                                <button style="border: none; float: right; width: 30px; background-color:#4285f4"><a href="process?num=1&id=${i.idProduct}&u=${i.idUser}" style="text-decoration: none; color: white">+</a></button>
+                            </td>
+                            <td class="text-right">${i.product.salePrice}</td>
+                            <td class="text-right">
+                                <%--<form action="process" method="post">
+                                    <input type="hidden" name="uid" value="${i.idUser}">
+                                    <input type="hidden" name="pid" value="${i.idProduct}">--%>
+                                    <%--<button type="submit" >--%><a class="btn btn-sm btn-danger btn-number" href="deleteCart?pid=${i.idProduct}&uid=${i.idUser}"  style="text-decoration: none; color: white"><i class="fa fa-trash" style="margin-right: 4px"></i>Delete</a></button>
+                              <%--  </form>--%>
+
+                            </td>
+                            <td>${i.price}</td>
                         </tr>
-                      </c:forEach>
+                    </c:forEach>
                         <tr>
+                            <td>Temporary Cost</td>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td>Sub-Total</td>
-                            <td class="text-right">255,90 €</td>
-                        </tr>
-                        <tr>
                             <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>Shipping</td>
-                            <td class="text-right">6,90 €</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td><strong>Total</strong></td>
-                            <td class="text-right"><strong>346,90 €</strong></td>
+                            <td class="text-right">${total}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-        <div class="col mb-2">
-            <div class="row">
-                <div class="col-sm-12  col-md-6">
-                    <button class="btn btn-block btn-light"><a href="home">Continue Shopping</a></button>
-                </div>
-                <div class="col-sm-12 col-md-6 text-right">
-                    <button class="btn btn-lg btn-block btn-success text-uppercase">Checkout</button>
-                </div>
-            </div>
-           
+        <div class="col-sm-12  col-md-6">
+            <button class="btn btn-block btn-light" href="category?cid=0"><a href="category?cid=0">Continue Shopping</a></button>
         </div>
-    
+        <div class="col-sm-12 col-md-6 text-right">
+            <input type="hidden" name="uid" value="${sessionScope.acc.id}">
+            <button type="submit" class="btn btn-lg btn-block btn-success text-uppercase">Checkout</button>
+        </div>
+
     </div>
 </div>
 </form>
+<div class="container mb-4">
+    <div class="row">
+        <div class="col-12">
+            <form action="order">
+                <div class="col mb-2">
+                    <div class="row">
+
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 
 
 <!-- Footer -->

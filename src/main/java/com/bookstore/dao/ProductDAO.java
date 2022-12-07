@@ -62,12 +62,6 @@ public class ProductDAO {
         }
     }
 
-    public Product findById(int id) {
-        Session session = HibernateUtility.getSessionFactory().openSession();
-        Product product = session.load(Product.class, id);
-        return product;
-    }
-
     public List<Product> getAll(){
         // open session
         Session session = HibernateUtility.getSessionFactory().openSession();
@@ -157,6 +151,25 @@ public class ProductDAO {
             session.close();
         }
         return products;
+    }
+
+    public int getSalePrice(int id){
+        int price = 0;
+        Product product = getProductByID(id);
+        price = product.getSalePrice();
+        return price;
+    }
+
+    public void updateAfterOrder(int id, int quantity){
+        try{
+            Product product = getProductByID(id);
+            product.setQuantity(product.getQuantity() - quantity);
+            update(product);
+        }
+        catch(RuntimeException e){
+            e.printStackTrace();
+        }
+
     }
 }
 

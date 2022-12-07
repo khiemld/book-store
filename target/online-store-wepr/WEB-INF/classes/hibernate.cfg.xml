@@ -19,6 +19,7 @@
         <!-- Disable the second-level cache -->
         <property name="cache.provider_class">org.hibernate.cache.internal.NoCachingRegionFactory</property>
         <property name="hbm2ddl.auto">update</property>
+        <property name="hibernate.allow_update_outside_transaction">true</property>
 
         <!-- Entities Mapping-->
         <mapping class="com.bookstore.entity.CartItem" />

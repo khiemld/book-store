@@ -30,6 +30,12 @@ public class PayMethod {
         this.name = name;
     }
 
+    public PayMethod(){ }
+
+    public PayMethod(String name) {
+        this.name = name;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

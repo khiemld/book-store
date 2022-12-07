@@ -5,7 +5,7 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-	<a class="navbar-brand" href="#">Navbar</a>
+	<a class="navbar-brand" href="#">BOOKSTORE</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarSupportedContent"
 		aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -48,8 +48,8 @@
 					style='font-size: 32px; color: #28A745;'></a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown"
 						style="float: right;">
-						<a class="dropdown-item " href="profile">Your profile</a>
-						<a class="dropdown-item " href="reset-password">Reset</a> 
+						<a class="dropdown-item " href="<%=request.getContextPath()%>/profile">Your profile</a>
+						<a class="dropdown-item " href="<%=request.getContextPath()%>/reset">Reset Password</a>
 						<a class="dropdown-item " href="logout">Logout</a>
 					</div></li>
 			</c:if>

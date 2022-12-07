@@ -67,10 +67,6 @@
                     <td>Subtotal</td>
                     <td>${total}</td>
                 </tr>
-                <tr>
-                    <td>Shipping</td>
-                    <td>Free shipping</td>
-                </tr>
             </table><br>
 
         </div>

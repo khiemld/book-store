@@ -170,4 +170,24 @@ public class UserDAO {
         }
         return result;
     }
+
+    public User getUserByID(int id){
+        Session session = HibernateUtility.getSessionFactory().openSession();
+        List<User> users= null;
+        User user = new User();
+        try {
+            // Create query
+            final String sqlString = "select u from User u where u.id = :id";
+
+            Query query = session.createQuery(sqlString);
+            query.setParameter("id", id);
+            users = query.list();
+            user = users.get(0);
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return user;
+    }
 }

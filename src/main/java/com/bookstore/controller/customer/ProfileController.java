@@ -12,7 +12,6 @@ import java.io.IOException;
 public class ProfileController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html");
         User user = (User) request.getSession().getAttribute("acc");
@@ -22,7 +21,7 @@ public class ProfileController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("utf-8");
+        response.setContentType("text/html");
         response.setCharacterEncoding("utf-8");
 
         HttpSession session = request.getSession();

@@ -80,4 +80,22 @@ public class PaymentDAO {
         }
         return payMethods;
     }
+
+    public PayMethod getMethodbyID(int id){
+        Session session = HibernateUtility.getSessionFactory().openSession();
+        PayMethod payMethod = new PayMethod();
+        List<PayMethod> payMethods = null;
+        try{
+            final String sqlString = "Select p from PayMethod p order by p.id";
+            Query query = session.createQuery(sqlString);
+            payMethods = query.list();
+            payMethod = payMethods.get(0);
+        }
+        catch(RuntimeException e){
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return payMethod;
+    }
 }

@@ -48,8 +48,8 @@
 					style='font-size: 32px; color: #28A745;'></a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown"
 						style="float: right;">
-						<a class="dropdown-item " href="profile">Your profile</a>
-						<a class="dropdown-item " href="reset-password">Reset</a> 
+						<a class="dropdown-item " href="<%=request.getContextPath()%>/profile">Your profile</a>
+						<a class="dropdown-item " href="<%=request.getContextPath()%>/reset">Reset Password</a>
 						<a class="dropdown-item " href="logout">Logout</a>
 					</div></li>
 			</c:if>

@@ -61,4 +61,13 @@ footer a {
     color: #f8f9fa!important
 }
 
+.remind{
+    color: #ff424f;
+    font-size: 0.8rem;
+    padding-left: 48px;
+    margin-bottom: 0.4rem;
+    margin-top: 0.2rem;
+    visibility: hidden;
+}
+
 

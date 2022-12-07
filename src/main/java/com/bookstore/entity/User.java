@@ -40,8 +40,6 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Order> orders;
 
-
-
     public User(){ }
 
     public User(String name, String address, String email, String phone, String password, int isRole) {

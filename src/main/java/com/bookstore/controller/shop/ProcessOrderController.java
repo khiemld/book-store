@@ -1,11 +1,7 @@
 package com.bookstore.controller.shop;
 
-import com.bookstore.dao.CartItemDAO;
-import com.bookstore.dao.OrderDAO;
-import com.bookstore.dao.OrderItemDAO;
-import com.bookstore.entity.CartItem;
-import com.bookstore.entity.OrderItem;
-import com.bookstore.entity.Order;
+import com.bookstore.dao.*;
+import com.bookstore.entity.*;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -32,8 +28,14 @@ public class ProcessOrderController extends HttpServlet {
         int idDelivery = Integer.parseInt(request.getParameter("delivery"));
         int uid = Integer.parseInt(request.getParameter("uid"));
 
+        DeliveryDAO deliveryDAO = new DeliveryDAO();
+        Delivery delivery = deliveryDAO.getDeliveryByID(idDelivery);
+
+        PaymentDAO paymentDAO = new PaymentDAO();
+        PayMethod payMethod = paymentDAO.getMethodbyID(idPayment);
+
         OrderDAO orderDAO = new OrderDAO();
-        Order order = new Order(uid, phone, address, name, idPayment, idDelivery);
+        Order order = new Order(uid, phone, address, name, idPayment, idDelivery, 1);
 
         orderDAO.save(order);
         orderDAO.addOrder(order, uid);
@@ -42,8 +44,16 @@ public class ProcessOrderController extends HttpServlet {
         List<OrderItem> orderItems = orderItemDAO.orderItemList(order.getId());
 
         int total = orderDAO.totalOrder(orderItems, order);
+        int sum = total - delivery.getShipFee();
 
+        request.setAttribute("order", order);
+        request.setAttribute("nameDelivery", delivery.getName());
+        request.setAttribute("fee", delivery.getShipFee());
+        request.setAttribute("namePay", payMethod.getName());
+        request.setAttribute("oid", order.getId());
+        request.setAttribute("listOrder", orderItems);
         request.setAttribute("total", total);
+        request.setAttribute("sum", sum);
         request.getRequestDispatcher("/store/views/detailOrder.jsp").forward(request, response);
     }
 }

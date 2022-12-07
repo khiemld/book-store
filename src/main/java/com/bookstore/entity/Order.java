@@ -47,13 +47,14 @@ public class Order {
 
     public Order(){}
 
-    public Order(int idUser, String phone, String address, String contactName, int idMethod, int idDelivery) {
+    public Order(int idUser, String phone, String address, String contactName, int idMethod, int idDelivery, int status) {
         this.idUser = idUser;
         this.phone = phone;
         this.address = address;
         this.contactName = contactName;
         this.idMethod = idMethod;
         this.idDelivery = idDelivery;
+        this.status = status;
     }
 
     @ManyToOne
@@ -70,6 +71,14 @@ public class Order {
     @ManyToOne
     @JoinColumn(name="idUser", referencedColumnName = "id", nullable = false,insertable = false, updatable = false)
     private User user;
+
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
+    }
 
     public int getId() {
         return id;

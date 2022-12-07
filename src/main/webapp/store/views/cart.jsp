@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix ="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -50,11 +51,15 @@
                                 ${i.quantity}
                                 <button style="border: none; float: right; width: 30px; background-color:#4285f4"><a href="process?num=1&id=${i.idProduct}&u=${i.idUser}" style="text-decoration: none; color: white">+</a></button>
                             </td>
-                            <td class="text-right">${i.product.salePrice}</td>
+                            <td class="text-right">
+                                <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${i.product.salePrice}"/> đ
+                            </td>
                             <td class="text-right">
                                 <a class="btn btn-sm btn-danger btn-number" href="deleteCart?pid=${i.idProduct}&uid=${i.idUser}"  style="text-decoration: none; color: white"><i class="fa fa-trash" style="margin-right: 4px"></i>Delete</a></button>
                             </td>
-                            <td>${i.price}</td>
+                            <td>
+                                <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${i.price}"/> đ
+                            </td>
                         </tr>
                     </c:forEach>
                         <tr>
@@ -64,7 +69,9 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td class="text-right">${total}</td>
+                            <td class="text-right">
+                                <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${total}"/> đ
+                            </td>
                         </tr>
                     </tbody>
                 </table>

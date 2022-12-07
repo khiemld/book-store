@@ -40,36 +40,40 @@
             </ol>
           </nav>
           <!-- /Breadcrumb -->
-    
-          <div class="row gutters-sm">
+
+        <div class="row gutters-sm">
             <div class="col-md-4 mb-3">
-              <div class="card">
-                <div class="card-body">
-                  <div class="d-flex flex-column align-items-center text-center">
-                      <c:if test="${sessionScope.acc.image != null}">
-                          <img src="${sessionScope.acc.image}" alt="Admin" class="rounded-circle" width="150">
-                      </c:if>
-                      <div class="mt-3">
-                          <h4>${sessionScope.acc.email}</h4>
-                          <c:if test="${sessionScope.acc.isRole == 1}">
-                            <p class="text-secondary mb-1">Admin</p>
-                          </c:if>
-                          <c:if test="${sessionScope.acc.isRole == 2}">
-                              <p class="text-secondary mb-1">Employee</p>
-                          </c:if>
-                          <c:if test="${sessionScope.acc.isRole == 3}">
-                              <p class="text-secondary mb-1">Customer</p>
-                          </c:if>
-                          <p class="text-muted font-size-sm">${sessionScope.acc.address}</p>
-                          <button class="btn btn-primary">Follow</button>
-                          <button class="btn btn-outline-primary">Message</button>
-                      </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            <c:if test="${sessionScope.acc.image != null}">
+                                <img src="${sessionScope.acc.image}" alt="Admin" class="rounded-circle" width="150">
+                            </c:if>
+                            <div class="mt-3">
+                                <h4>${sessionScope.acc.email}</h4>
+                                <c:if test="${sessionScope.acc.isRole == 1}">
+                                    <p class="text-secondary mb-1">Admin</p>
+                                </c:if>
+                                <c:if test="${sessionScope.acc.isRole == 2}">
+                                    <p class="text-secondary mb-1">Employee</p>
+                                </c:if>
+                                <c:if test="${sessionScope.acc.isRole == 3}">
+                                    <p class="text-secondary mb-1">Customer</p>
+                                </c:if>
+                                <p class="text-muted font-size-sm">${sessionScope.acc.address}</p>
+                                <button class="btn btn-primary">Follow</button>
+                                <button class="btn btn-outline-primary">Message</button>
+                            </div>
+                            <form action="orderProfile" method="post">
+                                <input type="hidden" name="uid" value="${sessionScope.acc.id}">
+                                <button type="submit" class="btn btn-outline-primary" style="margin-top: 8px">Đơn hàng của tôi</button>
+                            </form>
 
-                  </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-
             </div>
+
               <div class="col-md-8">
                   <div class="card mb-3">
                       <div class="card-body">

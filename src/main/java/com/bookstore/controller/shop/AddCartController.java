@@ -1,6 +1,5 @@
 package com.bookstore.controller.shop;
 import com.bookstore.dao.CartItemDAO;
-import com.bookstore.dao.CategoryDAO;
 import com.bookstore.dao.ProductDAO;
 import com.bookstore.entity.CartItem;
 
@@ -12,7 +11,7 @@ import java.io.IOException;
 
 
 @WebServlet(name = "AddCardControl", value = "/cart")
-public class AddCartControl extends HttpServlet {
+public class AddCartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
        /* request.setCharacterEncoding("UTF-8");

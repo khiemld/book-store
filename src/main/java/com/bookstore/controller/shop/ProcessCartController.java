@@ -5,17 +5,14 @@ import com.bookstore.dao.ProductDAO;
 import com.bookstore.entity.CartItem;
 import com.bookstore.entity.Product;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "ProcessCartServlet", value = "/process")
-public class ProcessCartControl extends HttpServlet {
+public class ProcessCartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String num_raw = request.getParameter("num");

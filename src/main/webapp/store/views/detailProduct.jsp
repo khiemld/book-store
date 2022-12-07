@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix ="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -54,21 +55,14 @@
             <div class="card bg-light mb-3">
                 <div class="card-body">
                     ${detail.name}
-                    <p class="price">${detail.salePrice} $</p>
+                    <p class="price">
+                        <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${detail.salePrice}"/> đ
+                    </p>
 <%--                    <p class="price_discounted">${pdetail.promotionalPrice}$</p>--%>
                     <form method="post" action="cart" name="infoProduct">
                         <c:set var="id" value="${detail.id}"/>
                         <div class="form-group">
-                            <label for="colors">Color</label>
-                            <select class="custom-select" id="colors">
-                                <option selected>Select</option>
-                                <option value="1">Blue</option>
-                                <option value="2">Red</option>
-                                <option value="3">Green</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>So luong da ban:${pdetail.sold}</label>
+                            <label>Số lượng:${pdetail.sold}</label>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <button type="button" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">

@@ -23,56 +23,52 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body ">
-        <div class="text-right"> <i class="fa fa-close close" data-dismiss="modal"></i> </div>
 
         <div class="px-4">
 
-          <h5 class="text-uppercase">Jonathan Adler</h5>
+          <h5 class="text-uppercase">${sessionScope.acc.name} #${oid}</h5>
 
+          <h4 class="theme-color">Chi tiết đơn hàng</h4>
 
+          <c:forEach items="${listOrder}" var="i">
+            <div style="display: inline-block">
+              <small>${i.product.name} x ${i.quantity}</small>
+              <small>${i.price}</small>
+            </div>
+          </c:forEach>
 
-          <h4 class="mt-5 theme-color">Thanks for your order</h4>
-
-          <span class="theme-color">Payment Summary</span>
           <div class="mb-3">
             <hr class="new1">
           </div>
 
           <div class="d-flex justify-content-between">
-            <span class="font-weight-bold">Ether Chair(Qty:1)</span>
-            <span class="text-muted">$1750.00</span>
+            <span class="font-weight-bold">Tổng tiền</span>
+            <span class="text-muted">${total}</span>
           </div>
 
           <div class="d-flex justify-content-between">
-            <small>Shipping</small>
-            <small>$175.00</small>
+            <small>Tiền sách</small>
+            <small>${sum}</small>
           </div>
 
-
           <div class="d-flex justify-content-between">
-            <small>Tax</small>
-            <small>$200.00</small>
+            <small>Vận chuyển</small>
+            <small>${fee}</small>
           </div>
 
           <div class="d-flex justify-content-between mt-3">
-            <span class="font-weight-bold">Total</span>
-            <span class="font-weight-bold theme-color">${total}</span>
+            <span class="font-weight-bold theme-color">${nameDelivery}</span>
           </div>
-
+          <div class="d-flex justify-content-between mt-3">
+            <span class="font-weight-bold theme-color">${namePay}</span>
+          </div>
 
 
           <div class="text-center mt-5">
-
-
-            <button class="btn btn-primary">Track your order</button>
-
-
-
+            <a class="btn btn-primary" href="home">Trở về</a>
           </div>
 
         </div>
-
-
       </div>
     </div>
   </div>

@@ -40,36 +40,40 @@
             </ol>
           </nav>
           <!-- /Breadcrumb -->
-    
-          <div class="row gutters-sm">
+
+        <div class="row gutters-sm">
             <div class="col-md-4 mb-3">
-              <div class="card">
-                <div class="card-body">
-                  <div class="d-flex flex-column align-items-center text-center">
-                      <c:if test="${sessionScope.acc.image != null}">
-                          <img src="${sessionScope.acc.image}" alt="Admin" class="rounded-circle" width="150" height="150">
-                      </c:if>
-                      <div class="mt-3">
-                          <h4>${sessionScope.acc.email}</h4>
-                          <c:if test="${sessionScope.acc.isRole == 1}">
-                            <p class="text-secondary mb-1">Admin</p>
-                          </c:if>
-                          <c:if test="${sessionScope.acc.isRole == 2}">
-                              <p class="text-secondary mb-1">Nhân viên</p>
-                          </c:if>
-                          <c:if test="${sessionScope.acc.isRole == 3}">
-                              <p class="text-secondary mb-1">Khách hàng</p>
-                          </c:if>
-                          <p class="text-muted font-size-sm">${sessionScope.acc.address}</p>
-                          <button class="btn btn-primary">Follow</button>
-                          <button class="btn btn-outline-primary">Message</button>
-                      </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            <c:if test="${sessionScope.acc.image != null}">
+                                <img src="${sessionScope.acc.image}" alt="Admin" class="rounded-circle" width="150">
+                            </c:if>
+                            <div class="mt-3">
+                                <h4>${sessionScope.acc.email}</h4>
+                                <c:if test="${sessionScope.acc.isRole == 1}">
+                                    <p class="text-secondary mb-1">Admin</p>
+                                </c:if>
+                                <c:if test="${sessionScope.acc.isRole == 2}">
+                                    <p class="text-secondary mb-1">Employee</p>
+                                </c:if>
+                                <c:if test="${sessionScope.acc.isRole == 3}">
+                                    <p class="text-secondary mb-1">Customer</p>
+                                </c:if>
+                                <p class="text-muted font-size-sm">${sessionScope.acc.address}</p>
+                                <button class="btn btn-primary">Follow</button>
+                                <button class="btn btn-outline-primary">Message</button>
+                            </div>
+                            <form action="orderProfile" method="post">
+                                <input type="hidden" name="uid" value="${sessionScope.acc.id}">
+                                <button type="submit" class="btn btn-outline-primary" style="margin-top: 8px">Đơn hàng của tôi</button>
+                            </form>
 
-                  </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-
             </div>
+
               <div class="col-md-8">
                   <div class="card mb-3">
                       <div class="card-body">
@@ -138,33 +142,37 @@
         <div class="modal-content">
             <form action="profile" method="post">
                 <div class="modal-header">
-                    <h4 class="modal-title">Chỉnh sửa thông tin</h4>
+                    <h4 class="modal-title">Edit Profile</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
 
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>Họ và tên</label>
+                        <label>Full Name</label>
                         <input name="name" value="${sessionScope.acc.name}" type="text" class="form-control"
                                required>
                     </div>
                     <div class="form-group">
-                        <label>Địa chỉ Email:</label>
+                        <label>Email:</label>
                         <input name="email" type="text" value="${sessionScope.acc.email}" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label>Số điện thoại</label>
+                        <label>Phone</label>
                         <input name="phone" type="text" value="${sessionScope.acc.phone}" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label>Địa chỉ</label>
+                        <label>Address</label>
                         <input name="address" value="${sessionScope.acc.address}" type="text" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label>Avatar. Nhập link ảnh.</label>
+                        <label>Avatar</label>
                         <c:if test="${sessionScope.acc.image != null}">
-                            <input name="address" value="${sessionScope.acc.image}" type="text" class="form-control">
+                            <input name="image" value="${sessionScope.acc.image}" type="image" class="form-control">
                         </c:if>
+                        <c:if test="${sessionScope.acc.image == null}">
+                            <input name="image" value="${sessionScope.acc.image}" type="image" class="form-control">
+                        </c:if>
+<%--                        <input name="avatar" value="${sessionScope.acc.image}" type="image" class="form-control">--%>
                     </div>
                 </div>
                 <div class="modal-footer">

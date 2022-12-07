@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix ="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -79,7 +80,9 @@
 						<img class="img-fluid" src="${lastProduct.image}" />
 						<h5 class="card-title">${lastProduct.name}</h5>
 						<p class="card-text web-kit-3">${lastProduct.discription}</p>
-						<p class="bloc_left_price">${lastProduct.salePrice} VNĐ</p>
+						<p class="bloc_left_price">
+							<fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${lastProduct.salePrice}"/> đ
+						</p>
 					</div>
 				</div>
 			</div>
@@ -99,7 +102,9 @@
 									</div>
 									<div class="row" style="margin-top: 8px">
 										<div class="col">
-											<p class="btn btn-danger btn-block">${o.salePrice}</p>
+											<p class="btn btn-danger btn-block">
+												<fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${o.salePrice}"/> đ
+											</p>
 										</div>
 										<%--<div class="col">
 											<a href="cart?pid=${o.id}"

@@ -52,12 +52,7 @@
                             </td>
                             <td class="text-right">${i.product.salePrice}</td>
                             <td class="text-right">
-                                <%--<form action="process" method="post">
-                                    <input type="hidden" name="uid" value="${i.idUser}">
-                                    <input type="hidden" name="pid" value="${i.idProduct}">--%>
-                                    <%--<button type="submit" >--%><a class="btn btn-sm btn-danger btn-number" href="deleteCart?pid=${i.idProduct}&uid=${i.idUser}"  style="text-decoration: none; color: white"><i class="fa fa-trash" style="margin-right: 4px"></i>Delete</a></button>
-                              <%--  </form>--%>
-
+                                <a class="btn btn-sm btn-danger btn-number" href="deleteCart?pid=${i.idProduct}&uid=${i.idUser}"  style="text-decoration: none; color: white"><i class="fa fa-trash" style="margin-right: 4px"></i>Delete</a></button>
                             </td>
                             <td>${i.price}</td>
                         </tr>

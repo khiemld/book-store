@@ -48,9 +48,9 @@
 					style='font-size: 32px; color: #28A745;'></a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown"
 						style="float: right;">
-						<a class="dropdown-item " href="profile">Your profile</a>
-						<a class="dropdown-item " href="reset-password">Reset</a> 
-						<a class="dropdown-item " href="logout">Logout</a>
+						<a class="dropdown-item " href="profile">Hồ sơ</a>
+						<a class="dropdown-item " href="orderHistory">Đơn hàng của tôi</a>
+						<a class="dropdown-item " href="logout">Đăng xuất</a>
 					</div></li>
 			</c:if>
 		</form>

@@ -54,7 +54,8 @@
                     ${detail.name}
                     <p class="price">${detail.salePrice} $</p>
 <%--                    <p class="price_discounted">${pdetail.promotionalPrice}$</p>--%>
-                    <form method="get" action="cart.html">
+                    <form method="post" action="cart" name="infoProduct">
+                        <c:set var="id" value="${detail.id}"/>
                         <div class="form-group">
                             <label for="colors">Color</label>
                             <select class="custom-select" id="colors">
@@ -72,6 +73,8 @@
                                         <i class="fa fa-minus"></i>
                                     </button>
                                 </div>
+                                <input type="hidden" class="form-control"  id="idProduct" name="pid" value="${detail.id}">
+                                <input type="hidden" class="form-control"  id="idUser" name="uid" value="${sessionScope.acc.id}">
                                 <input type="text" class="form-control"  id="quantity" name="quantity" min="1" max="100" value="1">
                                 <div class="input-group-append">
                                     <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
@@ -80,9 +83,15 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="cart.html" class="btn btn-success btn-lg btn-block text-uppercase">
-                            <i class="fa fa-shopping-cart"></i> Add To Cart
-                        </a>
+                    <c:if test="${sessionScope.acc != null}">
+                     <input type="submit" class="btn btn-success btn-lg btn-block text-uppercase" value="Add to cart">
+                    </c:if>
+                    <c:if test="${sessionScope.acc == null}">
+                        <a href="login"
+                           class="btn btn-success btn-block">Add to cart</a>
+                    </c:if>
+                        
+
                     </form>
                     <div class="product_rassurance">
                         <ul class="list-inline">
@@ -196,7 +205,9 @@
 <script src="//code.jquery.com/jquery-3.2.1.slim.min.js" type="text/javascript"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" type="text/javascript"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" type="text/javascript"></script>
-<scrip src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
 <script type="text/javascript">
     //Plus & Minus for Quantity product
     $(document).ready(function(){
@@ -215,8 +226,9 @@
                 $('#quantity').val(quantity - 1);
             }
         });
-
     });
+
 </script>
+
 </body>
 </html>

@@ -39,6 +39,13 @@ public class Delivery {
         this.shipFee = shipFee;
     }
 
+    public Delivery(){ }
+
+    public Delivery(String name, int shipFee) {
+        this.name = name;
+        this.shipFee = shipFee;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

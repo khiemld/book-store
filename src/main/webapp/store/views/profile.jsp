@@ -15,8 +15,13 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<<<<<<< HEAD
     <link href="<c:url value ="/store/css/style.css" />" rel="stylesheet" type="text/css">
     <title>Your Profile</title>
+=======
+    <link href="<c:url value = "/store/css/style.css" />" rel="stylesheet" type="text/css">
+<title>Insert title here</title>
+>>>>>>> e0668993a5a58b1fbedfe08033b1a1ab0e09b8ce
 </head>
 <body>
 <!-- header -->

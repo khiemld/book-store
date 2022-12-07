@@ -64,10 +64,18 @@
 				</div>
 			</div>
 		</form>
+
 		<form class="form-inline my-2 my-lg-0">
-			<a class="btn btn-success btn-sm ml-3" href="cart"> <i
-				class="fa fa-shopping-cart"></i>Cart <span class="badge badge-light">3</span>
-			</a>
+			<c:if test="${sessionScope.acc != null}">
+				<a class="btn btn-success btn-sm ml-3" href="showCart?uid=${sessionScope.acc.id}">
+					<i class="fa fa-shopping-cart"></i>Cart <span class="badge badge-light">3</span>
+				</a>
+			</c:if>
+			<c:if test="${sessionScope.acc == null}">
+				<a class="btn btn-success btn-sm ml-3" href="showCart?uid=0">
+					<i class="fa fa-shopping-cart"></i>Cart <span class="badge badge-light">3</span>
+				</a>
+			</c:if>
 		</form>
 
 	</div>

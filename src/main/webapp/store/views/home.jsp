@@ -85,7 +85,6 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                    
                         <c:forEach items ="${list4last}" var = "p">
                          <div class="col-sm">
                             <div class="card">

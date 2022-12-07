@@ -103,6 +103,26 @@ public class ProductDAO {
         return product;
     }
 
+    public List<Product> get4LastestProduct(){
+        Session session = HibernateUtility.getSessionFactory().openSession();
+        Product product = new Product();
+        List<Product> products = null;
+
+//        int num = session.createQuery("select count(id) from Product p where active = 1");
+
+        try{
+            final String sqlString = "Select p from Product p order by p.id desc";
+            Query query = session.createQuery(sqlString);
+            products = query.setMaxResults(4).list();
+        }
+        catch(RuntimeException e){
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return products;
+    }
+
     public List<Product> getProductByCategoryID(int cateID){
         Session session = HibernateUtility.getSessionFactory().openSession();
         List<Product> products= null;

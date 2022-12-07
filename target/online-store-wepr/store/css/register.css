@@ -31,6 +31,7 @@
 
 .input-group{
     height: 50px;
+    margin-bottom: 0;
 }
 
 .input-group-prepend{
@@ -39,4 +40,21 @@
 
 .form-control{
     height: 100%;
+}
+
+.remind{
+    color: #ff424f;
+    font-size: 0.8rem;
+    padding-left: 48px;
+    margin-bottom: 0.4rem;
+    margin-top: 0.2rem;
+    visibility: hidden;
+}
+
+.mg-bot-2rem{
+    margin-bottom: 2rem!important;
+}
+
+.mg-top-2rem{
+    margin-top: 2rem!important;
 }

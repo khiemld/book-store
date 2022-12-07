@@ -6,6 +6,8 @@
         <entry key="file://$PROJECT_DIR$/src/main/webapp/store/views/category.jsp" value="file://$PROJECT_DIR$/src/main/webapp/store/views" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/store/views/header.jsp" value="file://$PROJECT_DIR$/src/main/webapp/store/views" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/store/views/home.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/store/views/login.jsp" value="file://$PROJECT_DIR$/src/main/webapp/store/views" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/store/views/profile.jsp" value="file://$PROJECT_DIR$/src/main/webapp/store/views" />
       </map>
     </option>
   </component>

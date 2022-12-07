@@ -16,6 +16,8 @@ import java.util.List;
 public class CategoryController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
         response.setContentType("text/html; charset=UTF8");
 
         String cateID = request.getParameter("cid");
@@ -44,6 +46,8 @@ public class CategoryController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
         doGet(request, response);
     }
 }

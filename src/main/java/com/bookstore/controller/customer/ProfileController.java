@@ -8,33 +8,36 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "RegisterServlet", value = "/register")
-public class RegisterController extends HttpServlet {
+@WebServlet(name = "ProfileController", value = "/profile")
+public class ProfileController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
-        System.out.println("Loading: RegisterController DoGet");
-
-        doPost(request,response);
+        response.setContentType("text/html");
+        User user = (User) request.getSession().getAttribute("acc");
+        System.out.println("acc: " + user.getEmail());
+        request.getRequestDispatcher("/store/views/profile.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
+
         HttpSession session = request.getSession();
         response.setContentType("text/html");
-        String url = "/login";
+
+        System.out.println("Vào được doPost");
 
         String name = request.getParameter("name").trim();
         String address = request.getParameter("address").trim();
         String phone = request.getParameter("phone").trim();
         String email = request.getParameter("email").trim();
-        String password = request.getParameter("password").trim();
+//        String image = request.getParameter("image").trim();
 
-//        Kiểm tra để đảm bảo phone và email là unique
         UserDAO userDAO = new UserDAO();
+//      Check unique cho email và phone
         String errorMessage = "";
         if(userDAO.isExistEmail(email)){
             errorMessage = "Email already exists, please enter another email.";
@@ -50,33 +53,25 @@ public class RegisterController extends HttpServlet {
         System.out.println("Error Message: " + errorMessage);
 
         if(errorMessage == ""){
-            //Nếu email và phone number hợp lệ thì tiến hành đăng ký thành viên
+            //      Update: begin
             User user = new User();
+            user = (User)   request.getSession().getAttribute("acc");
             user.setName(name);
             user.setPhone(phone);
-            user.setAddress(address);
             user.setEmail(email);
-            user.setPassword(password);
-            user.setIsRole(3);
-            user.setActive(true);
-
-            request.setAttribute("user", user);
-
+            user.setAddress(address);
             try {
-                userDAO.save(user);
-                session.setAttribute("statusRegisterForm", 0);
-                System.out.println("Thêm User thành công");
+                userDAO.update(user);
+                System.out.println("Update User thành công");
             } catch (Exception e) {
                 // TODO Auto-generated catch block
-                session.setAttribute("statusRegisterForm", 1);
-                System.out.println("Thêm User không thành công");
+                System.out.println("Update User không thành công");
                 e.printStackTrace();
             }
+            request.setAttribute("acc", user);
+//      Update: End
         }
-        session.setAttribute("register_error", errorMessage);
-        getServletContext().getRequestDispatcher(url).forward(request,response);
-
-//        response.setContentType("text/html");
-//        request.getRequestDispatcher("/store/views/register.jsp").forward(request, response);
+        session.setAttribute("update_error", errorMessage);
+        request.getRequestDispatcher("/store/views/profile.jsp").forward(request, response);
     }
 }

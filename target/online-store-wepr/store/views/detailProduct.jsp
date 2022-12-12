@@ -62,21 +62,22 @@
                     <form method="post" action="cart" name="infoProduct">
                         <c:set var="id" value="${detail.id}"/>
                         <div class="form-group">
-                            <label>Số lượng:${pdetail.sold}</label>
+                            <%--<label>Số lượng</label>--%>
                             <div class="input-group mb-3">
-                                <div class="input-group-prepend">
+                                <%--<div class="input-group-prepend">
                                     <button type="button" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
                                         <i class="fa fa-minus"></i>
                                     </button>
-                                </div>
+                                </div>--%>
                                 <input type="hidden" class="form-control"  id="idProduct" name="pid" value="${detail.id}">
                                 <input type="hidden" class="form-control"  id="idUser" name="uid" value="${sessionScope.acc.id}">
-                                <input type="text" class="form-control"  id="quantity" name="quantity" min="1" max="100" value="1">
+                                    <input type="hidden" class="form-control"  id="idUser" name="quantity" value="1">
+                                <%--<input type="text" class="form-control"  id="quantity" name="quantity" min="1" max="100" value="1">
                                 <div class="input-group-append">
                                     <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
                                         <i class="fa fa-plus"></i>
                                     </button>
-                                </div>
+                                </div>--%>
                             </div>
                         </div>
                     <c:if test="${sessionScope.acc != null}">

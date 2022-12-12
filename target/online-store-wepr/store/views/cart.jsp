@@ -21,7 +21,7 @@
 <!-- header -->
 <%@ include file ="header.jsp" %>
 <!-- end header -->
-<form action="order" method="get">
+<form action="order">
 <div class="container mb-4">
     <div class="row">
         <div class="col-12">
@@ -30,12 +30,12 @@
                     <thead >
                         <tr>
                             <th scope="col" style="vertical-align: middle">Stt</th>
-                            <th scope="col" style="vertical-align: middle; max-width: 64px" class="text-center">Image</th>
+                            <th scope="col" style="vertical-align: middle" class="text-center">Image</th>
                             <th scope="col-sm-4" style="vertical-align: middle">Product</th>
                             <th scope="col" style="vertical-align: middle">Quantity</th>
                             <th scope="col" class="text-center" style="vertical-align: middle">Price</th>
-                            <th scope="col" style="vertical-align: middle">Delete</th>
-                            <th scope="col" style="vertical-align: middle">Sub-total</th>
+                            <th scope="col" style="vertical-align: middle" class="text-center">Delete</th>
+                            <th scope="col" style="vertical-align: middle" class="text-left">Sub-total</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -43,35 +43,35 @@
                     <c:forEach items="${listItem}" var="i">
                         <c:set var="tt" value="${tt+1}"/>
                         <tr>
-                            <td>${tt}</td>
-                            <td><img class ="col-4" src="${i.product.image}"></td>
+                            <td style="width: 0">${tt}</td>
+                            <td style="max-width: 32px"><img class ="col-4" src="${i.product.image}" style="max-width: 90.333333%"></td>
                             <td>${i.product.name}</td>
                             <td>
-                                <button style="border: none; display:inline; width: 20px; background-color:#4285f4"><a href="process?num=-1&id=${i.idProduct}&u=${i.idUser}" style="text-decoration: none; color: white" >-</a></button>
+                                <button type="button" style="border: none; width: 30px; background-color:#4285f4; margin-right: 32px"><a href="process?num=-1&id=${i.idProduct}&u=${i.idUser}" style="text-decoration: none; color: white">-</a></button>
                                 <%--<input type="number" value="${i.quantity}" min="1" max="10">--%>
                                 ${i.quantity}
-                                <button style="border: none; float: right; width: 30px; background-color:#4285f4"><a href="process?num=1&id=${i.idProduct}&u=${i.idUser}" style="text-decoration: none; color: white">+</a></button>
+                                <button type="button" style="border: none; float: right; width: 30px; background-color:#4285f4; margin-left: -28px;"><a href="process?num=1&id=${i.idProduct}&u=${i.idUser}" style="text-decoration: none; color: white">+</a></button>
                             </td>
-                            <td class="text-right">
+                            <td class="text-center">
                                 <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${i.product.salePrice}"/> đ
                             </td>
-                            <td class="text-right">
+                            <td class="text-center">
                                 <a class="btn btn-sm btn-danger btn-number" href="deleteCart?pid=${i.idProduct}&uid=${i.idUser}"  style="text-decoration: none; color: white"><i class="fa fa-trash" style="margin-right: 4px"></i>Delete</a></button>
                             </td>
-                            <td>
-                                <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${i.price}"/> đ
+                            <td class="text-left">
+                               <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${i.price}"/> đ
                             </td>
                         </tr>
                     </c:forEach>
                         <tr>
-                            <td>Temporary Cost</td>
+                            <td></td>
+                            <td></td>
+                            <td><b>Temporary Cost</td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td></td>
-                            <td></td>
-                            <td class="text-right">
-                                <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${total}"/> đ
+                            <td class="text-left">
+                                <b><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${total}"/> đ
                             </td>
                         </tr>
                     </tbody>

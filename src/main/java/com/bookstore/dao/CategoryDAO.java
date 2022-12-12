@@ -2,13 +2,14 @@ package com.bookstore.dao;
 
 import com.bookstore.entity.Category;
 import com.bookstore.utility.HibernateUtility;
+import org.hibernate.HibernateError;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import java.util.List;
 
 public class CategoryDAO {
-    public void save(Category catagory){
+    public static void save(Category catagory){
         Session session = HibernateUtility.getSessionFactory().openSession();
         try{
             session.beginTransaction();
@@ -25,7 +26,7 @@ public class CategoryDAO {
         }
     }
 
-    public void update(Category catagory){
+    public static void update(Category catagory){
         Session session = HibernateUtility.getSessionFactory().openSession();
         try{
             session.beginTransaction();
@@ -42,7 +43,7 @@ public class CategoryDAO {
         }
     }
 
-    public void delete(int id) {
+    public static void delete(int id) {
         Session session = HibernateUtility.getSessionFactory().openSession();
         try{
             session.beginTransaction();
@@ -62,13 +63,35 @@ public class CategoryDAO {
         }
     }
 
-    public Category findById(int id) {
+    public static Category findById(int id) {
         Session session = HibernateUtility.getSessionFactory().openSession();
         Category category = session.load(Category.class, id);
         return category;
     }
 
-    public List<Category> getAll(){
+    public static List<Category> findByName(String name) {
+        // open session
+        Session session = HibernateUtility.getSessionFactory().openSession();
+        List<Category> categories = null;
+        try {
+            // Create query string
+            String queryString = "from Category where name like :name";
+
+            // Create query
+            Query query = session.createQuery(queryString, Category.class);
+            query.setParameter("name", "%" + name + "%");
+
+            // Return result List
+            categories = query.list();
+        } catch (HibernateError error) {
+            System.err.println(error);
+        } finally {
+            session.close();
+        }
+        return categories;
+    }
+
+    public static List<Category> getAll(){
         // open session
         Session session = HibernateUtility.getSessionFactory().openSession();
         List<Category> categories = null;

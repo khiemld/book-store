@@ -4,7 +4,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 
-public class HibernateUtility {
+public class
+HibernateUtility {
     public static SessionFactory factory;
 
     private HibernateUtility() {

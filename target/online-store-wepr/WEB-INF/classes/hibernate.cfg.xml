@@ -20,7 +20,7 @@
         <property name="cache.provider_class">org.hibernate.cache.internal.NoCachingRegionFactory</property>
         <property name="hbm2ddl.auto">update</property>
         <property name="hibernate.allow_update_outside_transaction">true</property>
-
+        <property name="connection.pool_size">100</property>
         <!-- Entities Mapping-->
         <mapping class="com.bookstore.entity.CartItem" />
         <mapping class="com.bookstore.entity.Category" />

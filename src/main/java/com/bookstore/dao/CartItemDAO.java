@@ -1,9 +1,7 @@
 package com.bookstore.dao;
 
 import com.bookstore.entity.CartItem;
-import com.bookstore.entity.Category;
 import com.bookstore.entity.Product;
-import com.bookstore.entity.User;
 import com.bookstore.utility.HibernateUtility;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -11,7 +9,7 @@ import org.hibernate.query.Query;
 import java.util.List;
 
 public class CartItemDAO {
-    public void save(CartItem cartItem){
+    public static void save(CartItem cartItem){
         Session session = HibernateUtility.getSessionFactory().openSession();
         try{
             session.beginTransaction();
@@ -28,7 +26,7 @@ public class CartItemDAO {
         }
     }
 
-    public void update(CartItem cartItem){
+    public static void update(CartItem cartItem){
         Session session = HibernateUtility.getSessionFactory().openSession();
         try{
             session.beginTransaction();
@@ -45,7 +43,7 @@ public class CartItemDAO {
         }
     }
 
-    public void delete(int id) {
+    public static void delete(int id) {
         Session session = HibernateUtility.getSessionFactory().openSession();
         try{
             session.beginTransaction();
@@ -66,7 +64,7 @@ public class CartItemDAO {
     }
 
 
-    public List<CartItem> getAll(){
+    public static  List<CartItem> getAll(){
         // open session
         Session session = HibernateUtility.getSessionFactory().openSession();
         List<CartItem> cartItems = null;
@@ -83,7 +81,7 @@ public class CartItemDAO {
         return cartItems;
     }
 
-    public CartItem getCartItemByID(int id){
+    public static  CartItem getCartItemByID(int id){
         Session session = HibernateUtility.getSessionFactory().openSession();
         CartItem cartItem = new CartItem();
         List<CartItem> cartItems= null;
@@ -106,7 +104,7 @@ public class CartItemDAO {
 
 
 
-    public List<CartItem> testCartItem(int uid, int pid){
+    public static List<CartItem> testCartItem(int uid, int pid){
         Session session = HibernateUtility.getSessionFactory().openSession();
         List<CartItem> cartItems= null;
         /*CartItem cartItem = null;*/
@@ -129,14 +127,14 @@ public class CartItemDAO {
         return cartItems;
     }
 
-    public Product setProductbyID(int id){
+    public static Product setProductbyID(int id){
         ProductDAO productDAO = new ProductDAO();
         Product product = new Product();
         product = productDAO.getProductByID(id);
         return product;
     }
 
-    public boolean cartItemExist(CartItem i){
+    public static boolean cartItemExist(CartItem i){
         if(testCartItem(i.getIdUser(), i.getIdProduct()).size() != 0){
             return true;
         }
@@ -145,7 +143,7 @@ public class CartItemDAO {
         }
     }
 
-    public void addCartItem(CartItem item){
+    public static void addCartItem(CartItem item){
         if(cartItemExist(item)){
             Product product = setProductbyID(item.getIdProduct());
             CartItem i = testCartItem(item.getIdUser(), item.getIdProduct()).get(0);
@@ -161,7 +159,7 @@ public class CartItemDAO {
         }
     }
 
-    public List<CartItem> getItemListByUId(int uid){
+    public static List<CartItem> getItemListByUId(int uid){
         Session session = HibernateUtility.getSessionFactory().openSession();
         List<CartItem> cartItems = null;
         try {
@@ -179,7 +177,7 @@ public class CartItemDAO {
         return cartItems;
     }
 
-    public void deleteAll(int uid){
+    public static void deleteAll(int uid){
         List<CartItem> cartItems = getItemListByUId(uid);
         for(CartItem i : cartItems){
             if(cartItems.size() >= 0) {
@@ -189,7 +187,7 @@ public class CartItemDAO {
     }
 
 
-    public int totalPrice(List<CartItem> itemList){
+    public static int totalPrice(List<CartItem> itemList){
         int total = 0;
         for(CartItem i : itemList){
             total += i.getPrice();
@@ -197,7 +195,7 @@ public class CartItemDAO {
         return total;
     }
 
-    public void RemoveItem(CartItem item){
+    public static void RemoveItem(CartItem item){
         if(cartItemExist(item)){
             Product product = setProductbyID(item.getIdProduct());
             CartItem i = testCartItem(item.getIdUser(), item.getIdProduct()).get(0);

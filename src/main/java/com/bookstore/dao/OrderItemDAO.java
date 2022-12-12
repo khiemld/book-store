@@ -9,7 +9,7 @@ import java.util.List;
 
 public class OrderItemDAO {
 
-    public void save(OrderItem orderItem){
+    public static void save(OrderItem orderItem){
         Session session = HibernateUtility.getSessionFactory().openSession();
         try{
             session.beginTransaction();
@@ -26,7 +26,7 @@ public class OrderItemDAO {
         }
     }
 
-    public List<OrderItem> orderItemList(int id){
+    public static List<OrderItem> orderItemList(int id){
         Session session = HibernateUtility.getSessionFactory().openSession();
         List<OrderItem> orderItems =  null;
         try {
@@ -44,5 +44,39 @@ public class OrderItemDAO {
         return orderItems;
     }
 
+    public static List<OrderItem> orderItemListByProduct(int id){
+        Session session = HibernateUtility.getSessionFactory().openSession();
+        List<OrderItem> orderItems =  null;
+        try {
+            // Create query
+            final String sqlString = "select o from OrderItem o where o.idProduct = :id";
+
+            Query query = session.createQuery(sqlString);
+            query.setParameter("id", id);
+            orderItems = query.list();
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return orderItems;
+    }
+
+    public static List<OrderItem> getAll() {
+        // open session
+        Session session = HibernateUtility.getSessionFactory().openSession();
+        List<OrderItem> orderitemEntities = null;
+        try {
+            // Create query
+            final String sqlString = " select ot from OrderItem ot";
+            Query query = session.createQuery(sqlString);
+            orderitemEntities = query.list();
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return orderitemEntities;
+    }
 
 }

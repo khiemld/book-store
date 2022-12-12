@@ -59,17 +59,26 @@ public class LoginController extends HttpServlet {
             UserDAO userDAO = new UserDAO();
             User account = userDAO.testLogin(email, password);
             if(account.getName() != null){
-                HttpSession session = request.getSession();
-                session.setAttribute("acc", account);
-                ProductDAO productDAO = new ProductDAO();
-                List<Product> product4Lastest = null;
-                product4Lastest = productDAO.get4LastestProduct();
 
-                Product product1Lastest = productDAO.getLatestProduct();
+                if(account.getIsRole() == 3){
+                    HttpSession session = request.getSession();
+                    session.setAttribute("acc", account);
+                    ProductDAO productDAO = new ProductDAO();
+                    List<Product> product4Lastest = null;
+                    product4Lastest = productDAO.get4LastestProduct();
 
-                request.setAttribute("list1product", product1Lastest);
-                request.setAttribute("list4last",  product4Lastest);
-                request.getRequestDispatcher("/store/views/home.jsp").forward(request, response);
+                    Product product1Lastest = productDAO.getLatestProduct();
+
+                    request.setAttribute("list1product", product1Lastest);
+                    request.setAttribute("list4last",  product4Lastest);
+                    request.getRequestDispatcher("/store/views/home.jsp").forward(request, response);
+                }
+                else {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("admin", account);
+                    response.sendRedirect("admin");
+                }
+
             }
             else{
                 request.setAttribute("error", "Wrong email or password");

@@ -139,6 +139,7 @@ public class EmployeeServlet extends HttpServlet {
             user.setPassword(ePassword);
             user.setImage(eImageLink);
             user.setIsRole(2);
+            user.setActive(true);
 
 //            Kiểm tra dữ liệu đầu vào đang được lưu trong book
 //            Nêu dữ liệu chưa hợp lệ

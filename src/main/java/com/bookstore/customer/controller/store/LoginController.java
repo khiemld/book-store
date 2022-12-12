@@ -18,7 +18,7 @@ public class LoginController extends HttpServlet {
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html");
         System.out.println("Loading: LoginController DoGet");
-        String url ="/store/views/login.jsp";
+        String url = "/store/views/login.jsp";
 
 //        request.setAttribute("statusRegisterForm", 0); //0: hiện khung đăng nhập, 1: hiện khung đăng ký
 //        String action = request.getParameter("action").trim();
@@ -27,10 +27,23 @@ public class LoginController extends HttpServlet {
 //        } else if (action.equals("signin-form")) {
 //            url = "/store/views/login.jsp";
 //        }
-        if(request.getAttribute("error") != null){
+
+        if (request.getAttribute("error") != null) {
             request.removeAttribute("error");
         }
-        if(request.getAttribute("register_error") != null){
+        String error = request.getParameter("error");
+        if (error != null) {
+            if (error.equals("admin-only")) {
+                error = new String("Vui lòng đăng nhập với tài khoản admin|nhân viên!");
+            }
+            if(error.equals("customer-only")){
+                error = new String("Vui lòng đăng nhập với tài khoản khách hàng!");
+            }
+            request.setAttribute("error", error);
+            System.out.println(error);
+            request.getRequestDispatcher("/store/views/login.jsp").forward(request, response);
+        }
+        if (request.getAttribute("register_error") != null) {
             request.removeAttribute("register_error");
         }
 
@@ -50,7 +63,7 @@ public class LoginController extends HttpServlet {
         String action = request.getParameter("action").trim();
         System.out.println("action = " + action);
 
-        if(action.equals("signin")){
+        if (action.equals("signin")) {
             String email = request.getParameter("user");
             String password = request.getParameter("pass");
 
@@ -58,7 +71,7 @@ public class LoginController extends HttpServlet {
 
             UserDAO userDAO = new UserDAO();
             User account = userDAO.testLogin(email, password);
-            if(account.getName() != null){
+            if (account.getName() != null) {
                 HttpSession session = request.getSession();
                 session.setAttribute("acc", account);
                 ProductDAO productDAO = new ProductDAO();
@@ -68,10 +81,17 @@ public class LoginController extends HttpServlet {
                 Product product1Lastest = productDAO.getLatestProduct();
 
                 request.setAttribute("list1product", product1Lastest);
-                request.setAttribute("list4last",  product4Lastest);
-                request.getRequestDispatcher("/store/views/home.jsp").forward(request, response);
-            }
-            else{
+                request.setAttribute("list4last", product4Lastest);
+
+                if (account.getIsRole() == 3) {
+                    response.sendRedirect("/home");
+                } else if(account.getIsRole() == 1){
+                    response.sendRedirect("/admin");
+                } else if(account.getIsRole() == 2){
+                    response.sendRedirect("/admin/order");
+                }
+//                request.getRequestDispatcher("/store/views/home.jsp").forward(request, response);
+            } else {
                 request.setAttribute("error", "Wrong email or password");
                 request.getRequestDispatcher("/store/views/login.jsp").forward(request, response);
             }
@@ -85,20 +105,19 @@ public class LoginController extends HttpServlet {
 //        Kiểm tra để đảm bảo phone và email là unique
             UserDAO userDAO = new UserDAO();
             String errorMessage = "";
-            if(userDAO.isExistEmail(email)){
+            if (userDAO.isExistEmail(email)) {
                 errorMessage = "Địa chỉ Email được đã đăng ký trước đó. Vui lòng nhập email mới";
             }
-            if(userDAO.isExistPhone(phone)){
-                if(errorMessage == ""){
+            if (userDAO.isExistPhone(phone)) {
+                if (errorMessage == "") {
                     errorMessage = "Số điện thoại được đã đăng ký trước đó. Vui lòng nhập email mới";
-                }
-                else{
+                } else {
                     errorMessage = "Số điện thoại và địa chỉ Email được đã đăng ký trước đó. Vui lòng nhập email mới";
                 }
             }
             System.out.println("Error Message: " + errorMessage);
 
-            if(errorMessage == ""){
+            if (errorMessage == "") {
                 //Nếu email và phone number hợp lệ thì tiến hành đăng ký thành viên
                 User user = new User();
                 user.setName(name);

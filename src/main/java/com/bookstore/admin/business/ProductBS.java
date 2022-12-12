@@ -51,7 +51,7 @@ public class ProductBS {
         int total = 0;
         for (Product book : books) {
             for (Order order : OrderDAO.getAll()) {
-                if (order.getStatus() == 1) {
+                if (order.getStatus() == 1 || order.getStatus() == 5) {
                     continue;
                 }
                 for (OrderItem item : OrderItemDAO.orderItemList(order.getId())) {

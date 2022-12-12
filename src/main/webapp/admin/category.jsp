@@ -40,7 +40,7 @@
     <!-- Chỗ này hong biết sao nó hong ăn bên file style.css nên phải để ở đây :>> -->
     <style>
         .img-rectangle {
-            width: 250px;
+            width: 200px;
         }
 
         .recent-sales {
@@ -48,11 +48,12 @@
         }
 
         .desciption-column-witdh {
-            width: 300px;
+            width: 920px;
             text-align: justify;
         }
 
         .action-column {
+            width: 150px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -64,6 +65,10 @@
 
         .margin-top-30 {
             margin-top: 30px;
+        }
+
+        .full-column-width {
+            width: 100%;
         }
     </style>
 
@@ -158,7 +163,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="/admin=">
+            <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin">
                 <i class="bi bi-grid"></i>
                 <span>Dashboard</span>
             </a>
@@ -174,7 +179,7 @@
         <%--        </li><!-- End Profile Page Nav -->--%>
 
         <li class="nav-item">
-            <a class="nav-link" href="${pageContext.request.contextPath}/admin/customer">
+            <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/customer">
                 <i class="bi bi-emoji-sunglasses"></i>
                 <span>Customer</span>
             </a>
@@ -202,7 +207,7 @@
         </li><!-- End Order Page Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/category">
+            <a class="nav-link" href="${pageContext.request.contextPath}/admin/category">
                 <i class="bi bi-grid-1x2"></i>
                 <span>Category</span>
             </a>
@@ -220,7 +225,6 @@
                 <span>Delivery</span>
             </a>
         </li><!-- End Category Page Nav -->
-
     </ul>
 
 </aside><!-- End Sidebar-->
@@ -228,11 +232,11 @@
 <main id="main" class="main">
 
     <div class="pagetitle">
-        <h1>${action.equals("insert")?"Thêm khách hàng":"Chi tiết khách hàng"}</h1>
+        <h1>Dashboard</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/admin">Home</a></li>
-                <li class="breadcrumb-item active">Customer</li>
+                <li class="breadcrumb-item active">Category</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -244,77 +248,81 @@
             <div class="col-lg-8 recent-sales">
                 <div class="row">
                     <c:if test="${not empty message}">
-                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
                             <i class="bi bi-exclamation-triangle me-1"></i>
                                 ${message}
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     </c:if>
-                    <form action="${pageContext.request.contextPath}/admin/customer" method="post">
-                        <div class="row mb-3">
-                            <label for="inputText" class="col-sm-2 col-form-label">Tên khách hàng</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="customerName" value="${customer.name}"
-                                ${action.equals("insert")?"required":"readonly"}>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="inputText" class="col-sm-2 col-form-label">Địa chỉ</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="customerAddress"
-                                       value="${customer.address}" ${action.equals("insert")?"required":"readonly"}>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="inputText" class="col-sm-2 col-form-label">Email</label>
-                            <div class="col-sm-10">
-                                <input type="email" class="form-control" name="customerEmail"
-                                       value="${customer.email}" ${action.equals("insert")?"required":"readonly"}>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="inputText" class="col-sm-2 col-form-label">Mật khẩu</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="customerPassword"
-                                       value="${customer.password}" ${action.equals("insert")?"required":"readonly"}>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="inputNumber" class="col-sm-2 col-form-label">Điện thoại</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="customerPhone"
-                                       value="${customer.phone}" ${action.equals("insert")?" required":"readonly"}>
-                            </div>
-                        </div>
+                    <!-- Sales Card -->
+                    <div class="col-xxl-4 col-md-6">
+                        <div class="card info-card sales-card">
 
-                        <div class="row mb-3">
-                            <label for="inputText" class="col-sm-2 col-form-label">Link ảnh</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="imageLink" name="customerImageLink"
-                                       value="${customer.image}" readonly>
-                            </div>
-                        </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Tổng <span>| loại sách</span></h5>
 
-                        <div class="row mb-3" ${action.equals("insert")?"":"hidden"}>
-                            <label for="inputNumber" class="col-sm-2 col-form-label">Chọn ảnh</label>
-                            <div class="col-sm-10">
-                                <%--id cũ formFile--%>
-                                <input class="form-control" type="file" id="fileImage" value="upload" accept="image/*">
-                                <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-cart"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6>${categoryList.size()} loại sách</h6>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label"></label>
-                            <div class="col-sm-10">
-                                <a href="${pageContext.request.contextPath}/admin/customer" class="btn ${action.equals("insert")?"btn-danger":"btn-success"}">${action.equals("insert")?"Cancel":"OK"}</a>
-                                <button type="submit" class="btn btn-success" value="add" ${action.equals("insert")?"":"hidden"}>Save</button>
-                            </div>
                         </div>
-                        <input type="hidden" name="action" value="save">
-                        <input type="hidden" name="cID" value="${customer.id}">
-                    </form><!-- End General Form Elements -->
-                    <button class="btn btn-primary" id="fileButton" ${action.equals("insert")?"":"hidden"}>Upload Image</button>
+                    </div><!-- End Sales Card -->
+
+
+                    <!-- Add button -->
+                    <form action="${pageContext.request.contextPath}/admin/category" method="get">
+                        <input type="hidden" name="action" value="insert">
+                        <input type="submit" class="btn btn-success" value="Add category">
+                        <%--<a href="/admin/book?action=insert" class="btn btn-success">Add book</a>--%>
+                    </form>
+
+                    <!-- Book List -->
+                    <div class="col-12">
+                        <div class="card overflow-auto margin-top-30">
+
+                            <div class="card-body">
+                                <h5 class="card-title">Loại sách</h5>
+
+                                <table class="table table-borderless datatable">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <c:forEach items="${categoryList}" var="category">
+                                        <tr>
+                                            <th scope="row"><a href="#">${category.id}</a></th>
+                                            <td class="desciption-column-witdh"><a href="" >${category.name}</a></td>
+                                            <td class="action-column">
+                                                <a href="${pageContext.request.contextPath}/admin/category?action=edit&categoryID=${category.id}"
+                                                   class="btn btn-outline-primary full-column-width  margin-top-10">Chỉnh sửa</a>
+                                                <form action="" method="post">
+                                                    <input type="hidden" name="categoryID" value="${category.id}">
+                                                    <input type="hidden" name="action" value="delete">
+                                                    <input class="btn btn-danger margin-top-10 full-column-width" type="submit"
+                                                           value="Xóa"
+                                                           onclick="if (confirm('Bạn có chắc chắn muốn xóa loại sách này(Không thể phục hồi)?')) { form.action='${pageContext.request.contextPath}/admin/category'; } else { return false; }"/>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                        </div>
+                    </div><!-- End Book List-->
+
                 </div>
             </div><!-- End Left side columns -->
 
@@ -352,98 +360,6 @@
 
 <!-- Template Main JS File -->
 <script src="${pageContext.request.contextPath}/admin/assets/js/main.js"></script>
-
-<%-- Script để up ảnh lên trên firebase --%>
-<script type="text/javascript">
-    const firebaseConfig = {
-        apiKey: "AIzaSyAkEUZstCnJ5AqGXBqpTefdojdmFJUlg9s",
-        authDomain: "bookstore-group6.firebaseapp.com",
-        projectId: "bookstore-group6",
-        storageBucket: "bookstore-group6.appspot.com",
-        messagingSenderId: "511904505175",
-        appId: "1:511904505175:web:024a0d6a156673f8b87212",
-        measurementId: "G-113KCDWNBN"
-    };
-
-    firebase.initializeApp(firebaseConfig);
-
-    var image = '';
-    // firebase bucket name
-    // REPLACE WITH THE ONE YOU CREATE
-    // ALSO CHECK STORAGE RULES IN FIREBASE CONSOLE
-    var fbBucketName = 'images';
-
-    // get elements
-    var uploader = document.getElementById('uploader');
-    var fileButton = document.getElementById('fileButton');
-
-    // listen for file selection
-    fileButton.addEventListener('click', function (e) {
-
-        // get file
-        var file = document.getElementById("fileImage").files[0];
-
-        // create a storage ref
-        <%--var storageRef = firebase.storage().ref(`${fbBucketName}/${file.name}`);--%>
-        const storageRef = firebase.storage().ref(file.name);
-        // upload file
-        var uploadTask = storageRef.put(file);
-
-        // The part below is largely copy-pasted from the 'Full Example' section from
-        // https://firebase.google.com/docs/storage/web/upload-files
-
-        // update progress bar
-        uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
-            function (snapshot) {
-                // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-                var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                uploader.value = progress;
-                console.log('Upload is ' + progress + '% done');
-                switch (snapshot.state) {
-                    case firebase.storage.TaskState.PAUSED: // or 'paused'
-                        console.log('Upload is paused');
-                        break;
-                    case firebase.storage.TaskState.RUNNING: // or 'running'
-                        console.log('Upload is running');
-                        break;
-                }
-            }, function (error) {
-
-                // A full list of error codes is available at
-                // https://firebase.google.com/docs/storage/web/handle-errors
-                switch (error.code) {
-                    case 'storage/unauthorized':
-                        // User doesn't have permission to access the object
-                        break;
-
-                    case 'storage/canceled':
-                        // User canceled the upload
-                        break;
-
-                    case 'storage/unknown':
-                        // Unknown error occurred, inspect error.serverResponse
-                        break;
-                }
-            }, function () {
-                // Upload completed successfully, now we can get the download URL
-                // save this link somewhere, e.g. put it in an input field
-                var downloadURL = uploadTask.snapshot.downloadURL;
-                image = downloadURL;
-                console.log('downloadURL ===>', downloadURL);
-                console.log('pic ==', downloadURL)
-                var imgElement = document.getElementById('imageLink');
-                imgElement.value = downloadURL;
-                console.log(imgElement.value);
-            });
-
-    });
-    z
-
-    function resultImage() {
-        console.log('image resulte -->', image)
-        return image;
-    }
-</script>
 
 </body>
 

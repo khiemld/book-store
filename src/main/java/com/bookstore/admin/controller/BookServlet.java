@@ -110,7 +110,6 @@ public class BookServlet extends HttpServlet {
         String pCategoryID = request.getParameter("bookCategoryID");
         String pImageLink = request.getParameter("bookImageLink");
 
-
 //        Kiểm tra người dùng có nhập dữ liệu vào hay chưa
         if (!pName.trim().equals("") && !pOriginalPrice.trim().equals("") && !pSalePrice.trim().equals("") && !pQuantity.trim().equals("")) {
 //            Thực hiện kiểm tra dữ liệu vào
@@ -127,6 +126,7 @@ public class BookServlet extends HttpServlet {
             book.setQuantity(Integer.parseInt(pQuantity));
             book.setIdCategory(Integer.parseInt(pCategoryID));
             book.setImage(pImageLink);
+            book.setActive(true);
 
 //            Kiểm tra dữ liệu đầu vào đang được lưu trong book
 //            Nêu dữ liệu chưa hợp lệ
@@ -160,6 +160,8 @@ public class BookServlet extends HttpServlet {
                         int totalBook= ProductBS.totalBook(bookList);
                         request.setAttribute("total",totalBook);
                         request.setAttribute("bookList", bookList);
+                        int sellBook= ProductBS.sellBook(bookList);
+                        request.setAttribute("sell",sellBook);
                         request.getRequestDispatcher("/admin/book.jsp").forward(request, response);
                     }
                 }
@@ -172,6 +174,8 @@ public class BookServlet extends HttpServlet {
                     request.setAttribute("bookList", bookList);
                     int totalBook= ProductBS.totalBook(bookList);
                     request.setAttribute("total",totalBook);
+                    int sellBook= ProductBS.sellBook(bookList);
+                    request.setAttribute("sell",sellBook);
                     request.getRequestDispatcher("/admin/book.jsp").forward(request, response);
                 }
             }

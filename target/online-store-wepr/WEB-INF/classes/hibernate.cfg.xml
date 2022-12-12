@@ -7,10 +7,10 @@
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/bookstore?useUnicode=true&amp;createDatabaseIfNotExist=true&amp;characterEncoding=utf-8</property>
         <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">0204</property>
+        <property name="hibernate.connection.password">28102002</property>
         <property name="hibernate.show_sql">true</property>
         <!-- SQL dialect -->
-        <property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 
         <property name="hibernate.connection.CharSet">utf8</property>
         <property name="hibernate.connection.characterEncoding">utf8</property>
@@ -20,7 +20,7 @@
         <property name="cache.provider_class">org.hibernate.cache.internal.NoCachingRegionFactory</property>
         <property name="hbm2ddl.auto">update</property>
         <property name="hibernate.allow_update_outside_transaction">true</property>
-        <property name="connection.pool_size">100</property>
+
         <!-- Entities Mapping-->
         <mapping class="com.bookstore.entity.CartItem" />
         <mapping class="com.bookstore.entity.Category" />

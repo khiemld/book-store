@@ -40,7 +40,7 @@
     <!-- Chỗ này hong biết sao nó hong ăn bên file style.css nên phải để ở đây :>> -->
     <style>
         .img-rectangle {
-            width: 250px;
+            width: 150px;
         }
 
         .recent-sales {
@@ -65,7 +65,8 @@
         .margin-top-30 {
             margin-top: 30px;
         }
-        .full-column-width{
+
+        .full-column-width {
             width: 100%;
         }
     </style>
@@ -169,12 +170,12 @@
 
         <li class="nav-heading">Pages</li>
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="">
-                <i class="bi bi-person"></i>
-                <span>Profile</span>
-            </a>
-        </li><!-- End Profile Page Nav -->
+        <%--        <li class="nav-item">--%>
+        <%--            <a class="nav-link collapsed" href="">--%>
+        <%--                <i class="bi bi-person"></i>--%>
+        <%--                <span>Profile</span>--%>
+        <%--            </a>--%>
+        <%--        </li><!-- End Profile Page Nav -->--%>
 
         <li class="nav-item">
             <a class="nav-link" href="${pageContext.request.contextPath}/admin/customer">
@@ -185,7 +186,7 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/employee">
-                <i class="bi bi-emoji-laughing-fill"></i>
+                <i class="bi bi-emoji-expressionless"></i>
                 <span>Employee</span>
             </a>
         </li><!-- End Employee Page Nav -->
@@ -205,7 +206,7 @@
         </li><!-- End Order Page Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="">
+            <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/category">
                 <i class="bi bi-grid-1x2"></i>
                 <span>Category</span>
             </a>
@@ -349,18 +350,26 @@
                                             <td><a href="">${c.name}</a></td>
                                             <td>${c.address}</td>
                                             <td>${c.email}</td>
-                                            <td><img alt="" class="img-rectangle" src="${c.image}"/></td>
+                                            <td><img alt="" class="img-rectangle" src="
+                                                <c:if test="${c.image.equals('')}">
+                                                    https://static.vecteezy.com/system/resources/thumbnails/001/840/618/small/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg
+                                                </c:if>
+                                                <c:if test="${!c.image.equals('')}">
+                                                    ${c.image}
+                                                </c:if>
+                                                "/>
+                                            </td>
                                             <td><span>${c.phone}</span></td>
                                             <td class="action-column">
                                                 <a href="${pageContext.request.contextPath}/admin/customer?action=edit&customerID=${c.id}"
-                                                   class="btn btn-primary full-column-width">Detail</a>
-<%--                                                <form action="" method="post">--%>
-<%--                                                    <input type="hidden" name="customerID" value="${c.id}">--%>
-<%--                                                    <input type="hidden" name="action" value="delete">--%>
-<%--                                                    <input class="btn btn-danger margin-top-10 full-column-width" type="submit"--%>
-<%--                                                           value="Delete"--%>
-<%--                                                           onclick="if (confirm('Bạn có chắc chắn muốn xóa khách hàng này?')) { form.action='/admin/customer'; } else { return false; }"/>--%>
-<%--                                                </form>--%>
+                                                   class="btn btn-outline-primary full-column-width  margin-top-10">Chi tiết</a>
+                                                    <%--                                                <form action="" method="post">--%>
+                                                    <%--                                                    <input type="hidden" name="customerID" value="${c.id}">--%>
+                                                    <%--                                                    <input type="hidden" name="action" value="delete">--%>
+                                                    <%--                                                    <input class="btn btn-danger margin-top-10 full-column-width" type="submit"--%>
+                                                    <%--                                                           value="Delete"--%>
+                                                    <%--                                                           onclick="if (confirm('Bạn có chắc chắn muốn xóa khách hàng này?')) { form.action='/admin/customer'; } else { return false; }"/>--%>
+                                                    <%--                                                </form>--%>
                                             </td>
                                         </tr>
                                     </c:forEach>

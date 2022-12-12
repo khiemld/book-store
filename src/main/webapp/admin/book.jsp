@@ -40,7 +40,7 @@
     <!-- Chỗ này hong biết sao nó hong ăn bên file style.css nên phải để ở đây :>> -->
     <style>
         .img-rectangle {
-            width: 250px;
+            width: 200px;
         }
 
         .recent-sales {
@@ -166,12 +166,12 @@
 
         <li class="nav-heading">Pages</li>
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="">
-                <i class="bi bi-person"></i>
-                <span>Profile</span>
-            </a>
-        </li><!-- End Profile Page Nav -->
+        <%--        <li class="nav-item">--%>
+        <%--            <a class="nav-link collapsed" href="">--%>
+        <%--                <i class="bi bi-person"></i>--%>
+        <%--                <span>Profile</span>--%>
+        <%--            </a>--%>
+        <%--        </li><!-- End Profile Page Nav -->--%>
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/customer">
@@ -182,7 +182,7 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/employee">
-                <i class="bi bi-emoji-laughing-fill"></i>
+                <i class="bi bi-emoji-expressionless"></i>
                 <span>Employee</span>
             </a>
         </li><!-- End Employee Page Nav -->
@@ -202,7 +202,7 @@
         </li><!-- End Order Page Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="">
+            <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/category">
                 <i class="bi bi-grid-1x2"></i>
                 <span>Category</span>
             </a>
@@ -367,12 +367,12 @@
                                             <td><img alt="" class="img-rectangle" src="${b.image}"/></td>
                                             <td class="action-column">
                                                 <a href="${pageContext.request.contextPath}/admin/book?action=edit&productID=${b.id}"
-                                                   class="btn btn-primary">Edit</a>
+                                                   class="btn btn-primary">Sửa</a>
                                                 <form action="" method="post">
                                                     <input type="hidden" name="productID" value="${b.id}">
                                                     <input type="hidden" name="action" value="delete">
                                                     <input class="btn btn-danger margin-top-10" type="submit"
-                                                           value="Delete"
+                                                           value="Xóa"
                                                            onclick="if (confirm('Bạn có chắc chắn muốn xóa món hàng này?')) { form.action='${pageContext.request.contextPath}/admin/book'; } else { return false; }"/>
                                                 </form>
                                             </td>

@@ -1,10 +1,10 @@
 package com.bookstore.admin.controller;
 
-import com.bookstore.admin.business.CustomerBS;
-import com.bookstore.admin.business.EmployeeBS;
-import com.bookstore.admin.business.ProductBS;
+import com.bookstore.admin.business.*;
+import com.bookstore.dao.CategoryDAO;
 import com.bookstore.dao.OrderDAO;
 import com.bookstore.dao.ProductDAO;
+import com.bookstore.entity.Category;
 import com.bookstore.entity.Order;
 import com.bookstore.entity.Product;
 import com.bookstore.entity.User;
@@ -13,6 +13,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 @WebServlet(name = "AdminHomeServlet", value = "/admin")
@@ -40,6 +41,22 @@ public class AdminHomeServlet extends HttpServlet {
 
         Product bestSellerBook= ProductBS.BestSellerBook();
         request.setAttribute("bestSellerBook", bestSellerBook);
+
+        List<Category> categoryList = CategoryDAO.getAll();
+        request.setAttribute("categoryList", categoryList);
+
+        List<Integer> totalSaleOfCartegory= CategoryBS.totalSaleOfCartegory();
+        request.setAttribute("totalSaleOfCartegory", totalSaleOfCartegory);
+
+        List<Date> lastWeekFromNow= OrderBS.aLastWeekFromNow();
+        request.setAttribute("lastWeekFromNow", lastWeekFromNow);
+
+        List<Integer> incomeLastWeek=OrderBS.incomeLastWeek();
+        request.setAttribute("incomeLastWeek", incomeLastWeek);
+
+        User bestCustomerByPrice= CustomerBS.BestCustomerByPrice();
+        request.setAttribute("bestCustomerByPrice", bestCustomerByPrice);
+
         // Tổng số bán trong ngày
         // Thu nhập trong tháng
         // Khách hàng trong năm

@@ -48,7 +48,7 @@
         }
 
         .desciption-column-witdh {
-            width: 300px;
+            width: 920px;
             text-align: justify;
         }
 
@@ -170,12 +170,12 @@
 
         <li class="nav-heading">Pages</li>
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="">
-                <i class="bi bi-person"></i>
-                <span>Profile</span>
-            </a>
-        </li><!-- End Profile Page Nav -->
+        <%--        <li class="nav-item">--%>
+        <%--            <a class="nav-link collapsed" href="">--%>
+        <%--                <i class="bi bi-person"></i>--%>
+        <%--                <span>Profile</span>--%>
+        <%--            </a>--%>
+        <%--        </li><!-- End Profile Page Nav -->--%>
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/customer">
@@ -186,7 +186,7 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/employee">
-                <i class="bi bi-emoji-laughing-fill"></i>
+                <i class="bi bi-emoji-expressionless"></i>
                 <span>Employee</span>
             </a>
         </li><!-- End Employee Page Nav -->
@@ -206,7 +206,7 @@
         </li><!-- End Order Page Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="">
+            <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/category">
                 <i class="bi bi-grid-1x2"></i>
                 <span>Category</span>
             </a>
@@ -302,18 +302,18 @@
                                     <c:forEach items="${paymethodList}" var="p">
                                         <tr>
                                             <th scope="row"><a href="#">${p.id}</a></th>
-                                            <td><a href="">${p.name}</a></td>
+                                            <td class="desciption-column-witdh"><a href="">${p.name}</a></td>
                                             <td class="action-column">
                                                 <a href="${pageContext.request.contextPath}/admin/paymethod?action=edit&paymethodID=${p.id}"
-                                                   class="btn btn-primary full-column-width">Detail</a>
-<%--                                                <form action="" method="post">--%>
-<%--                                                    <input type="hidden" name="paymethodID" value="${p.id}">--%>
-<%--                                                    <input type="hidden" name="action" value="delete">--%>
-<%--                                                    <input class="btn btn-danger margin-top-10 full-column-width"--%>
-<%--                                                           type="submit"--%>
-<%--                                                           value="Delete"--%>
-<%--                                                           onclick="if (confirm('Bạn có chắc chắn muốn xóa khách hàng này?')) { form.action='/admin/paymethod'; } else { return false; }"/>--%>
-<%--                                                </form>--%>
+                                                   class="btn btn-outline-primary full-column-width  margin-top-10">Chi tiết</a>
+                                                <form action="" method="post">
+                                                    <input type="hidden" name="paymethodID" value="${p.id}">
+                                                    <input type="hidden" name="action" value="delete">
+                                                    <input class="btn btn-danger margin-top-10 full-column-width"
+                                                           type="submit"
+                                                           value="Xóa"
+                                                           onclick="if (confirm('Bạn có chắc chắn muốn xóa phương thức này này (Không thể khôi phục)?')) { form.action='${pageContext.request.contextPath}/admin/paymethod'; } else { return false; }"/>
+                                                </form>
                                             </td>
                                         </tr>
                                     </c:forEach>

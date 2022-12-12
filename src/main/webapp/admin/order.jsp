@@ -170,12 +170,12 @@
 
         <li class="nav-heading">Pages</li>
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="">
-                <i class="bi bi-person"></i>
-                <span>Profile</span>
-            </a>
-        </li><!-- End Profile Page Nav -->
+        <%--        <li class="nav-item">--%>
+        <%--            <a class="nav-link collapsed" href="">--%>
+        <%--                <i class="bi bi-person"></i>--%>
+        <%--                <span>Profile</span>--%>
+        <%--            </a>--%>
+        <%--        </li><!-- End Profile Page Nav -->--%>
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/customer">
@@ -186,14 +186,14 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/employee">
-                <i class="bi bi-emoji-laughing-fill"></i>
+                <i class="bi bi-emoji-expressionless"></i>
                 <span>Employee</span>
             </a>
         </li><!-- End Employee Page Nav -->
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/book">
-                <i class="bi bi-dash-circle"></i>
+                <i class="bi bi-journal-bookmark-fill"></i>
                 <span>Book</span>
             </a>
         </li><!-- End Book Page Nav -->
@@ -206,7 +206,7 @@
         </li><!-- End Order Page Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="">
+            <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/category">
                 <i class="bi bi-grid-1x2"></i>
                 <span>Category</span>
             </a>
@@ -364,8 +364,8 @@
 
                                     <c:forEach items="${orderList}" var="o">
                                         <tr>
-                                            <th scope="row"><a href="#">${o.id}</a></th>
-                                            <td><a href="">${o.contactName}</a></td>
+                                            <th scope="row"><a href="${pageContext.request.contextPath}/admin/order?action=edit&orderID=${o.id}">${o.id}</a></th>
+                                            <td><a href="${pageContext.request.contextPath}/admin/order?action=edit&orderID=${o.id}">${o.contactName}</a></td>
                                             <td>${o.createTime}</td>
                                             <td>${o.phone}</td>
                                             <td><span>${o.totalPay}</span></td>

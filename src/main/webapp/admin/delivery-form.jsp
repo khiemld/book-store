@@ -166,12 +166,12 @@
 
         <li class="nav-heading">Pages</li>
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="">
-                <i class="bi bi-person"></i>
-                <span>Profile</span>
-            </a>
-        </li><!-- End Profile Page Nav -->
+        <%--        <li class="nav-item">--%>
+        <%--            <a class="nav-link collapsed" href="">--%>
+        <%--                <i class="bi bi-person"></i>--%>
+        <%--                <span>Profile</span>--%>
+        <%--            </a>--%>
+        <%--        </li><!-- End Profile Page Nav -->--%>
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/customer">
@@ -182,7 +182,7 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/employee">
-                <i class="bi bi-emoji-laughing-fill"></i>
+                <i class="bi bi-emoji-expressionless"></i>
                 <span>Employee</span>
             </a>
         </li><!-- End Employee Page Nav -->
@@ -202,7 +202,7 @@
         </li><!-- End Order Page Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="">
+            <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/category">
                 <i class="bi bi-grid-1x2"></i>
                 <span>Category</span>
             </a>

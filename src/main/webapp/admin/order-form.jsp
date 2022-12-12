@@ -166,12 +166,12 @@
 
         <li class="nav-heading">Pages</li>
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="">
-                <i class="bi bi-person"></i>
-                <span>Profile</span>
-            </a>
-        </li><!-- End Profile Page Nav -->
+        <%--        <li class="nav-item">--%>
+        <%--            <a class="nav-link collapsed" href="">--%>
+        <%--                <i class="bi bi-person"></i>--%>
+        <%--                <span>Profile</span>--%>
+        <%--            </a>--%>
+        <%--        </li><!-- End Profile Page Nav -->--%>
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/customer">
@@ -182,7 +182,7 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/employee">
-                <i class="bi bi-emoji-laughing-fill"></i>
+                <i class="bi bi-emoji-expressionless"></i>
                 <span>Employee</span>
             </a>
         </li><!-- End Employee Page Nav -->
@@ -202,7 +202,7 @@
         </li><!-- End Order Page Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="">
+            <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/category">
                 <i class="bi bi-grid-1x2"></i>
                 <span>Category</span>
             </a>
@@ -254,49 +254,49 @@
                             <label for="inputText" class="col-sm-2 col-form-label">Khách hàng</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" name="customerName" value="${customer.name}"
-                                readonly>
+                                       readonly>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="inputText" class="col-sm-2 col-form-label">Nhân viên</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" name="employeeName" value="${employee.name}"
-                                readonly>
+                                       readonly>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="inputText" class="col-sm-2 col-form-label">Ngày tạo</label>
                             <div class="col-sm-10">
                                 <input type="date" class="form-control" name="createDate" value="${order.createTime}"
-                                readonly>
+                                       readonly>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="inputText" class="col-sm-2 col-form-label">Điện thoại</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" name="orderName" value="${order.phone}"
-                                readonly>
+                                       readonly>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="inputText" class="col-sm-2 col-form-label">Địa chỉ</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" name="orderAddress" value="${order.address}"
-                                readonly>
+                                       readonly>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="inputText" class="col-sm-2 col-form-label">Người nhận</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" name="orderContactName" value="${order.contactName}"
-                                readonly>
+                                       readonly>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="inputText" class="col-sm-2 col-form-label">Ngày nhận (Dự đoán)</label>
                             <div class="col-sm-10">
                                 <input type="date" class="form-control" name="receiveDate" value="${order.receiveDate}"
-                                readonly>
+                                       readonly>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -416,7 +416,7 @@
 <!-- Vendor JS Files -->
 <script src="${pageContext.request.contextPath}/admin/assets/vendor/apexcharts/apexcharts.min.js"></script>
 <script src="${pageContext.request.contextPath}/admin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="${pageContext.request.contextPath}"></script>
+<script src="${pageContext.request.contextPath}/admin/assets/vendor/chart.js/chart.min.js"></script>
 <script src="${pageContext.request.contextPath}/admin/assets/vendor/echarts/echarts.min.js"></script>
 <script src="${pageContext.request.contextPath}/admin/assets/vendor/quill/quill.min.js"></script>
 <script src="${pageContext.request.contextPath}/admin/assets/vendor/simple-datatables/simple-datatables.js"></script>

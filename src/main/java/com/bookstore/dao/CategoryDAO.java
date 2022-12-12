@@ -109,4 +109,26 @@ public class CategoryDAO {
         return categories;
     }
 
+    public static List<Category> getCategoryByName(String name) {
+        // open session
+        Session session = HibernateUtility.getSessionFactory().openSession();
+        List<Category> categories = null;
+        try {
+            // Create query string
+            String queryString = "from Category where name like :name";
+
+            // Create query
+            Query query = session.createQuery(queryString, Category.class);
+            query.setParameter("name", name);
+
+            // Return result List
+            categories = query.list();
+        } catch (HibernateError error) {
+            System.err.println(error);
+        } finally {
+            session.close();
+        }
+        return categories;
+    }
+
 }

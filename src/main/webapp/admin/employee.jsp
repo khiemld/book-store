@@ -40,7 +40,7 @@
     <!-- Chỗ này hong biết sao nó hong ăn bên file style.css nên phải để ở đây :>> -->
     <style>
         .img-rectangle {
-            width: 250px;
+            width: 150px;
         }
 
         .recent-sales {
@@ -65,7 +65,8 @@
         .margin-top-30 {
             margin-top: 30px;
         }
-        .full-column-width{
+
+        .full-column-width {
             width: 100%;
         }
     </style>
@@ -169,12 +170,12 @@
 
         <li class="nav-heading">Pages</li>
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="">
-                <i class="bi bi-person"></i>
-                <span>Profile</span>
-            </a>
-        </li><!-- End Profile Page Nav -->
+        <%--        <li class="nav-item">--%>
+        <%--            <a class="nav-link collapsed" href="">--%>
+        <%--                <i class="bi bi-person"></i>--%>
+        <%--                <span>Profile</span>--%>
+        <%--            </a>--%>
+        <%--        </li><!-- End Profile Page Nav -->--%>
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/customer">
@@ -185,7 +186,7 @@
 
         <li class="nav-item">
             <a class="nav-link" href="${pageContext.request.contextPath}/admin/employee">
-                <i class="bi bi-emoji-laughing-fill"></i>
+                <i class="bi bi-emoji-expressionless"></i>
                 <span>Employee</span>
             </a>
         </li><!-- End Employee Page Nav -->
@@ -205,7 +206,7 @@
         </li><!-- End Order Page Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="">
+            <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/category">
                 <i class="bi bi-grid-1x2"></i>
                 <span>Category</span>
             </a>
@@ -349,16 +350,24 @@
                                             <td><a href="">${e.name}</a></td>
                                             <td>${e.address}</td>
                                             <td>${e.email}</td>
-                                            <td><img alt="" class="img-rectangle" src="${e.image}"/></td>
+                                            <td><img alt="" class="img-rectangle" src="
+                                                <c:if test="${e.image.equals('')}">
+                                                    https://static.vecteezy.com/system/resources/thumbnails/001/840/618/small/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg
+                                                </c:if>
+                                                <c:if test="${!e.image.equals('')}">
+                                                    ${e.image}
+                                                </c:if>
+"/></td>
                                             <td><span>${e.phone}</span></td>
                                             <td class="action-column">
                                                 <a href="${pageContext.request.contextPath}/admin/employee?action=edit&employeeID=${e.id}"
-                                                   class="btn btn-primary full-column-width">Edit</a>
+                                                   class="btn btn-primary full-column-width">Chỉnh sửa</a>
                                                 <form action="" method="post">
                                                     <input type="hidden" name="employeeID" value="${e.id}">
                                                     <input type="hidden" name="action" value="delete">
-                                                    <input class="btn btn-danger margin-top-10 full-column-width" type="submit"
-                                                           value="Delete"
+                                                    <input class="btn btn-danger margin-top-10 full-column-width"
+                                                           type="submit"
+                                                           value="Xóa"
                                                            onclick="if (confirm('Bạn có chắc chắn muốn xóa nhân viên này?')) { form.action='${pageContext.request.contextPath}/admin/employee'; } else { return false; }"/>
                                                 </form>
                                             </td>

@@ -1,8 +1,10 @@
 package com.bookstore.admin.business;
 
+import com.bookstore.dao.OrderDAO;
 import com.bookstore.entity.Order;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -57,6 +59,44 @@ public class OrderBS {
             }
         }
         return selectedStatus;
+    }
+
+    //    Lấy ra doanh thu mỗi ngày trong một tuần vừa qua
+    public static List<Integer> incomeLastWeek() {
+        List<Date> lastWeek = aLastWeekFromNow();
+        List<Integer> income = new ArrayList<>();
+        for (Date date : lastWeek) {
+            int count = 0;
+            for (Order order : OrderDAO.getAll()) {
+                if (order.getStatus() == 5 || order.getStatus() == 1) {
+                    continue;
+                }
+                if (order.getCreateTime().compareTo(date) == 0) {
+                    count += order.getTotalPay();
+                }
+            }
+            income.add(count);
+        }
+        return income;
+    }
+
+    //    Lấy ra một tuần trước bao gồm ngày hôm nay
+    public static List<Date> aLastWeekFromNow() {
+        List<Date> lastWeek = new ArrayList<>();
+        Date now = Date.valueOf(LocalDate.now());
+        Calendar calendar = Calendar.getInstance();
+        for (int i = 6; i >= 1; i--) {
+            calendar.setTime(now);
+            calendar.add(Calendar.DATE, -i);
+            String newYear = String.valueOf(calendar.get(Calendar.YEAR));
+            String newMonth = String.valueOf(calendar.get(Calendar.MONTH) + 1);
+            String newDate = String.valueOf(calendar.get(Calendar.DATE));
+            String dayAgo = newYear + "-" + newMonth + "-" + newDate;
+            Date newdt = Date.valueOf(dayAgo);
+            lastWeek.add(newdt);
+        }
+        lastWeek.add(now);
+        return lastWeek;
     }
 
 }

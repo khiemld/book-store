@@ -32,7 +32,7 @@ public class Product {
     private int quantity;
     @Basic
     @Column(name = "active", nullable = false)
-    private boolean active;
+    private boolean active = true;
     @OneToMany(mappedBy = "product")
     private List<CartItem> cartItems;
 
@@ -42,7 +42,6 @@ public class Product {
     @OneToOne
     @JoinColumn(name = "idCategory", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
     private Category category;
-
 
 
     public int getId() {
@@ -117,7 +116,10 @@ public class Product {
         this.active = active;
     }
 
-    public Product(){};
+    public Product() {
+    }
+
+    ;
 
     public Product(int id, Integer idCategory, String name, String image, int originalPrice, int salePrice, String discription, int quantity, boolean active, List<CartItem> cartItems, List<OrderItem> orderitems, Category category) {
         this.id = id;

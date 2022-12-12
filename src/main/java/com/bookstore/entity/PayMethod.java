@@ -1,9 +1,9 @@
 package com.bookstore.entity;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
+@Table(name = "paymethod", schema = "hzKo5BHrzp")
 public class PayMethod {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

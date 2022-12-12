@@ -120,4 +120,12 @@ public class OrderItem {
     public void setOrder(Order order) {
         this.order = order;
     }
+
+    public Product getProductByIdProduct() {
+        return product;
+    }
+
+    public void setProductByIdProduct(Product productByIdProduct) {
+        this.product = productByIdProduct;
+    }
 }

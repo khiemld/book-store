@@ -2,13 +2,14 @@ package com.bookstore.dao;
 
 import com.bookstore.entity.Delivery;
 import com.bookstore.utility.HibernateUtility;
+import org.hibernate.HibernateError;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import java.util.List;
 
 public class DeliveryDAO {
-    public void save(Delivery delivery){
+    public static void save(Delivery delivery){
         Session session = HibernateUtility.getSessionFactory().openSession();
         try{
             session.beginTransaction();
@@ -25,7 +26,7 @@ public class DeliveryDAO {
         }
     }
 
-    public void update(Delivery delivery){
+    public static void update(Delivery delivery){
         Session session = HibernateUtility.getSessionFactory().openSession();
         try{
             session.beginTransaction();
@@ -42,7 +43,7 @@ public class DeliveryDAO {
         }
     }
 
-    public void delete(int id) {
+    public static void delete(int id) {
         Session session = HibernateUtility.getSessionFactory().openSession();
         try{
             session.beginTransaction();
@@ -63,7 +64,8 @@ public class DeliveryDAO {
     }
 
 
-    public List<Delivery> getAll(){
+
+    public static List<Delivery> getAll(){
         // open session
         Session session = HibernateUtility.getSessionFactory().openSession();
         List<Delivery> deliveries = null;
@@ -80,7 +82,7 @@ public class DeliveryDAO {
         return deliveries;
     }
 
-    public Delivery getDeliveryByID(int id){
+    public static Delivery getDeliveryByID(int id){
         Session session = HibernateUtility.getSessionFactory().openSession();
         Delivery delivery = new Delivery();
         List<Delivery> deliveries = null;
@@ -98,12 +100,34 @@ public class DeliveryDAO {
         return delivery;
     }
 
-    public int getPayDelivery(int id){
+    public static int getPayDelivery(int id){
         int fee = 0;
         Delivery delivery = getDeliveryByID(id);
         if(delivery.getName()!=null){
             fee = delivery.getShipFee();
         }
         return fee;
+    }
+
+    public static List<Delivery> getDeliveryByName(String name) {
+        // open session
+        Session session = HibernateUtility.getSessionFactory().openSession();
+        List<Delivery> deliveries = null;
+        try {
+            // Create query string
+            String queryString = "from Delivery where name like :name";
+
+            // Create query
+            Query query = session.createQuery(queryString, Delivery.class);
+            query.setParameter("name", name);
+
+            // Return result List
+            deliveries = query.list();
+        } catch (HibernateError error) {
+            System.err.println(error);
+        } finally {
+            session.close();
+        }
+        return deliveries;
     }
 }

@@ -1,15 +1,15 @@
 package com.bookstore.dao;
 
-import com.bookstore.entity.Delivery;
 import com.bookstore.entity.PayMethod;
 import com.bookstore.utility.HibernateUtility;
+import org.hibernate.HibernateError;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import java.util.List;
 
 public class PaymentDAO {
-    public void save(PayMethod payMethod){
+    public static void save(PayMethod payMethod){
         Session session = HibernateUtility.getSessionFactory().openSession();
         try{
             session.beginTransaction();
@@ -26,7 +26,7 @@ public class PaymentDAO {
         }
     }
 
-    public void update(PayMethod payMethod){
+    public static void update(PayMethod payMethod){
         Session session = HibernateUtility.getSessionFactory().openSession();
         try{
             session.beginTransaction();
@@ -43,7 +43,7 @@ public class PaymentDAO {
         }
     }
 
-    public void delete(int id) {
+    public static void delete(int id) {
         Session session = HibernateUtility.getSessionFactory().openSession();
         try{
             session.beginTransaction();
@@ -64,7 +64,7 @@ public class PaymentDAO {
     }
 
 
-    public List<PayMethod> getAll(){
+    public static List<PayMethod> getAll(){
         // open session
         Session session = HibernateUtility.getSessionFactory().openSession();
         List<PayMethod> payMethods = null;
@@ -81,7 +81,7 @@ public class PaymentDAO {
         return payMethods;
     }
 
-    public PayMethod getMethodbyID(int id){
+    public static PayMethod getMethodbyID(int id){
         Session session = HibernateUtility.getSessionFactory().openSession();
         PayMethod payMethod = new PayMethod();
         List<PayMethod> payMethods = null;
@@ -97,5 +97,33 @@ public class PaymentDAO {
             session.close();
         }
         return payMethod;
+    }
+
+    public static List<PayMethod> find(String name) {
+        // open session
+        Session session = HibernateUtility.getSessionFactory().openSession();
+        List<PayMethod> paymethods = null;
+        try {
+            // Create query string
+            String queryString = "from PayMethod where name like :name";
+
+            // Create query
+            Query query = session.createQuery(queryString, PayMethod.class);
+            query.setParameter("name", name);
+
+            // Return result List
+            paymethods = query.list();
+        } catch (HibernateError error) {
+            System.err.println(error);
+        } finally {
+            session.close();
+        }
+        return paymethods;
+    }
+
+    public static PayMethod find(int id) {
+        Session session = HibernateUtility.getSessionFactory().openSession();
+        PayMethod paymethod = session.load(PayMethod.class,id);
+        return paymethod;
     }
 }

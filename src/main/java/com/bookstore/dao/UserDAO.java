@@ -1,8 +1,8 @@
 package com.bookstore.dao;
 
-import com.bookstore.entity.Product;
 import com.bookstore.entity.User;
 import com.bookstore.utility.HibernateUtility;
+import org.hibernate.HibernateError;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.hibernate.type.StandardBasicTypes;
@@ -11,7 +11,7 @@ import java.util.List;
 
 public class UserDAO {
 
-    public void save(User user){
+    public static void save(User user){
         Session session = HibernateUtility.getSessionFactory().openSession();
         try{
             session.beginTransaction();
@@ -28,7 +28,7 @@ public class UserDAO {
      }
     }
 
-    public void update(User user){
+    public static void update(User user){
         Session session = HibernateUtility.getSessionFactory().openSession();
         try{
             session.beginTransaction();
@@ -44,13 +44,13 @@ public class UserDAO {
         }
     }
 
-    public User findById(int id) {
+    /*public User findById(int id) {
         Session session = HibernateUtility.getSessionFactory().openSession();
         User user = session.load(User.class, id);
         return user;
-    }
+    }*/
 
-    public User findByEmail(String email){
+    public static User findByEmail(String email){
         Session session = HibernateUtility.getSessionFactory().openSession();
         User user = new User();
         List<User> users = null;
@@ -71,7 +71,29 @@ public class UserDAO {
         return user;
     }
 
-    public List<User> getAll(){
+    public static List<User> findListUserByEmail(String email) {
+        // open session
+        Session session = HibernateUtility.getSessionFactory().openSession();
+        List<User> users = null;
+        try {
+            // Create query string
+            String queryString = "from User where email like :email and active=true";
+
+            // Create query
+            Query query = session.createQuery(queryString, User.class);
+            query.setParameter("email", email);
+
+            // Return result List
+            users = query.list();
+        } catch (HibernateError error) {
+            System.err.println(error);
+        } finally {
+            session.close();
+        }
+        return users;
+    }
+
+    public static List<User> getAll(){
         // open session
         Session session = HibernateUtility.getSessionFactory().openSession();
         List<User> users= null;
@@ -88,7 +110,7 @@ public class UserDAO {
         return users;
     }
 
-    public List<User> searchByName(String name) {
+    public static List<User> searchByName(String name) {
         Session session = HibernateUtility.getSessionFactory().openSession();
         List<User> users= null;
         try {
@@ -105,7 +127,7 @@ public class UserDAO {
         return users;
     }
 
-    public User testLogin(String email, String password){
+    public static User testLogin(String email, String password){
         Session session = HibernateUtility.getSessionFactory().openSession();
         List<User> users= null;
         User user = new User();
@@ -127,7 +149,7 @@ public class UserDAO {
         }
         return user;
     }
-    public User getLastestUser(){
+    public static  User getLastestUser(){
         Session session = HibernateUtility.getSessionFactory().openSession();
         User user = new User();
         List<User> users = null;
@@ -145,7 +167,7 @@ public class UserDAO {
         }
         return user;
     }
-    public boolean isExistEmail(String email){
+    public static boolean isExistEmail(String email){
         boolean result = false;
 
         Session session = HibernateUtility.getSessionFactory().openSession();
@@ -168,7 +190,7 @@ public class UserDAO {
         return result;
     }
 
-    public boolean isExistPhone(String phone){
+    public static boolean isExistPhone(String phone){
         boolean result = false;
 
         Session session = HibernateUtility.getSessionFactory().openSession();
@@ -190,5 +212,68 @@ public class UserDAO {
         }
         return result;
     }
+
+    public static User find(int id) {
+        // open session
+        Session session = HibernateUtility.getSessionFactory().openSession();
+        User user = null;
+        try {
+            if (id != 0) {
+                // Return result List
+                user = session.load(User.class, id);
+            }
+        } catch (HibernateError error) {
+            System.err.println(error);
+        } finally {
+            session.close();
+        }
+        return user;
+    }
+
+    public static List<User> findByRole(int id) {
+        // open session
+        Session session = HibernateUtility.getSessionFactory().openSession();
+        List<User> users = null;
+        try {
+            // Create query string
+            String queryString = "from User where isRole = :role and active = true";
+
+            // Create query
+            Query query = session.createQuery(queryString, User.class);
+            query.setParameter("role", id);
+
+            // Return result List
+            users = query.list();
+        } catch (HibernateError error) {
+            System.err.println(error);
+        } finally {
+            session.close();
+        }
+        return users;
+    }
+
+    public static List<User> findByPhone(String phone) {
+        // open session
+        Session session = HibernateUtility.getSessionFactory().openSession();
+        List<User> users = null;
+        try {
+            // Create query string
+            String queryString = "from User where phone like :phone and active=true";
+
+            // Create query
+            Query query = session.createQuery(queryString, User.class);
+            query.setParameter("phone", phone);
+
+            // Return result List
+            users = query.list();
+        } catch (HibernateError error) {
+            System.err.println(error);
+        } finally {
+            session.close();
+        }
+        return users;
+    }
+
+
 
 }

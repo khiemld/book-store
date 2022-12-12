@@ -1,19 +1,20 @@
 package com.bookstore.dao;
 
-import com.bookstore.entity.*;
+import com.bookstore.entity.CartItem;
+import com.bookstore.entity.Order;
+import com.bookstore.entity.OrderItem;
+import com.bookstore.entity.Product;
 import com.bookstore.utility.HibernateUtility;
 import org.hibernate.Session;
-
 import org.hibernate.query.Query;
 
 import java.sql.Date;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
 
 public class OrderDAO {
-    public void save(Order order){
+    public static void save(Order order){
         Session session = HibernateUtility.getSessionFactory().openSession();
         try{
             session.beginTransaction();
@@ -30,7 +31,7 @@ public class OrderDAO {
         }
     }
 
-    public Order getLatestOrder(){
+    public static Order getLatestOrder(){
         Session session = HibernateUtility.getSessionFactory().openSession();
         Order order = new Order();
         List<Order> orders = null;
@@ -48,7 +49,7 @@ public class OrderDAO {
         return order;
     }
 
-    public void update(Order order){
+    public static void update(Order order){
         Session session = HibernateUtility.getSessionFactory().openSession();
         try{
             session.beginTransaction();
@@ -65,7 +66,7 @@ public class OrderDAO {
         }
     }
 
-    public  Date receiveDate(Order order) {
+    public static Date receiveDate(Order order) {
         Date dt = order.getCreateTime();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(dt);
@@ -92,7 +93,7 @@ public class OrderDAO {
     }
 
 
-    public void addOrder(Order order, int uid){
+    public static void addOrder(Order order, int uid){
         try{
             Order o = getLatestOrder();
             CartItemDAO cartItemDAO = new CartItemDAO();
@@ -123,7 +124,7 @@ public class OrderDAO {
         }
     }
 
-    public int totalOrder(List<OrderItem> orderItems, Order order){
+    public static int totalOrder(List<OrderItem> orderItems, Order order){
         int subTotal = 0;
         int total = 0;
         for(OrderItem o : orderItems){
@@ -135,7 +136,7 @@ public class OrderDAO {
         return total;
     }
 
-    public List<Order> getOrderByIdUer(int uid){
+    public static List<Order> getOrderByIdCustomer(int uid){
         Session session = HibernateUtility.getSessionFactory().openSession();
         List<Order> orders = null;
         try{
@@ -152,7 +153,7 @@ public class OrderDAO {
         return orders;
     }
 
-    public List<Order> getOrderByIdStatus(int sid){
+    public static List<Order> findByStatus(int sid){
         Session session = HibernateUtility.getSessionFactory().openSession();
         List<Order> orders = null;
         try{
@@ -169,7 +170,7 @@ public class OrderDAO {
         return orders;
     }
 
-    public Order getOrderByIdOder(int oid){
+    public static Order getOrderByIdOrder(int oid){
         Session session = HibernateUtility.getSessionFactory().openSession();
         Order order = new Order();
         List<Order> orders = null;
@@ -188,7 +189,7 @@ public class OrderDAO {
         return order;
     }
 
-    public void deleteOrder(int oid){
+    public static void deleteOrder(int oid){
         OrderItemDAO orderItemDAO = new OrderItemDAO();
         List<OrderItem> orderItems = orderItemDAO.orderItemList(oid);
         for(OrderItem o: orderItems){
@@ -198,16 +199,73 @@ public class OrderDAO {
             productDAO.update(product);
         }
         OrderDAO orderDAO = new OrderDAO();
-        Order order = orderDAO.getOrderByIdOder(oid);
+        Order order = orderDAO.getOrderByIdOrder(oid);
         order.setStatus(5);
         update(order);
     }
 
-    public void updateOrderByStatus(int oid){
+    public static void updateOrderByStatus(int oid){
         OrderDAO orderDAO = new OrderDAO();
-        Order order = orderDAO.getOrderByIdOder(oid);
+        Order order = orderDAO.getOrderByIdOrder(oid);
         order.setStatus(4);
         update(order);
     }
+
+    public static List<Order> getOrderByIdEmployee(int employeeID) {
+        // open session
+        Session session = HibernateUtility.getSessionFactory().openSession();
+        List<Order> orders = null;
+        try {
+            // Create query
+            final String sqlString = "select ct from Order ct where idSeller = :id";
+            Query query = session.createQuery(sqlString);
+            query.setParameter("id", employeeID);
+            orders = query.list();
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return orders;
+    }
+
+
+    public static List<Order> getAll() {
+        // open session
+        Session session = HibernateUtility.getSessionFactory().openSession();
+        List<Order> orders = null;
+        try {
+            // Create query
+            final String sqlString = "select ct from Order ct";
+            Query query = session.createQuery(sqlString);
+            orders = query.list();
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        } finally {
+            session.flush();
+            session.close();
+        }
+        return orders;
+    }
+
+    public static List<Order> get5LastestOrder(){
+        Session session = HibernateUtility.getSessionFactory().openSession();
+        List<Order> orderEntities = null;
+
+//        int num = session.createQuery("select count(id) from Product p where active = 1");
+
+        try{
+            final String sqlString = "Select p from Order p order by p.id desc";
+            Query query = session.createQuery(sqlString);
+            orderEntities = query.setMaxResults(5).list();
+        }
+        catch(RuntimeException e){
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return orderEntities;
+    }
+
 
 }

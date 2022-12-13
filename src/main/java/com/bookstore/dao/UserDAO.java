@@ -149,6 +149,7 @@ public class UserDAO {
         }
         return user;
     }
+
     public static  User getLastestUser(){
         Session session = HibernateUtility.getSessionFactory().openSession();
         User user = new User();

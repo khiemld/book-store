@@ -50,7 +50,7 @@ public class LoginController extends HttpServlet {
         String action = request.getParameter("action").trim();
         System.out.println("action = " + action);
 
-        if(action.equals("signin")){
+        if (action.equals("signin")) {
             String email = request.getParameter("user");
             String password = request.getParameter("pass");
 
@@ -58,29 +58,27 @@ public class LoginController extends HttpServlet {
 
             UserDAO userDAO = new UserDAO();
             User account = userDAO.testLogin(email, password);
-            if(account.getName() != null){
+            if (account.getName() != null) {
+                HttpSession session = request.getSession();
+                session.setAttribute("acc", account);
+                ProductDAO productDAO = new ProductDAO();
+                List<Product> product4Lastest = null;
+                product4Lastest = productDAO.get4LastestProduct();
 
-                if(account.getIsRole() == 3){
-                    HttpSession session = request.getSession();
-                    session.setAttribute("acc", account);
-                    ProductDAO productDAO = new ProductDAO();
-                    List<Product> product4Lastest = null;
-                    product4Lastest = productDAO.get4LastestProduct();
+                Product product1Lastest = productDAO.getLatestProduct();
 
-                    Product product1Lastest = productDAO.getLatestProduct();
+                request.setAttribute("list1product", product1Lastest);
+                request.setAttribute("list4last", product4Lastest);
 
-                    request.setAttribute("list1product", product1Lastest);
-                    request.setAttribute("list4last",  product4Lastest);
-                    request.getRequestDispatcher("/store/views/home.jsp").forward(request, response);
-                }
-                else {
-                    HttpSession session = request.getSession();
-                    session.setAttribute("admin", account);
+                if (account.getIsRole() == 3) {
+                    response.sendRedirect("home");
+                } else if(account.getIsRole() == 1){
                     response.sendRedirect("admin");
+                } else if(account.getIsRole() == 2){
+                    response.sendRedirect("admin/order");
                 }
-
-            }
-            else{
+//                request.getRequestDispatcher("/store/views/home.jsp").forward(request, response);
+            } else {
                 request.setAttribute("error", "Wrong email or password");
                 request.getRequestDispatcher("/store/views/login.jsp").forward(request, response);
             }
@@ -94,20 +92,19 @@ public class LoginController extends HttpServlet {
 //        Kiểm tra để đảm bảo phone và email là unique
             UserDAO userDAO = new UserDAO();
             String errorMessage = "";
-            if(userDAO.isExistEmail(email)){
+            if (userDAO.isExistEmail(email)) {
                 errorMessage = "Địa chỉ Email được đã đăng ký trước đó. Vui lòng nhập email mới";
             }
-            if(userDAO.isExistPhone(phone)){
-                if(errorMessage == ""){
+            if (userDAO.isExistPhone(phone)) {
+                if (errorMessage == "") {
                     errorMessage = "Số điện thoại được đã đăng ký trước đó. Vui lòng nhập email mới";
-                }
-                else{
+                } else {
                     errorMessage = "Số điện thoại và địa chỉ Email được đã đăng ký trước đó. Vui lòng nhập email mới";
                 }
             }
             System.out.println("Error Message: " + errorMessage);
 
-            if(errorMessage == ""){
+            if (errorMessage == "") {
                 //Nếu email và phone number hợp lệ thì tiến hành đăng ký thành viên
                 User user = new User();
                 user.setName(name);

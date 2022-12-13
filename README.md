@@ -43,8 +43,15 @@ https://group-web9.herokuapp.com/
 - Manage orders (but cannot create orders)
 - View statistical information
 
-## Diagram Database
-![Diagram](https://user-images.githubusercontent.com/89928696/207126316-f536308d-7adb-4d4f-b34a-7e4965c90ebd.png)
+## Data need to be managed:
+- Customer information
+- Admin User information
+- Category information
+- Book information
+- Cart information
+- Order information
+- Delivery information
+- Pay method information
 
 ## References
 - BaoCaoDoAnCuoiKy.docx

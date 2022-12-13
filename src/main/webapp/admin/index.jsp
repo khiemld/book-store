@@ -124,9 +124,9 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="">
+                        <a class="dropdown-item d-flex align-items-center" href="${pageContext.request.contextPath}/admin/employee?action=edit&employeeID=${sessionScope.acc.id}">
                             <i class="bi bi-person"></i>
-                            <span>My Profile</span>
+                            <span>Tài khoản</span>
                         </a>
                     </li>
                     <li>
@@ -134,27 +134,7 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="">
-                            <i class="bi bi-gear"></i>
-                            <span>Account Settings</span>
-                        </a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li>
-                        <a class="dropdown-item d-flex align-items-center" href="">
-                            <i class="bi bi-question-circle"></i>
-                            <span>Need Help?</span>
-                        </a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li>
-                        <a class="dropdown-item d-flex align-items-center" href="/logout">
+                        <a class="dropdown-item d-flex align-items-center" href="${pageContext.request.contextPath}/logout">
                             <i class="bi bi-box-arrow-right"></i>
                             <span>Đăng xuất</span>
                         </a>
@@ -270,7 +250,13 @@
             <!-- Left side columns -->
             <div class="col-lg-8">
                 <div class="row">
-
+                    <c:if test="${not empty message}">
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="bi bi-exclamation-triangle me-1"></i>
+                                ${message}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </c:if>
                     <!-- Total books Card -->
                     <div class="col-xxl-4 col-md-6">
                         <div class="card info-card sales-card">

@@ -5,6 +5,7 @@ import com.bookstore.dao.*;
 import com.bookstore.entity.CartItem;
 import com.bookstore.entity.Delivery;
 import com.bookstore.entity.PayMethod;
+import com.bookstore.entity.User;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -18,9 +19,16 @@ public class OrderController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         CartItemDAO cartItemDAO = new CartItemDAO();
-        int idUser = Integer.parseInt(request.getParameter("uid"));
-        List<CartItem> cartItems =cartItemDAO.getItemListByUId(idUser);
-        request.setAttribute("listItem",cartItems);
+        String uidString = request.getParameter("uid");
+        int idUser = 0;
+        if (uidString == null) {
+            idUser = ((User) request.getSession().getAttribute("acc")).getId();
+        }
+        else {
+            idUser = Integer.parseInt(uidString);
+        }
+        List<CartItem> cartItems = cartItemDAO.getItemListByUId(idUser);
+        request.setAttribute("listItem", cartItems);
         int total = cartItemDAO.totalPrice(cartItems);
 
         PaymentDAO paymentDAO = new PaymentDAO();

@@ -26,8 +26,10 @@
           rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="${pageContext.request.contextPath}/admin/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/admin/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/admin/assets/vendor/bootstrap/css/bootstrap.min.css"
+          rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/admin/assets/vendor/bootstrap-icons/bootstrap-icons.css"
+          rel="stylesheet">
     <link href="${pageContext.request.contextPath}/admin/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/admin/assets/vendor/quill/quill.snow.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/admin/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
@@ -124,29 +126,9 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="">
+                        <a class="dropdown-item d-flex align-items-center" href="${pageContext.request.contextPath}/admin/employee?action=edit&employeeID=${sessionScope.acc.id}">
                             <i class="bi bi-person"></i>
-                            <span>My Profile</span>
-                        </a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li>
-                        <a class="dropdown-item d-flex align-items-center" href="">
-                            <i class="bi bi-gear"></i>
-                            <span>Account Settings</span>
-                        </a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li>
-                        <a class="dropdown-item d-flex align-items-center" href="">
-                            <i class="bi bi-question-circle"></i>
-                            <span>Need Help?</span>
+                            <span>Tài khoản</span>
                         </a>
                     </li>
                     <li>
@@ -175,7 +157,7 @@
 
         <li class="nav-item">
             <c:if test="${sessionScope.acc.isRole==1}">
-                <a class="nav-link" href="${pageContext.request.contextPath}/admin">
+                <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin">
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
                 </a>
@@ -199,11 +181,12 @@
 
         <c:if test="${sessionScope.acc.isRole==1}">
             <li class="nav-item">
-                <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/employee">
+                <a class="nav-link" href="${pageContext.request.contextPath}/admin/employee">
                     <i class="bi bi-emoji-expressionless"></i>
                     <span>Employee</span>
                 </a>
-            </li><!-- End Employee Page Nav -->
+            </li>
+            <!-- End Employee Page Nav -->
         </c:if>
 
         <c:if test="${sessionScope.acc.isRole==1}">
@@ -212,7 +195,8 @@
                     <i class="bi bi-journal-bookmark-fill"></i>
                     <span>Book</span>
                 </a>
-            </li><!-- End Book Page Nav -->
+            </li>
+            <!-- End Book Page Nav -->
         </c:if>
 
         <li class="nav-item">
@@ -228,7 +212,8 @@
                     <i class="bi bi-grid-1x2"></i>
                     <span>Category</span>
                 </a>
-            </li><!-- End Category Page Nav -->
+            </li>
+            <!-- End Category Page Nav -->
         </c:if>
 
         <c:if test="${sessionScope.acc.isRole==1}">
@@ -237,7 +222,8 @@
                     <i class="bi bi-wallet2"></i>
                     <span>Pay method</span>
                 </a>
-            </li><!-- End Pay method Page Nav -->
+            </li>
+            <!-- End Pay method Page Nav -->
         </c:if>
 
         <c:if test="${sessionScope.acc.isRole==1}">
@@ -246,7 +232,8 @@
                     <i class="bi bi-box-seam"></i>
                     <span>Delivery</span>
                 </a>
-            </li><!-- End Category Page Nav -->
+            </li>
+            <!-- End Category Page Nav -->
         </c:if>
     </ul>
 
@@ -277,42 +264,64 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     </c:if>
-                    <form action="${pageContext.request.contextPath}/admin/employee" method="post">
+                    <form action="
+                        <c:if test="${empty employee}">
+                            /admin/employee
+                        </c:if>
+                        <c:if test="${not empty employee}">
+                            <c:if test="${employee.isRole==2 && sessionScope.acc.isRole==1}">
+                                /admin/employee
+                            </c:if>
+                            <c:if test="${employee.isRole==2 && sessionScope.acc.isRole==2}">
+                                /admin/profile
+                            </c:if>
+                            <c:if test="${employee.isRole==1}">
+                                /admin/profile
+                            </c:if>
+                        </c:if>
+
+                    " method="post">
                         <div class="row mb-3">
                             <label for="inputText" class="col-sm-2 col-form-label">Tên nhân viên</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="employeeName" required value="${employee.name}">
+                                <input type="text" class="form-control" name="employeeName" required
+                                       value="${employee.name}">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="inputText" class="col-sm-2 col-form-label">Địa chỉ</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="employeeAddress" required value="${employee.address}">
+                                <input type="text" class="form-control" name="employeeAddress" required
+                                       value="${employee.address}">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="inputText" class="col-sm-2 col-form-label">Email</label>
                             <div class="col-sm-10">
-                                <input type="email" class="form-control" name="employeeEmail" required value="${employee.email}">
+                                <input type="email" class="form-control" name="employeeEmail" required
+                                       value="${employee.email}">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="inputText" class="col-sm-2 col-form-label">Mật khẩu</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="employeePassword" required value="${employee.password}">
+                                <input type="text" class="form-control" name="employeePassword" required
+                                       value="${employee.password}">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="inputNumber" class="col-sm-2 col-form-label">Điện thoại</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="employeePhone" required value="${employee.phone}">
+                                <input type="text" class="form-control" name="employeePhone" required
+                                       value="${employee.phone}">
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <label for="inputText" class="col-sm-2 col-form-label">Link ảnh</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="imageLink" name="employeeImageLink" value="${employee.image}" readonly>
+                                <input type="text" class="form-control" id="imageLink" name="employeeImageLink"
+                                       value="${employee.image}" readonly>
                             </div>
                         </div>
 
@@ -328,8 +337,24 @@
                         <div class="row mb-3">
                             <label class="col-sm-2 col-form-label"></label>
                             <div class="col-sm-10">
-                                <a href="${pageContext.request.contextPath}/admin/employee" class="btn btn-danger">Cancel</a>
-                                <button type="submit" class="btn btn-success"  value="add">Save</button>
+                                <c:if test="${empty employee}">
+                                    <a href="${pageContext.request.contextPath}/admin/employee" class="btn btn-danger">Cancel</a>
+                                </c:if>
+                                <c:if test="${not empty employee}">
+                                    <c:if test="${employee.isRole==2 && sessionScope.acc.isRole==1}">
+                                        <a href="${pageContext.request.contextPath}/admin/employee"
+                                           class="btn btn-danger">Cancel</a>
+                                    </c:if>
+                                    <c:if test="${employee.isRole==2 && sessionScope.acc.isRole==2}">
+                                        <a href="${pageContext.request.contextPath}/admin/order"
+                                           class="btn btn-danger">Cancel</a>
+                                    </c:if>
+                                    <c:if test="${employee.isRole==1}">
+                                        <a href="${pageContext.request.contextPath}/admin"
+                                           class="btn btn-danger">Cancel</a>
+                                    </c:if>
+                                </c:if>
+                                <button type="submit" class="btn btn-success" value="add">Save</button>
                             </div>
                         </div>
                         <input type="hidden" name="action" value="save">
@@ -399,7 +424,7 @@
     var fileButton = document.getElementById('fileButton');
 
     // listen for file selection
-    fileButton.addEventListener('click', function (e){
+    fileButton.addEventListener('click', function (e) {
 
         // get file
         var file = document.getElementById("fileImage").files[0];
@@ -453,12 +478,13 @@
                 console.log('downloadURL ===>', downloadURL);
                 console.log('pic ==', downloadURL)
                 var imgElement = document.getElementById('imageLink');
-                imgElement.value=downloadURL;
+                imgElement.value = downloadURL;
                 console.log(imgElement.value);
             });
 
     });
     z
+
     function resultImage() {
         console.log('image resulte -->', image)
         return image;

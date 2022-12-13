@@ -39,23 +39,32 @@ public class AdminHomeServlet extends HttpServlet {
         List<Product> book5List = ProductDAO.get5LastestProduct();
         request.setAttribute("book5List", book5List);
 
-        Product bestSellerBook= ProductBS.BestSellerBook();
+        Product bestSellerBook = ProductBS.BestSellerBook();
         request.setAttribute("bestSellerBook", bestSellerBook);
 
         List<Category> categoryList = CategoryDAO.getAll();
         request.setAttribute("categoryList", categoryList);
 
-        List<Integer> totalSaleOfCartegory= CategoryBS.totalSaleOfCartegory();
+        List<Integer> totalSaleOfCartegory = CategoryBS.totalSaleOfCartegory();
         request.setAttribute("totalSaleOfCartegory", totalSaleOfCartegory);
 
-        List<Date> lastWeekFromNow= OrderBS.aLastWeekFromNow();
+        List<Date> lastWeekFromNow = OrderBS.aLastWeekFromNow();
         request.setAttribute("lastWeekFromNow", lastWeekFromNow);
 
-        List<Integer> incomeLastWeek=OrderBS.incomeLastWeek();
+        List<Integer> incomeLastWeek = OrderBS.incomeLastWeek();
         request.setAttribute("incomeLastWeek", incomeLastWeek);
 
-        User bestCustomerByPrice= CustomerBS.BestCustomerByPrice();
+        User bestCustomerByPrice = CustomerBS.BestCustomerByPrice();
         request.setAttribute("bestCustomerByPrice", bestCustomerByPrice);
+
+        String message = request.getParameter("message");
+        if (message != null && message.equals("updated-admin")) {
+            message = new String("Vừa cập nhật thông tin của bạn (Admin) đóa!");
+        }
+        else if (message != null && message.equals("updated-employee")){
+            message = new String("Vừa cập nhật thông tin của bạn (Employee) đóa!");
+        }
+        request.setAttribute("message", message);
 
         request.getRequestDispatcher("/admin/index.jsp").forward(request, response);
     }

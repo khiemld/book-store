@@ -32,6 +32,18 @@ public class OrderServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
 
+        String message = request.getParameter("message");
+        if (message != null && message.equals("updated-admin")) {
+            message = new String("Vừa cập nhật thông tin của bạn (Admin) đóa!");
+        }
+        if (message != null && message.equals("updated-employee")) {
+            message = new String("Vừa cập nhật thông tin của bạn (Employee) đóa!");
+        }
+        if (message != null && message.equals("employee-only")) {
+            message = new String("Chỉ nhân viên mới được xác nhận đơn hàng!");
+        }
+        request.setAttribute("message", message);
+
         // Lấy action của người dùng
         String action = request.getParameter("action");
         if (action == null) {
@@ -252,6 +264,14 @@ public class OrderServlet extends HttpServlet {
 //        Thêm tiếng việt
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
+
+        // Khum cho admin xác nhận đơn hàng - chỉ có nhân viên được làm thoy
+        HttpSession session = request.getSession();
+        User whoDoAction = (User) session.getAttribute("acc");
+        if (whoDoAction.getIsRole() == 1) {
+            response.sendRedirect("/admin/order?message=employee-only");
+            return;
+        }
 //      Lấy id của product được truyền xuống nè
         String oID = request.getParameter("orderID");
 //      Lấy order có id tương ứng ra
@@ -259,7 +279,6 @@ public class OrderServlet extends HttpServlet {
         selectedOrder.setStatus(2);
 
 //        Lấy Id của seller mà xác nhận đơn hàng
-        HttpSession session = request.getSession();
         User seller = (User) session.getAttribute("acc");
         selectedOrder.setIdSeller(seller.getId());
         OrderDAO.update(selectedOrder);

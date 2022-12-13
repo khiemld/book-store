@@ -18,7 +18,7 @@ public class LoginController extends HttpServlet {
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html");
         System.out.println("Loading: LoginController DoGet");
-        String url ="/store/views/login.jsp";
+        String url = "/store/views/login.jsp";
 
 //        request.setAttribute("statusRegisterForm", 0); //0: hiện khung đăng nhập, 1: hiện khung đăng ký
 //        String action = request.getParameter("action").trim();
@@ -27,13 +27,23 @@ public class LoginController extends HttpServlet {
 //        } else if (action.equals("signin-form")) {
 //            url = "/store/views/login.jsp";
 //        }
-        if(request.getAttribute("error") != null){
-            request.removeAttribute("error");
+//        if(request.getAttribute("error") != null){
+//            request.removeAttribute("error");
+//        }
+        String error = request.getParameter("error");
+        if (error!=null && error.equals("admin-only")) {
+            error = new String("Vui lòng đăng nhập bằng account admin");
         }
-        if(request.getAttribute("register_error") != null){
+        if (error!=null && error.equals("manager-only")) {
+            error = new String("Vui lòng đăng nhập bằng account admin | employee");
+        }
+        if (error!=null && error.equals("customer-only")) {
+            error = new String("Vui lòng đăng nhập bằng account khách hàng");
+        }
+        if (request.getAttribute("register_error") != null) {
             request.removeAttribute("register_error");
         }
-
+        request.setAttribute("error", error);
 //        request.setAttribute("error", "");
 //        request.setAttribute("register_error", "");
 
@@ -72,9 +82,9 @@ public class LoginController extends HttpServlet {
 
                 if (account.getIsRole() == 3) {
                     response.sendRedirect("home");
-                } else if(account.getIsRole() == 1){
+                } else if (account.getIsRole() == 1) {
                     response.sendRedirect("admin");
-                } else if(account.getIsRole() == 2){
+                } else if (account.getIsRole() == 2) {
                     response.sendRedirect("admin/order");
                 }
 //                request.getRequestDispatcher("/store/views/home.jsp").forward(request, response);

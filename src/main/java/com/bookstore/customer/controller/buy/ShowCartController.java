@@ -3,6 +3,7 @@ package com.bookstore.customer.controller.buy;
 import com.bookstore.dao.*;
 
 import com.bookstore.entity.CartItem;
+import com.bookstore.entity.User;
 
 
 import javax.servlet.*;
@@ -15,18 +16,22 @@ import java.util.List;
 public class ShowCartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int uid = Integer.parseInt(request.getParameter("uid"));
-
-        if(uid != 0){
+        String uidString = request.getParameter("uid");
+        int uid = 0;
+        if (uidString == null) {
+            uid = ((User) request.getSession().getAttribute("acc")).getId();
+        } else {
+            uid = Integer.parseInt(uidString);
+        }
+        if (uid != 0) {
             CartItemDAO cartItemDAO = new CartItemDAO();
 
-            List<CartItem> cartItems =cartItemDAO.getItemListByUId(uid);
+            List<CartItem> cartItems = cartItemDAO.getItemListByUId(uid);
             int total = cartItemDAO.totalPrice(cartItems);
             request.setAttribute("total", total);
-            request.setAttribute("listItem",cartItems);
+            request.setAttribute("listItem", cartItems);
             request.getRequestDispatcher("/store/views/cart.jsp").forward(request, response);
-        }
-        else{
+        } else {
             request.getRequestDispatcher("/store/views/cart.jsp").forward(request, response);
         }
     }
@@ -34,14 +39,14 @@ public class ShowCartController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-            CartItemDAO cartItemDAO = new CartItemDAO();
-            int idUser = Integer.parseInt(request.getParameter("uid"));
+        CartItemDAO cartItemDAO = new CartItemDAO();
+        int idUser = Integer.parseInt(request.getParameter("uid"));
 
 
-            List<CartItem> cartItems =cartItemDAO.getItemListByUId(idUser);
-            int total = cartItemDAO.totalPrice(cartItems);
-            request.setAttribute("total", total);
-            request.setAttribute("listItem",cartItems);
-            request.getRequestDispatcher("/store/views/cart.jsp").forward(request, response);
+        List<CartItem> cartItems = cartItemDAO.getItemListByUId(idUser);
+        int total = cartItemDAO.totalPrice(cartItems);
+        request.setAttribute("total", total);
+        request.setAttribute("listItem", cartItems);
+        request.getRequestDispatcher("/store/views/cart.jsp").forward(request, response);
     }
 }

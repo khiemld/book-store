@@ -129,29 +129,9 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="">
+                        <a class="dropdown-item d-flex align-items-center" href="${pageContext.request.contextPath}/admin/employee?action=edit&employeeID=${sessionScope.acc.id}">
                             <i class="bi bi-person"></i>
-                            <span>My Profile</span>
-                        </a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li>
-                        <a class="dropdown-item d-flex align-items-center" href="">
-                            <i class="bi bi-gear"></i>
-                            <span>Account Settings</span>
-                        </a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li>
-                        <a class="dropdown-item d-flex align-items-center" href="">
-                            <i class="bi bi-question-circle"></i>
-                            <span>Need Help?</span>
+                            <span>Tài khoản</span>
                         </a>
                     </li>
                     <li>
@@ -180,7 +160,7 @@
 
         <li class="nav-item">
             <c:if test="${sessionScope.acc.isRole==1}">
-                <a class="nav-link" href="${pageContext.request.contextPath}/admin">
+                <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin">
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
                 </a>
@@ -229,7 +209,7 @@
 
         <c:if test="${sessionScope.acc.isRole==1}">
             <li class="nav-item">
-                <a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/category">
+                <a class="nav-link" href="${pageContext.request.contextPath}/admin/category">
                     <i class="bi bi-grid-1x2"></i>
                     <span>Category</span>
                 </a>

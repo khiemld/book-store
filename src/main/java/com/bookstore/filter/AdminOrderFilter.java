@@ -9,10 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(filterName = "AdminFilter")
-public class AdminFilter implements Filter {
+@WebFilter(filterName = "AdminOrderFilter")
+public class AdminOrderFilter implements Filter {
     public void init(FilterConfig config) throws ServletException {
-
     }
 
     public void destroy() {
@@ -25,28 +24,17 @@ public class AdminFilter implements Filter {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
         String url = request.getRequestURI();
-        if (url.startsWith("/admin")) {
+        if (url.contains("processOrder")) {
             HttpSession session = request.getSession();
             User user = (User) session.getAttribute("acc");
             if (user == null) {
                 response.sendRedirect("/login");
             } else {
-                if (user.getIsRole() == 1) {
+                if (user.getIsRole() == 3) {
                     chain.doFilter(request, response);
-                    System.out.println("do chain");
-                } else if (user.getIsRole() == 3) {
-                    String error = new String("manager-only");
-                    System.out.println("đăng nhập lại");
-                    response.sendRedirect("/login?error=" + error);
                 } else {
-                    if(url.startsWith("/admin/order") || url.startsWith("/admin/customer")){
-                        chain.doFilter(request, response);
-                    }
-                    else{
-                        String error = new String("admin-only");
-                        System.out.println("đăng nhập lại");
-                        response.sendRedirect("/login?error=" + error);
-                    }
+                    String error = new String("customer-only");
+                    response.sendRedirect("/login?error=" + error);
                 }
             }
         }

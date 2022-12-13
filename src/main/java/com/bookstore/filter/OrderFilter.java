@@ -1,5 +1,7 @@
 package com.bookstore.filter;
 
+import com.bookstore.dao.CartItemDAO;
+import com.bookstore.entity.CartItem;
 import com.bookstore.entity.User;
 
 import javax.servlet.*;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @WebFilter(filterName = "OrderFilter")
 public class OrderFilter implements Filter {
@@ -24,17 +27,18 @@ public class OrderFilter implements Filter {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
         String url = request.getRequestURI();
-        if (url.contains("processOrder")) {
+        if (url.startsWith("/order")) {
             HttpSession session = request.getSession();
             User user = (User) session.getAttribute("acc");
             if (user == null) {
                 response.sendRedirect("/login");
             } else {
-                if (user.getIsRole() == 3) {
+                List<CartItem> cartItemList= CartItemDAO.getItemListByUId(user.getId());
+                if(cartItemList.size()==0){
+                    response.sendRedirect("/home");
+                }
+                else{
                     chain.doFilter(request, response);
-                } else {
-                    String error = new String("customer-only");
-                    response.sendRedirect("/login?error=" + error);
                 }
             }
         }

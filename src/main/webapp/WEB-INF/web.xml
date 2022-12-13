@@ -11,6 +11,7 @@
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
+<!--  Admin filter-->
   <filter>
     <filter-name>AdminFilter</filter-name>
     <filter-class>com.bookstore.filter.AdminFilter</filter-class>
@@ -24,12 +25,33 @@
     <url-pattern>/admin</url-pattern>
   </filter-mapping>
 
+<!-- Admin order filter-->
+  <filter>
+    <filter-name>AdminOrderFilter</filter-name>
+    <filter-class>com.bookstore.filter.AdminOrderFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AdminOrderFilter</filter-name>
+    <url-pattern>/processOrder</url-pattern>
+  </filter-mapping>
+
+<!--  Cart filter-->
+  <filter>
+    <filter-name>CartFilter</filter-name>
+    <filter-class>com.bookstore.filter.CartFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>CartFilter</filter-name>
+    <url-pattern>/showCart</url-pattern>
+  </filter-mapping>
+
+  <!--  Order filter-->
   <filter>
     <filter-name>OrderFilter</filter-name>
     <filter-class>com.bookstore.filter.OrderFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>OrderFilter</filter-name>
-    <url-pattern>/processOrder</url-pattern>
+    <url-pattern>/order</url-pattern>
   </filter-mapping>
 </web-app>

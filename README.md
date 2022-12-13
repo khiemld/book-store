@@ -1,4 +1,4 @@
-# BUILD AN WEBSITE ECOMMERCE - BOOKSTORE
+# BUILD A WEBSITE ECOMMERCE - BOOKSTORE
 > Bulid with Java Servlet, JSP, JPA - Hibernate
 
 ## Group Web

@@ -5,9 +5,9 @@
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://remotemysql.com:3306/hzKo5BHrzp</property>
-        <property name="hibernate.connection.username">hzKo5BHrzp</property>
-        <property name="hibernate.connection.password">f2PTl19qpQ</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/bookstore?useUnicode=true&amp;createDatabaseIfNotExist=true&amp;characterEncoding=utf-8</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">0204</property>
         <property name="hibernate.show_sql">true</property>
         <!-- SQL dialect -->
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>

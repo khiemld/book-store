@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix ="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -62,12 +63,16 @@
                 <c:forEach items="${listItem}" var="i">
                     <tr>
                         <td>${i.product.name} x ${i.quantity}</td>
-                        <td>${i.price}</td>
+                        <td>
+                            <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${i.price}"/> đ
+                        </td>
                     </tr>
                 </c:forEach>
                 <tr>
                     <td>Subtotal</td>
-                    <td>${total}</td>
+                    <td>
+                        <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${total}"/> đ
+                    </td>
                 </tr>
             </table><br>
 

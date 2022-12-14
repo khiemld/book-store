@@ -26,6 +26,12 @@
     <div class="row">
         <div class="col-12">
             <div class="table-responsive">
+                <c:if test="${not empty err}">
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        Sách <strong>${product}</strong> ${err}!
+                    </div>
+                </c:if>
                 <table class="table table-striped">
                     <thead >
                         <tr>
@@ -83,7 +89,9 @@
         </div>
         <div class="col-sm-12 col-md-6 text-right">
             <input type="hidden" name="uid" value="${sessionScope.acc.id}">
-            <button type="submit" class="btn btn-lg btn-block btn-success text-uppercase">Checkout</button>
+            <c:if test="${size != 0}">
+                <button type="submit" class="btn btn-lg btn-block btn-success text-uppercase">Checkout</button>
+            </c:if>
         </div>
 
     </div>

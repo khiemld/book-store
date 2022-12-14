@@ -19,7 +19,7 @@ E:/HVTG/Code/Java/Hello World/book-store/src/main/resources/hibernate.cfg.xml</r
       <jdbc-url>jdbc:mysql://remotemysql.com:3306</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="bookstore@localhost" uuid="b9d91ded-b3b7-4cc8-a3e3-c1fa676ec2a5">
+    <data-source source="LOCAL" name="bookstore@localhost" uuid="9e72ad4f-d25e-4a21-b723-7799cb36d69c">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>

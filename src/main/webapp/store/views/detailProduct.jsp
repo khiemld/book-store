@@ -54,7 +54,13 @@
         <div class="col-12 col-lg-6 add_to_cart_block">
             <div class="card bg-light mb-3">
                 <div class="card-body">
-                    ${detail.name}
+                    <h2>${detail.name}</h2>
+                        <c:if test="${not empty err}">
+                            <div class="alert alert-danger alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                    ${err}
+                            </div>
+                        </c:if>
                     <p class="price">
                         <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${detail.salePrice}"/> đ
                     </p>

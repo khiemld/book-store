@@ -20,27 +20,29 @@
 
     <!-- Favicons -->
 
+
+
     <!-- Google Fonts -->
-    <link href="https://fonts.gstatic.com" rel="preconnect">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    <link href="<c:url value="https://fonts.gstatic.com"/>" rel="preconnect">
+    <link href="<c:url value="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"/>"
           rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="${pageContext.request.contextPath}/admin/assets/vendor/bootstrap/css/bootstrap.min.css"
+    <link href="<c:url value="${pageContext.request.contextPath}/admin/assets/vendor/bootstrap/css/bootstrap.min.css"/>"
           rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/admin/assets/vendor/bootstrap-icons/bootstrap-icons.css"
+    <link href="<c:url value="${pageContext.request.contextPath}/admin/assets/vendor/bootstrap-icons/bootstrap-icons.css"/>"
           rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/admin/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/admin/assets/vendor/quill/quill.snow.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/admin/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/admin/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/admin/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+    <link href="<c:url value="${pageContext.request.contextPath}/admin/assets/vendor/boxicons/css/boxicons.min.css"/>" rel="stylesheet">
+    <link href="<c:url value="${pageContext.request.contextPath}/admin/assets/vendor/quill/quill.snow.css"/>" rel="stylesheet">
+    <link href="<c:url value="${pageContext.request.contextPath}/admin/assets/vendor/quill/quill.bubble.css"/>" rel="stylesheet">
+    <link href="<c:url value="${pageContext.request.contextPath}/admin/assets/vendor/remixicon/remixicon.css"/>" rel="stylesheet">
+    <link href="<c:url value="${pageContext.request.contextPath}/admin/assets/vendor/simple-datatables/style.css"/>" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    <link href="${pageContext.request.contextPath}/admin/assets/css/style.css" rel="stylesheet">
+    <link href="<c:url value="${pageContext.request.contextPath}/admin/assets/css/style.css"/>" rel="stylesheet">
 
     <!-- Logo -->
-    <link rel="shortcut icon" href="${pageContext.request.contextPath}/store/icon/paper-plane.ico">
+    <link rel="shortcut icon" href="<c:url value="${pageContext.request.contextPath}/store/icon/paper-plane.ico"/>">
 
     <!-- =======================================================
     * Template Name: NiceAdmin - v2.4.1
@@ -97,17 +99,15 @@
             <li class="nav-item dropdown pe-3">
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <img src="
-                                <c:if test="${sessionScope.acc.image.equals('')}">
-                                    https://static.vecteezy.com/system/resources/thumbnails/001/840/618/small/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg
-                                </c:if>
-                                <c:if test="${!sessionScope.acc.image.equals('')}">
-                                    ${sessionScope.acc.image}
-                                </c:if>
-                            " alt="Profile"
-                         class="rounded-circle">
+                    <c:if test="${sessionScope.acc.image.equals('') || empty sessionScope.acc.image}">
+                        <img class="rounded-circle" src="https://static.vecteezy.com/system/resources/thumbnails/001/840/618/small/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg" alt="Profile">
+                    </c:if>
+                    <c:if test="${!sessionScope.acc.image.equals('') && not empty sessionScope.acc.image}">
+                        <img class="rounded-circle" src="${sessionScope.acc.image}" alt="Profile">
+                    </c:if>
                     <span class="d-none d-md-block dropdown-toggle ps-2">${sessionScope.acc.name}</span>
                 </a><!-- End Profile Iamge Icon -->
+
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">

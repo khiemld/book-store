@@ -28,6 +28,8 @@ public class ShowCartController extends HttpServlet {
 
             List<CartItem> cartItems = cartItemDAO.getItemListByUId(uid);
             int total = cartItemDAO.totalPrice(cartItems);
+            int size = cartItems.size();
+            request.setAttribute("size", size);
             request.setAttribute("total", total);
             request.setAttribute("listItem", cartItems);
             request.getRequestDispatcher("/store/views/cart.jsp").forward(request, response);
@@ -45,6 +47,8 @@ public class ShowCartController extends HttpServlet {
 
         List<CartItem> cartItems = cartItemDAO.getItemListByUId(idUser);
         int total = cartItemDAO.totalPrice(cartItems);
+        int size = cartItems.size();
+        request.setAttribute("size", size);
         request.setAttribute("total", total);
         request.setAttribute("listItem", cartItems);
         request.getRequestDispatcher("/store/views/cart.jsp").forward(request, response);

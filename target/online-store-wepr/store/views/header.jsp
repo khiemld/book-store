@@ -30,7 +30,7 @@
 				<li class="nav-item"><a class="nav-link" href="#">Seller
 						role</a></li>
 			</c:if>--%>
-			<li class="nav-item"><a class="nav-link" href="contact">Contact</a></li>
+			<li class="nav-item"><a class="nav-link" href="https://group-web9.herokuapp.com/">Contact</a></li>
 		</ul>
 
 		<form action="login" method="get" class="form-inline my-2 my-lg-0" <%--name="action" value="signin-form"--%>>
@@ -71,7 +71,7 @@
 		<form class="form-inline my-2 my-lg-0">
 			<c:if test="${sessionScope.acc != null}">
 				<a class="btn btn-success btn-sm ml-3" href="showCart?uid=${sessionScope.acc.id}">
-					<i class="fa fa-shopping-cart"></i>Cart <span class="badge badge-light">3</span>
+					<i class="fa fa-shopping-cart"></i>Cart
 				</a>
 			</c:if>
 			<c:if test="${sessionScope.acc == null}">

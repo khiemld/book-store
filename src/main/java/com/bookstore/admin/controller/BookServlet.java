@@ -215,7 +215,7 @@ public class BookServlet extends HttpServlet {
         String message;
         if (selectedBook != null) {
             message = new String("Vừa xóa sách <b>" + selectedBook.getName() + "</b>");
-            selectedBook.setActive(true);
+            selectedBook.setActive(false);
             ProductDAO.update(selectedBook);
         } else {
             message = new String("Sách <b>" + selectedBook.getName() + "</b> hong tồn tại!");

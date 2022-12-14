@@ -75,8 +75,8 @@ public class ProfileController extends HttpServlet {
             request.setAttribute("acc", user);
 //      Update: End
         }
-        session.setAttribute("update_error", errorMessage);
-        session.setAttribute("message", message);
+        request.setAttribute("update_error", errorMessage);
+        request.setAttribute("message", message);
         request.getRequestDispatcher("/store/views/profile.jsp").forward(request, response);
     }
 }

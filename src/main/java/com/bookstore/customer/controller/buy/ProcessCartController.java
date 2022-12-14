@@ -39,6 +39,8 @@ public class ProcessCartController extends HttpServlet {
             else{
                 if(num == 1 && (cartItem.getQuantity() >= numStore)){
                     CartItem cartItem1 = new CartItem(idUser, id, 0, product.getSalePrice());
+                    request.setAttribute("err", "hiện tại không đủ hàng");
+                    request.setAttribute("product", product.getName());
                     cartItemDAO.addCartItem(cartItem1);
                 }
                 else{
@@ -55,6 +57,8 @@ public class ProcessCartController extends HttpServlet {
         int idUser = Integer.parseInt(request.getParameter("u"));
         List<CartItem> cartItems =cartItemDAO.getItemListByUId(idUser);
         int total = cartItemDAO.totalPrice(cartItems);
+        int size = cartItems.size();
+        request.setAttribute("size", size);
         request.setAttribute("total", total);
         request.setAttribute("listItem",cartItems);
         request.getRequestDispatcher("/store/views/cart.jsp").forward(request, response);

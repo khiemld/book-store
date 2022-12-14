@@ -97,17 +97,15 @@
             <li class="nav-item dropdown pe-3">
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <img src="
-                                <c:if test="${sessionScope.acc.image.equals('')}">
-                                    https://static.vecteezy.com/system/resources/thumbnails/001/840/618/small/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg
-                                </c:if>
-                                <c:if test="${!sessionScope.acc.image.equals('')}">
-                                    ${sessionScope.acc.image}
-                                </c:if>
-                            " alt="Profile"
-                         class="rounded-circle">
+                    <c:if test="${sessionScope.acc.image.equals('') || empty sessionScope.acc.image}">
+                        <img class="rounded-circle" src="https://static.vecteezy.com/system/resources/thumbnails/001/840/618/small/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg" alt="Profile">
+                    </c:if>
+                    <c:if test="${!sessionScope.acc.image.equals('') && not empty sessionScope.acc.image}">
+                        <img class="rounded-circle" src="${sessionScope.acc.image}" alt="Profile">
+                    </c:if>
                     <span class="d-none d-md-block dropdown-toggle ps-2">${sessionScope.acc.name}</span>
                 </a><!-- End Profile Iamge Icon -->
+
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">

@@ -39,7 +39,7 @@ public class AdminFilter implements Filter {
                     System.out.println("đăng nhập lại");
                     response.sendRedirect("/login?error=" + error);
                 } else {
-                    if(url.startsWith("/admin/order") || url.startsWith("/admin/customer")){
+                    if(url.startsWith("/admin/order") || url.startsWith("/admin/customer") || url.equals("/admin")){
                         chain.doFilter(request, response);
                     }
                     else{

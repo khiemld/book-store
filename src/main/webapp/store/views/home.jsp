@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix ="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +26,7 @@
         }
         .web-kit-2{
             display: -webkit-box;
-            -webkit-line-clamp: 2;
+            -webkit-line-clamp: 1;
             -webkit-box-orient: vertical;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -80,7 +81,9 @@
                     <h4 class="card-title text-center"><a href="<%=request.getContextPath()%>/detail?pid=${list1product.id}" title="View Product">${list1product.name}</a></h4>
                     <div class="row">
                         <div class="col">
-                            <p class="btn btn-danger btn-block">${list1product.salePrice} $</p>
+                            <p class="btn btn-danger btn-block">
+                                <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${list1product.salePrice}"/> đ
+                            </p>
                         </div>
 <%--                        <div class="col">--%>
 <%--                            <a href="product" class="btn btn-success btn-block">View</a>--%>
@@ -111,7 +114,9 @@
                                     <p class="card-text web-kit-3">${p.discription}</p>
                                     <div class="row">
                                         <div class="col">
-                                            <p class="btn btn-danger btn-block">${p.salePrice} $</p>
+                                            <p class="btn btn-danger btn-block">
+                                                <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${p.salePrice}"/> đ
+                                            </p>
                                         </div>
                                     </div>
                                 </div>

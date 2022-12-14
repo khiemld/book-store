@@ -89,7 +89,7 @@ public class LoginController extends HttpServlet {
                 } else if (account.getIsRole() == 1) {
                     response.sendRedirect("admin");
                 } else if (account.getIsRole() == 2) {
-                    response.sendRedirect("admin/order");
+                    response.sendRedirect("admin");
                 }
 //                request.getRequestDispatcher("/store/views/home.jsp").forward(request, response);
             } else {

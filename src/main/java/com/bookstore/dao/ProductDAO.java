@@ -85,7 +85,7 @@ public class ProductDAO {
         Product product = new Product();
         List<Product> products = null;
         try{
-            final String sqlString = "Select p from Product p order by p.id desc";
+            final String sqlString = "Select p from Product p where p.active = true order by p.id desc";
             Query query = session.createQuery(sqlString);
             products = query.list();
             product = products.get(0);
@@ -106,7 +106,7 @@ public class ProductDAO {
 //        int num = session.createQuery("select count(id) from Product p where active = 1");
 
         try{
-            final String sqlString = "Select p from Product p order by p.id desc";
+            final String sqlString = "Select p from Product p where p.active = true order by p.id desc";
             Query query = session.createQuery(sqlString);
             products = query.setMaxResults(4).list();
         }
@@ -126,7 +126,7 @@ public class ProductDAO {
 //        int num = session.createQuery("select count(id) from Product p where active = 1");
 
         try{
-            final String sqlString = "Select p from Product p order by p.id desc";
+            final String sqlString = "Select p from Product p where p.active = true order by p.id desc";
             Query query = session.createQuery(sqlString);
             products = query.setMaxResults(5).list();
         }

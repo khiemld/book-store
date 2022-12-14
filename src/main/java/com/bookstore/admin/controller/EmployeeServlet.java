@@ -200,7 +200,7 @@ public class EmployeeServlet extends HttpServlet {
         String message;
         if (selectedUser != null && EmployeeBS.totalOrder(selectedUser) == 0) {
             message = new String("Vừa xóa nhân viên <b>" + selectedUser.getName() + "</b>");
-            selectedUser.setActive(true);
+            selectedUser.setActive(false);
             UserDAO.update(selectedUser);
         } else {
             message = new String("Nhân viên <b>" + selectedUser.getName() + "</b> hong thể xóa do có dữ liệu cần dùng!");

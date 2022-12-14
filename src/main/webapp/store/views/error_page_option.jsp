@@ -17,7 +17,7 @@
     <div class="middle">
       <div class="inner">
         <!--BEGIN CONTENT-->
-        <div class="inner-circle"><i class="fa fa-home"></i><span>Lỗi</span></div>
+        <div class="inner-circle"><i class="fa fa-home"></i><span>Error</span></div>
         <span class="inner-status">Oops! You're lost</span>
         <span class="inner-detail">
                     We can not find the page you're looking for.

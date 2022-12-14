@@ -27,9 +27,13 @@ public class LoginController extends HttpServlet {
 //        } else if (action.equals("signin-form")) {
 //            url = "/store/views/login.jsp";
 //        }
-//        if(request.getAttribute("error") != null){
-//            request.removeAttribute("error");
-//        }
+        if(request.getAttribute("message") != null){
+            request.removeAttribute("message");
+        }
+        if(request.getAttribute("error") != null){
+            request.removeAttribute("error");
+        }
+
         String error = request.getParameter("error");
         if (error!=null && error.equals("admin-only")) {
             error = new String("Vui lòng đăng nhập bằng account admin");

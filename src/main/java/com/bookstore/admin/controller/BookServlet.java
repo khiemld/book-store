@@ -6,7 +6,7 @@ import com.bookstore.dao.ProductDAO;
 import com.bookstore.entity.Category;
 import com.bookstore.entity.Email;
 import com.bookstore.entity.Product;
-import com.bookstore.util.EmailUtils;
+import com.bookstore.utility.EmailUtils;
 
 import javax.mail.MessagingException;
 import javax.servlet.*;

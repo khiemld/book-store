@@ -3,7 +3,7 @@ package com.bookstore.admin.controller;
 import com.bookstore.admin.business.*;
 import com.bookstore.dao.*;
 import com.bookstore.entity.*;
-import com.bookstore.util.EmailUtils;
+import com.bookstore.utility.EmailUtils;
 
 import javax.mail.MessagingException;
 import javax.servlet.*;

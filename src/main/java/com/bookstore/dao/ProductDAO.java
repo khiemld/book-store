@@ -219,7 +219,7 @@ public class ProductDAO {
         List<Product> books = null;
         try {
             // Create query string
-            String queryString = "from Product where name like :name and active=true";
+            String queryString = "select p from Product p where p.name like :name and p.active=true";
 
             // Create query
             Query query = session.createQuery(queryString, Product.class);

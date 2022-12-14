@@ -1,12 +1,12 @@
-package com.bookstore.util;
+package com.bookstore.utility;
 
 import com.bookstore.entity.Email;
-
-import java.util.Properties;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.util.Properties;
+import java.util.Random;
 
 public class EmailUtils {
     public static void send(Email email) throws MessagingException {
@@ -43,5 +43,16 @@ public class EmailUtils {
 
             throw e;
         }
+    }
+    public static String generateOTP(){
+        String otp = "";
+
+        Random rand = new Random();
+        int ranNum = rand.nextInt(100000)+1;
+
+        otp= Integer.toString(ranNum);
+        System.out.println(otp);
+
+        return otp;
     }
 }

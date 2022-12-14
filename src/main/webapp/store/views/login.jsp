@@ -39,7 +39,7 @@
                 </c:if>
             </div>
         </div>
-        <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">Sign in</h1>
+        <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">ĐĂNG NHẬP</h1>
         <div class="social-login">
             <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign in with Facebook</span>
             </button>
@@ -50,9 +50,9 @@
         <input name="pass" type="password" class="form-control" placeholder="Password">
 
         <button class="btn btn-success btn-block" type="submit" name="action" value="signin">
-            <i class="fas fa-sign-in-alt"></i> Sign in
+            <i class="fas fa-sign-in-alt"></i>Đăng nhập
         </button>
-        <a href="#" id="forgot_pswd">Forgot password?</a>
+        <a href="#" id="forgot_pswd">Quên mật khẩu ?</a>
         <hr>
         <!-- <p>Don't have an account!</p>  -->
         <button class="btn btn-primary btn-block" id="btn-signup">
@@ -61,8 +61,9 @@
     </form>
 
     <form action="forgot" method="post" class="form-reset">
-        <input type="email" name="resetEmail" class="form-control" placeholder="Email address" required="" autofocus="">
-        <button class="btn btn-primary btn-block" type="submit">Reset Password</button>
+        <input type="hidden" name="action" value="enterOTP">
+        <input id="resetEmail" name="resetEmail" type="email" class="form-control" placeholder="Email address" required="" autofocus="">
+        <button class="btn btn-primary btn-block" type="submit">Xác nhận</button>
         <a href="#" id="cancel_reset"><i class="fas fa-angle-left"></i> Back</a>
     </form>
 
@@ -74,7 +75,7 @@
             </div>
             <input id="name" name="name" class="form-control" placeholder="Full name" type="text" style="height: 100%">
         </div> <!-- form-group// -->
-        <p id="nameRemind" class="remind">Please enter your name</p>
+        <p id="nameRemind" class="remind">Vui lòng nhập tên</p>
         <div class="form-group input-group" style="height: 48px">
             <div class="input-group-prepend" style="height: 100%">
                 <span class="input-group-text"> <i class="fa fa-building"></i> </span>

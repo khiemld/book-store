@@ -51,9 +51,9 @@
 					style='font-size: 32px; color: #28A745;'></a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown"
 						style="float: right;">
-						<a class="dropdown-item " href="<%=request.getContextPath()%>/profile">Your profile</a>
-						<a class="dropdown-item " href="<%=request.getContextPath()%>/reset">Reset Password</a>
-						<a class="dropdown-item " href="logout">Logout</a>
+						<a class="dropdown-item " href="<%=request.getContextPath()%>/profile">Hồ sơ cá nhân</a>
+						<a class="dropdown-item " href="<%=request.getContextPath()%>/reset">Đổi mật khẩu</a>
+						<a class="dropdown-item " href="logout">Đăng xuất</a>
 					</div></li>
 			</c:if>
 		</form>
@@ -76,7 +76,7 @@
 			</c:if>
 			<c:if test="${sessionScope.acc == null}">
 				<a class="btn btn-success btn-sm ml-3" href="showCart?uid=0">
-					<i class="fa fa-shopping-cart"></i>Cart <span class="badge badge-light">3</span>
+					<i class="fa fa-shopping-cart" style="padding-right: 5px;"></i>Cart <span class="badge badge-light"></span>
 				</a>
 			</c:if>
 		</form>

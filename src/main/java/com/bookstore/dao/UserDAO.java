@@ -44,11 +44,11 @@ public class UserDAO {
         }
     }
 
-    /*public User findById(int id) {
+    public User findById(int id) {
         Session session = HibernateUtility.getSessionFactory().openSession();
         User user = session.load(User.class, id);
         return user;
-    }*/
+    }
 
     public static User findByEmail(String email){
         Session session = HibernateUtility.getSessionFactory().openSession();
@@ -77,7 +77,7 @@ public class UserDAO {
         List<User> users = null;
         try {
             // Create query string
-            String queryString = "from User where email like :email and active=true";
+            String queryString = "select u from User u where u.email like :email and u.active=true";
 
             // Create query
             Query query = session.createQuery(queryString, User.class);
@@ -168,6 +168,67 @@ public class UserDAO {
         }
         return user;
     }
+
+    public static User find(int id) {
+        // open session
+        Session session = HibernateUtility.getSessionFactory().openSession();
+        User user = null;
+        try {
+            if (id != 0) {
+                // Return result List
+                user = session.load(User.class, id);
+            }
+        } catch (HibernateError error) {
+            System.err.println(error);
+        } finally {
+            session.close();
+        }
+        return user;
+    }
+
+    public static List<User> findByRole(int id) {
+        // open session
+        Session session = HibernateUtility.getSessionFactory().openSession();
+        List<User> users = null;
+        try {
+            // Create query string
+            String queryString = "select u from User u where u.isRole = :role and u.active = true";
+
+            // Create query
+            Query query = session.createQuery(queryString, User.class);
+            query.setParameter("role", id);
+
+            // Return result List
+            users = query.list();
+        } catch (HibernateError error) {
+            System.err.println(error);
+        } finally {
+            session.close();
+        }
+        return users;
+    }
+
+    public static List<User> findByPhone(String phone) {
+        // open session
+        Session session = HibernateUtility.getSessionFactory().openSession();
+        List<User> users = null;
+        try {
+            // Create query string
+            String queryString = "select u from User u where u.phone like :phone and u.active=true";
+
+            // Create query
+            Query query = session.createQuery(queryString, User.class);
+            query.setParameter("phone", phone);
+
+            // Return result List
+            users = query.list();
+        } catch (HibernateError error) {
+            System.err.println(error);
+        } finally {
+            session.close();
+        }
+        return users;
+    }
     public static boolean isExistEmail(String email){
         boolean result = false;
 
@@ -214,67 +275,51 @@ public class UserDAO {
         return result;
     }
 
-    public static User find(int id) {
-        // open session
+    public boolean isValidUpdatePhone(String phone, int id){
+        boolean result = false;
+
         Session session = HibernateUtility.getSessionFactory().openSession();
-        User user = null;
+        User user = new User();
         try {
-            if (id != 0) {
-                // Return result List
-                user = session.load(User.class, id);
-            }
-        } catch (HibernateError error) {
-            System.err.println(error);
-        } finally {
-            session.close();
-        }
-        return user;
-    }
-
-    public static List<User> findByRole(int id) {
-        // open session
-        Session session = HibernateUtility.getSessionFactory().openSession();
-        List<User> users = null;
-        try {
-            // Create query string
-            String queryString = "from User where isRole = :role and active = true";
-
-            // Create query
-            Query query = session.createQuery(queryString, User.class);
-            query.setParameter("role", id);
-
-            // Return result List
-            users = query.list();
-        } catch (HibernateError error) {
-            System.err.println(error);
-        } finally {
-            session.close();
-        }
-        return users;
-    }
-
-    public static List<User> findByPhone(String phone) {
-        // open session
-        Session session = HibernateUtility.getSessionFactory().openSession();
-        List<User> users = null;
-        try {
-            // Create query string
-            String queryString = "from User where phone like :phone and active=true";
-
-            // Create query
-            Query query = session.createQuery(queryString, User.class);
+            final String sqlString = "Select COUNT(phone) AS num From User u WHERE u.phone = :phone and u.id = :id";
+            Query query = session.createNativeQuery(sqlString).addScalar("num", StandardBasicTypes.INTEGER);
             query.setParameter("phone", phone);
-
-            // Return result List
-            users = query.list();
-        } catch (HibernateError error) {
-            System.err.println(error);
+            query.setParameter("id", id);
+            int num = (int) query.uniqueResult();
+            System.out.println("Số phone: " + num);
+            if(num != 0){
+                result = true;
+            }
+        }
+        catch(RuntimeException e){
+            e.printStackTrace();
         } finally {
             session.close();
         }
-        return users;
+        return result;
     }
 
+    public boolean isValidUpdateEmail(String email, int id){
+        boolean result = false;
 
-
+        Session session = HibernateUtility.getSessionFactory().openSession();
+        User user = new User();
+        try {
+            final String sqlString = "Select COUNT(email) AS num From User u WHERE u.email = :email and u.id = :id";
+            Query query = session.createNativeQuery(sqlString).addScalar("num", StandardBasicTypes.INTEGER);
+            query.setParameter("email", email);
+            query.setParameter("id", id);
+            int num = (int) query.uniqueResult();
+            System.out.println("Số email: " + num);
+            if(num != 0){
+                result = true;
+            }
+        }
+        catch(RuntimeException e){
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return result;
+    }
 }

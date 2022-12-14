@@ -38,7 +38,7 @@
 				<li class="nav-item" style='margin-right: 16px; list-style: none'>
 					<a aria-haspopup="true" aria-expanded="false" style='font-size: 16px; color: white' href="login" >
 						<input type="hidden" name="action" value="signin-form">
-						Sign in | Sign up
+						Đăng nhập | Đăng ký
 					</a>
 				</li>
 			</c:if>
@@ -51,9 +51,9 @@
 					style='font-size: 32px; color: #28A745;'></a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown"
 						style="float: right;">
-						<a class="dropdown-item " href="<%=request.getContextPath()%>/profile">Your profile</a>
-						<a class="dropdown-item " href="<%=request.getContextPath()%>/reset">Reset Password</a>
-						<a class="dropdown-item " href="logout">Logout</a>
+						<a class="dropdown-item " href="<%=request.getContextPath()%>/profile">Hồ sơ cá nhân</a>
+						<a class="dropdown-item " href="<%=request.getContextPath()%>/reset">Đổi mật khẩu</a>
+						<a class="dropdown-item " href="logout">Đăng xuất</a>
 					</div></li>
 			</c:if>
 		</form>
@@ -71,7 +71,7 @@
 		<form class="form-inline my-2 my-lg-0">
 			<c:if test="${sessionScope.acc != null}">
 				<a class="btn btn-success btn-sm ml-3" href="showCart?uid=${sessionScope.acc.id}">
-					<i class="fa fa-shopping-cart"></i>Cart <span class="badge badge-light">3</span>
+					<i class="fa fa-shopping-cart" style="margin-right: 5px"></i>Cart <span class="badge badge-light"></span>
 				</a>
 			</c:if>
 			<c:if test="${sessionScope.acc == null}">

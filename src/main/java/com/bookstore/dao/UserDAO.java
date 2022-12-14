@@ -61,7 +61,7 @@ public class UserDAO {
             query.setParameter("email", email);
             users = query.list();
             user = users.get(0);
-            System.out.println("user is" + user.getEmail());
+            System.out.println("user is: " + user.getEmail());
         }
         catch(RuntimeException e){
             e.printStackTrace();
@@ -71,6 +71,26 @@ public class UserDAO {
         return user;
     }
 
+    public User findByPhone(String phone){
+        Session session = HibernateUtility.getSessionFactory().openSession();
+        User user = new User();
+        List<User> users = null;
+
+        try {
+            final String sqlString = "Select u from User u where u.phone = :phone";
+            Query query = session.createQuery(sqlString);
+            query.setParameter("phone", phone);
+            users = query.list();
+            user = users.get(0);
+            System.out.println("user is: " + user.getPhone());
+        }
+        catch(RuntimeException e){
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return user;
+    }
     public List<User> getAll(){
         // open session
         Session session = HibernateUtility.getSessionFactory().openSession();
@@ -191,4 +211,51 @@ public class UserDAO {
         return result;
     }
 
+    public boolean isValidUpdatePhone(String phone, int id){
+        boolean result = false;
+
+        Session session = HibernateUtility.getSessionFactory().openSession();
+        User user = new User();
+        try {
+            final String sqlString = "Select COUNT(phone) AS num From User u WHERE u.phone = :phone and u.id = :id";
+            Query query = session.createNativeQuery(sqlString).addScalar("num", StandardBasicTypes.INTEGER);
+            query.setParameter("phone", phone);
+            query.setParameter("id", id);
+            int num = (int) query.uniqueResult();
+            System.out.println("Số phone: " + num);
+            if(num != 0){
+                result = true;
+            }
+        }
+        catch(RuntimeException e){
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return result;
+    }
+
+    public boolean isValidUpdateEmail(String email, int id){
+        boolean result = false;
+
+        Session session = HibernateUtility.getSessionFactory().openSession();
+        User user = new User();
+        try {
+            final String sqlString = "Select COUNT(email) AS num From User u WHERE u.email = :email and u.id = :id";
+            Query query = session.createNativeQuery(sqlString).addScalar("num", StandardBasicTypes.INTEGER);
+            query.setParameter("email", email);
+            query.setParameter("id", id);
+            int num = (int) query.uniqueResult();
+            System.out.println("Số email: " + num);
+            if(num != 0){
+                result = true;
+            }
+        }
+        catch(RuntimeException e){
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return result;
+    }
 }

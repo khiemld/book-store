@@ -30,7 +30,6 @@
 
 <div class="container" >
     <div class="main-body">
-    
           <!-- Breadcrumb -->
           <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb">
@@ -75,6 +74,12 @@
             </div>
 
               <div class="col-md-8">
+                  <c:if test="${not empty update_error}">
+                      <div class="alert alert-danger">${update_error}</div>
+                  </c:if>
+                  <c:if test="${not empty message}">
+                      <div class="alert alert-success">${message}</div>
+                  </c:if>
                   <div class="card mb-3">
                       <div class="card-body">
                           <div class="row">
@@ -172,7 +177,7 @@
                         <c:if test="${sessionScope.acc.image == null}">
                             <input name="image" value="${sessionScope.acc.image}" type="image" class="form-control">
                         </c:if>
-<%--                        <input name="avatar" value="${sessionScope.acc.image}" type="image" class="form-control">--%>
+                        <input  name="image" type="file" id="fileImage" value="upload" accept="image/*">
                     </div>
                 </div>
                 <div class="modal-footer">

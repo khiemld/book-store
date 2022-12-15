@@ -1,9 +1,6 @@
 # BUILD A WEBSITE ECOMMERCE - BOOKSTORE
 > Bulid with Java Servlet, JSP, JPA - Hibernate
 
-## Group Web
-https://group-web9.herokuapp.com/
-
 ## Contributors
 - [Hautt](https://github.com/hautran-02)
 - [HVTGiang](https://github.com/HVTGiang)
